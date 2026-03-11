@@ -1,1 +1,44 @@
-<?php\n/**\n * View - Array Step\n * Lista degli step di elaborazione\n */\n?>\n\n<table class=\"array-step-table\">\n    <thead>\n        <tr>\n            <th>Pos</th>\n            <th>ID RUN SH</th>\n            <th>Step</th>\n            <th>Data/Ora</th>\n            <th>Azioni</th>\n        </tr>\n    </thead>\n    <tbody>\n        <?php\n            if (is_array($ArrayStep) && count($ArrayStep) > 0) {\n                foreach ($ArrayStep as $row) {\n                    $pos = $row['POS'];\n                    $idRunSh = $row['ID_RUN_SH'];\n                    $step = $row['STEP'];\n                    $time = $row['TIME'];\n                    ?>\n                    <tr class=\"array-step-row\">\n                        <td><?php echo $pos; ?></td>\n                        <td><?php echo $idRunSh; ?></td>\n                        <td><?php echo $step; ?></td>\n                        <td><?php echo $time; ?></td>\n                        <td>\n                            <button class=\"btn-small\" onclick=\"alert('Step: <?php echo htmlspecialchars($step); ?>')\">Info</button>\n                        </td>\n                    </tr>\n                    <?php\n                }\n            } else {\n                echo \"<tr><td colspan='5'>Nessuno step disponibile</td></tr>\";\n            }\n        ?>\n    </tbody>\n</table>\n"}}]
+<?php
+/**
+ * View - Array Step
+ * Lista degli step di elaborazione
+ */
+?>
+
+<table class="array-step-table">
+    <thead>
+        <tr>
+            <th>Pos</th>
+            <th>ID RUN SH</th>
+            <th>Step</th>
+            <th>Data/Ora</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            if (is_array($ArrayStep) && count($ArrayStep) > 0) {
+                foreach ($ArrayStep as $row) {
+                    $pos = $row['POS'];
+                    $idRunSh = $row['ID_RUN_SH'];
+                    $step = $row['STEP'];
+                    $time = $row['TIME'];
+                    ?>
+                    <tr class="array-step-row">
+                        <td><?php echo $pos; ?></td>
+                        <td><?php echo $idRunSh; ?></td>
+                        <td><?php echo $step; ?></td>
+                        <td><?php echo $time; ?></td>
+                        <td>
+                            <button class="btn-small" onclick="alert('Step: <?php echo htmlspecialchars($step); ?>')">Info</button>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                echo "<tr><td colspan='5'>Nessuno step disponibile</td></tr>";
+            }
+        ?>
+    </tbody>
+</table>
+"}}]

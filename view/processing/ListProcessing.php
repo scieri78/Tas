@@ -38,11 +38,13 @@
                         $rc = $row['RC'];
                         $tags = $row['TAGS'];
                         
-                        // Calcola il colore dello status\n                        $statusClass = '';
+                        // Calcola il colore dello status
+                        $statusClass = '';
                         switch ($status) {
                             case 'F':
                                 $statusClass = 'status-success';
-                                $statusText = 'FINE';\n                                break;
+                                $statusText = 'FINE';
+                                break;
                             case 'E':
                                 $statusClass = 'status-error';
                                 $statusText = 'ERRORE';
@@ -61,4 +63,47 @@
                                 break;
                         }
                         ?>
-                        <tr class="processing-row" onclick=\"openDetail(<?php echo $idRunSh; ?>)\" style=\"cursor:pointer;\">\n                            <td><?php echo $idSh; ?></td>\n                            <td><?php echo $idRunSh; ?></td>\n                            <td><?php echo $name; ?></td>\n                            <td><?php echo $startTime; ?></td>\n                            <td><?php echo $endTime; ?></td>\n                            <td><span class=\"<?php echo $statusClass; ?>\"><?php echo $statusText; ?></span></td>\n                            <td><?php echo $username; ?></td>\n                            <td><?php echo $rc; ?></td>\n                            <td><?php echo $tags; ?></td>\n                            <td>\n                                <button type=\"button\" class=\"btn-detail\" onclick=\"openDetail(<?php echo $idRunSh; ?>); event.stopPropagation();\">Dettagli</button>\n                            </td>\n                        </tr>\n                        <?php\n                    }\n                } else {\n                    echo \"<tr><td colspan='10'>Nessun dato disponibile</td></tr>\";\n                }\n            ?>\n        </tbody>\n    </table>\n</div>\n\n<script>\nfunction openDetail(idRunSh) {\n    // Invia il form con l'ID selezionato\n    var form = document.getElementById('formProcessing');\n    var input = document.createElement('input');\n    input.type = 'hidden';\n    input.name = 'idRunSh';\n    input.value = idRunSh;\n    form.appendChild(input);\n    \n    var actionInput = document.createElement('input');\n    actionInput.type = 'hidden';\n    actionInput.name = 'action';\n    actionInput.value = 'detail';\n    form.appendChild(actionInput);\n    \n    form.submit();\n}\n</script>\n"}}]
+                        <tr class="processing-row" onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;">
+                            <td><?php echo $idSh; ?></td>
+                            <td><?php echo $idRunSh; ?></td>
+                            <td><?php echo $name; ?></td>
+                            <td><?php echo $startTime; ?></td>
+                            <td><?php echo $endTime; ?></td>
+                            <td><span class="<?php echo $statusClass; ?>"><?php echo $statusText; ?></span></td>
+                            <td><?php echo $username; ?></td>
+                            <td><?php echo $rc; ?></td>
+                            <td><?php echo $tags; ?></td>
+                            <td>
+                                <button type="button" class="btn-detail" onclick="openDetail(<?php echo $idRunSh; ?>); event.stopPropagation();">Dettagli</button>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                } else {
+                    echo "<tr><td colspan='10'>Nessun dato disponibile</td></tr>";
+                }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+<script>
+function openDetail(idRunSh) {
+    // Invia il form con l'ID selezionato
+    var form = document.getElementById('formProcessing');
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'idRunSh';
+    input.value = idRunSh;
+    form.appendChild(input);
+    
+    var actionInput = document.createElement('input');
+    actionInput.type = 'hidden';
+    actionInput.name = 'action';
+    actionInput.value = 'detail';
+    form.appendChild(actionInput);
+    
+    form.submit();
+}
+</script>
+"}}]

@@ -1,1 +1,74 @@
-<?php\n/**\n * View - Array Shell Figli\n * Lista dei shell figli con dettagli e confronto con lancio precedente\n */\n?>\n\n<table class=\"array-shell-table\">\n    <thead>\n        <tr>\n            <th>Pos</th>\n            <th>ID SH</th>\n            <th>Nome</th>\n            <th>Data Inizio</th>\n            <th>Data Fine</th>\n            <th>Durata (sec)</th>\n            <th>Status</th>\n            <th>Utente</th>\n            <th>RC</th>\n            <th>Azioni</th>\n        </tr>\n    </thead>\n    <tbody>\n        <?php\n            if (is_array($ArrayShell) && count($ArrayShell) > 0) {\n                foreach ($ArrayShell as $row) {\n                    $pos = $row['POS'];\n                    $idSh = $row['ID_SH'];\n                    $name = $row['NAME'];\n                    $startTime = $row['START_TIME'];\n                    $endTime = $row['END_TIME'];\n                    $status = $row['STATUS'];\n                    $username = $row['USERNAME'];\n                    $rc = $row['RC'];\n                    $tags = $row['TAGS'];\n                    $log = $row['LOG'];\n                    \n                    // Calcola la durata\n                    $durata = 'N/A';\n                    if ($startTime && $endTime) {\n                        $start = new DateTime($startTime);\n                        $end = new DateTime($endTime);\n                        $durata = $end->getTimestamp() - $start->getTimestamp();\n                    }\n                    ?>\n                    <tr class=\"array-shell-row\">\n                        <td><?php echo $pos; ?></td>\n                        <td><?php echo $idSh; ?></td>\n                        <td><?php echo $name; ?></td>\n                        <td><?php echo $startTime; ?></td>\n                        <td><?php echo $endTime; ?></td>\n                        <td><?php echo $durata; ?></td>\n                        <td><span class=\"badge badge-status\"><?php echo $status; ?></span></td>\n                        <td><?php echo $username; ?></td>\n                        <td><?php echo $rc; ?></td>\n                        <td>\n                            <button class=\"btn-small\" onclick=\"showLog('<?php echo htmlspecialchars($log); ?>')\">Log</button>\n                        </td>\n                    </tr>\n                    <?php\n                }\n            } else {\n                echo \"<tr><td colspan='10'>Nessuno shell figlio</td></tr>\";\n            }\n        ?>\n    </tbody>\n</table>\n\n<script>\nfunction showLog(log) {\n    alert(log);\n}\n</script>\n"}}]
+<?php
+/**
+ * View - Array Shell Figli
+ * Lista dei shell figli con dettagli e confronto con lancio precedente
+ */
+?>
+
+<table class="array-shell-table">
+    <thead>
+        <tr>
+            <th>Pos</th>
+            <th>ID SH</th>
+            <th>Nome</th>
+            <th>Data Inizio</th>
+            <th>Data Fine</th>
+            <th>Durata (sec)</th>
+            <th>Status</th>
+            <th>Utente</th>
+            <th>RC</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            if (is_array($ArrayShell) && count($ArrayShell) > 0) {
+                foreach ($ArrayShell as $row) {
+                    $pos = $row['POS'];
+                    $idSh = $row['ID_SH'];
+                    $name = $row['NAME'];
+                    $startTime = $row['START_TIME'];
+                    $endTime = $row['END_TIME'];
+                    $status = $row['STATUS'];
+                    $username = $row['USERNAME'];
+                    $rc = $row['RC'];
+                    $tags = $row['TAGS'];
+                    $log = $row['LOG'];
+                    
+                    // Calcola la durata
+                    $durata = 'N/A';
+                    if ($startTime && $endTime) {
+                        $start = new DateTime($startTime);
+                        $end = new DateTime($endTime);
+                        $durata = $end->getTimestamp() - $start->getTimestamp();
+                    }
+                    ?>
+                    <tr class="array-shell-row">
+                        <td><?php echo $pos; ?></td>
+                        <td><?php echo $idSh; ?></td>
+                        <td><?php echo $name; ?></td>
+                        <td><?php echo $startTime; ?></td>
+                        <td><?php echo $endTime; ?></td>
+                        <td><?php echo $durata; ?></td>
+                        <td><span class="badge badge-status"><?php echo $status; ?></span></td>
+                        <td><?php echo $username; ?></td>
+                        <td><?php echo $rc; ?></td>
+                        <td>
+                            <button class="btn-small" onclick="showLog('<?php echo htmlspecialchars($log); ?>')">Log</button>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                echo "<tr><td colspan='10'>Nessuno shell figlio</td></tr>";
+            }
+        ?>
+    </tbody>
+</table>
+
+<script>
+function showLog(log) {
+    alert(log);
+}
+</script>
+"}}]

@@ -1,1 +1,72 @@
-<?php\n/**\n * View - Array SQL\n * Lista delle query SQL eseguite\n */\n?>\n\n<table class=\"array-sql-table\">\n    <thead>\n        <tr>\n            <th>Pos</th>\n            <th>ID RUN SQL</th>\n            <th>Step</th>\n            <th>Type Run</th>\n            <th>File SQL</th>\n            <th>Data Inizio</th>\n            <th>Data Fine</th>\n            <th>Durata (sec)</th>\n            <th>Status</th>\n            <th>Azioni</th>\n        </tr>\n    </thead>\n    <tbody>\n        <?php\n            if (is_array($ArraySql) && count($ArraySql) > 0) {\n                foreach ($ArraySql as $row) {\n                    $pos = $row['POS'];\n                    $idRunSql = $row['ID_RUN_SQL'];\n                    $step = $row['STEP'];\n                    $typeRun = $row['TYPE_RUN'];\n                    $fileSql = $row['FILE_SQL'];\n                    $startTime = $row['START_TIME'];\n                    $endTime = $row['END_TIME'];\n                    $status = $row['STATUS'];\n                    \n                    // Calcola la durata\n                    $durata = 'N/A';\n                    if ($startTime && $endTime) {\n                        $start = new DateTime($startTime);\n                        $end = new DateTime($endTime);\n                        $durata = $end->getTimestamp() - $start->getTimestamp();\n                    }\n                    ?>\n                    <tr class=\"array-sql-row\">\n                        <td><?php echo $pos; ?></td>\n                        <td><?php echo $idRunSql; ?></td>\n                        <td><?php echo $step; ?></td>\n                        <td><?php echo $typeRun; ?></td>\n                        <td><?php echo $fileSql; ?></td>\n                        <td><?php echo $startTime; ?></td>\n                        <td><?php echo $endTime; ?></td>\n                        <td><?php echo $durata; ?></td>\n                        <td><span class=\"badge badge-status\"><?php echo $status; ?></span></td>\n                        <td>\n                            <button class=\"btn-small\" onclick=\"viewFile('<?php echo htmlspecialchars($fileSql); ?>')\">View</button>\n                        </td>\n                    </tr>\n                    <?php\n                }\n            } else {\n                echo \"<tr><td colspan='10'>Nessuna query SQL</td></tr>\";\n            }\n        ?>\n    </tbody>\n</table>\n\n<script>\nfunction viewFile(file) {\n    window.open('./view/processing/viewFile.php?file=' + encodeURIComponent(file));\n}\n</script>\n"}}]
+<?php
+/**
+ * View - Array SQL
+ * Lista delle query SQL eseguite
+ */
+?>
+
+<table class="array-sql-table">
+    <thead>
+        <tr>
+            <th>Pos</th>
+            <th>ID RUN SQL</th>
+            <th>Step</th>
+            <th>Type Run</th>
+            <th>File SQL</th>
+            <th>Data Inizio</th>
+            <th>Data Fine</th>
+            <th>Durata (sec)</th>
+            <th>Status</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            if (is_array($ArraySql) && count($ArraySql) > 0) {
+                foreach ($ArraySql as $row) {
+                    $pos = $row['POS'];
+                    $idRunSql = $row['ID_RUN_SQL'];
+                    $step = $row['STEP'];
+                    $typeRun = $row['TYPE_RUN'];
+                    $fileSql = $row['FILE_SQL'];
+                    $startTime = $row['START_TIME'];
+                    $endTime = $row['END_TIME'];
+                    $status = $row['STATUS'];
+                    
+                    // Calcola la durata
+                    $durata = 'N/A';
+                    if ($startTime && $endTime) {
+                        $start = new DateTime($startTime);
+                        $end = new DateTime($endTime);
+                        $durata = $end->getTimestamp() - $start->getTimestamp();
+                    }
+                    ?>
+                    <tr class="array-sql-row">
+                        <td><?php echo $pos; ?></td>
+                        <td><?php echo $idRunSql; ?></td>
+                        <td><?php echo $step; ?></td>
+                        <td><?php echo $typeRun; ?></td>
+                        <td><?php echo $fileSql; ?></td>
+                        <td><?php echo $startTime; ?></td>
+                        <td><?php echo $endTime; ?></td>
+                        <td><?php echo $durata; ?></td>
+                        <td><span class="badge badge-status"><?php echo $status; ?></span></td>
+                        <td>
+                            <button class="btn-small" onclick="viewFile('<?php echo htmlspecialchars($fileSql); ?>')">View</button>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                echo "<tr><td colspan='10'>Nessuna query SQL</td></tr>";
+            }
+        ?>
+    </tbody>
+</table>
+
+<script>
+function viewFile(file) {
+    window.open('./view/processing/viewFile.php?file=' + encodeURIComponent(file));
+}
+</script>
+"}}]
