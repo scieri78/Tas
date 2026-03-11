@@ -6,7 +6,7 @@
                 <table id='idTabella' class="display dataTable">
                     <thead class="headerStyle">
                         <tr>
-                            <th>ID_CONTR</th>
+                            <th>ID_CONTR</th> <progress>dd</progress>
                             <th>GRUPPO</th>
                             <th>CONTROLLO</th>
                             <th>DESCRIZIONE</th>
