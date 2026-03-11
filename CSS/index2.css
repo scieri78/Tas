@@ -1,0 +1,232 @@
+html body {
+    color: #000;
+    margin: 0px auto;
+	overflow-y: scroll;
+	font-size: 11px;
+	background-color: #43533e26;
+
+}
+
+.headerContainer{
+	display: flex;
+	flex: 1;
+	overflow:hidden;
+	color:white;
+	background-color:#43533E;
+	padding: 6px;
+}
+
+.logoTAS{
+	display:flex;
+	flex-direction: column;
+	height: 60px;
+	
+	#AmbLav {
+		display: flex;
+		flex: 1;
+		justify-content: center;
+		color: white !important;
+	}
+}
+
+.logoTASContainer{
+	display:flex;
+	flex: 3;
+}
+
+.logoAllianz{
+		display:flex;
+	flex: 3;
+	align-items: center;
+	    justify-content: center;
+
+}
+
+.loginSection{
+			display:flex;
+	flex: 3;
+	    color: white;
+	font-size: 11px;
+	align-items:center;
+}
+
+.loginForm{
+	display: flex;
+	flex: 1;
+	justify-content: flex-end;
+	flex-direction: column;
+}
+
+.loginOut {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 6px;
+		margin-left: 6px;
+		
+		.loginOutLabel {
+			margin-bottom: 0px !important;
+		}
+}
+
+.loginUsername{
+	display: flex;
+		flex-direction: column;
+		flex: 2;
+		margin-right: 3px;
+		margin-left: 3px;
+		z-index: 99999;
+}
+
+.loginPassword{
+	display: flex;
+	flex-direction: column;
+	flex: 2;
+	margin-right: 3px;
+	margin-left: 3px;
+	z-index: 99999;
+}
+
+.loginAccedi{
+	display: flex !important;
+	align-content: flex-end;
+	justify-content: center;
+	flex: 1;
+
+}
+
+.loginMess{
+	display: flex;
+	z-index: 99999;
+}
+
+.loginRicorda{
+	display: flex;
+	z-index: 99999;
+}
+
+.loginButton{
+	background-image: linear-gradient(to bottom, #B73333 0px, #885D26 100%); 
+	background-repeat: repeat-x; 
+	width: 100%;
+	margin-right: 3px;
+	margin-left: 3px;
+	z-index: 99999;
+}
+
+.firstRowLogin{
+	display: flex;
+}
+
+.secondRowLogin{
+		display: flex;
+		margin-bottom:3px;
+}
+
+#menu{
+    width: 100%;
+    height: 35px;
+    background: rgba(129, 129, 129, 0.33) none repeat scroll 0% 0%;
+    position: fixed;
+    top: 80px;
+    z-index: 100000;
+}
+
+.center-text{
+    color: white;
+    text-align: center;
+}
+
+#page {
+	width:100%;
+    margin-top: 115px;
+}
+
+#footer { 
+  color: black;
+  position: fixed !important;
+  bottom: 0;
+  width:100%;
+  left: 0;
+  height: 30px;
+  z-index: 9999;
+  border-top: 1px solid black;
+}
+
+#IndIp {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+	z-index: 99998;
+    padding-right: 10px;
+}
+
+#contenitore {
+	position:relative;
+	/* padding-top: 20px; */
+	margin-bottom: 60px;
+}
+
+.nascondi{
+  visibility:hidden;
+  display:none;
+  height: 0px;
+}
+
+
+/* #login { */
+    /* color: white; */
+	/* font-size: 11px; */
+/* } */
+
+#prxlogin-out {
+    position: fixed;
+    top: 3px;
+    right: 5px;
+    z-index: 99999;
+}
+
+/* #login-esci { */
+	/* position: fixed; */
+	/* top: 3px; */
+	/* right: 15px; */
+	/* z-index: 99999; */
+/* } */
+
+/* #login-ricorda { */
+	/* position: fixed; */
+	/* top: 40px; */
+	/* right: 15px; */
+	/* z-index: 99999;	 */
+	/* display:none; */
+/* } */
+
+#modlgn-passwd, #modlgn-username {
+	color: black;		
+}
+
+/* #login-mess { */
+	/* position: fixed; */
+	/* top: 27px; */
+	/* right: 165px; */
+	/* z-index: 99999;	 */
+	/* color: red; */
+/* } */
+
+/* #AmbLav { */
+	/* position: absolute; */
+	/* font-size: 1em; */
+	/* left: 0px; */
+	/* right: 0px; */
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	/* text-align: center; */
+/* } */
+
+ /* #AccediEsci{  */
+	 /* background-image: linear-gradient(to bottom, #B73333 0px, #885D26 100%);  */
+	 /* background-repeat: repeat-x;  */
+	 /* border-color: #770909;  */
+	 /* height: 30px;  */
+	 /* width: 65px;	  */
+ /* }  */

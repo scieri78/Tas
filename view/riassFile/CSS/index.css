@@ -1,0 +1,36 @@
+.Titolo{
+    position:relative;
+    left:0;
+    right:0;
+    margin:auto;
+    font-size:20px;
+    width:100%;
+}
+
+
+.Title{
+  margin:4px;
+  font-size:20px;
+  left:0;
+  right:0;
+  margin:auto;
+  width: max-content;
+  color: blue;
+}
+
+.Button{
+  width:145px;
+  height:30px;
+  border: 1px solid black;
+  bachground:white;
+  text-align: center;
+  margin:5px;
+  cursor:pointer;
+}
+
+caption {
+    padding: 10px;
+    font-size: 15px;
+    text-align: left;
+    font-weight: bold;
+}

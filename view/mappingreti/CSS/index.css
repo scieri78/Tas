@@ -1,0 +1,55 @@
+
+
+#idTabella_wrapper {
+	background-color: transparent;
+}
+
+.Titolo{
+    position:relative;
+    left:0;
+    right:0;
+    margin:auto;
+    font-size:20px;
+    width:100%;
+}
+
+.Title{
+  margin:4px;
+  font-size:20px;
+  left:0;
+  right:0;
+  margin:auto;
+  width: max-content;
+  color: blue;
+}
+
+.Button{
+  width:145px;
+  height:30px;
+  border: 1px solid black;
+  bachground:white;
+  text-align: center;
+  margin:5px;
+  cursor:pointer;
+}
+
+
+table.dataTable.no-footer {
+    border:0px;
+}
+
+.filterTable{
+	width:96%;
+	margin:0 30px;
+	
+}
+
+.filterTable th, .filterTable td{
+	border:1px solid #43533e;
+	padding:5px;
+	
+}
+
+#FormSelectRete .ExcelTable {
+	border: 0px;
+}

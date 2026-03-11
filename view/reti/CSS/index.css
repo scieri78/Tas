@@ -1,0 +1,192 @@
+#DivRef {
+    padding: 8px;
+    position: fixed;
+    top: 298px;
+    left: -121px;
+    margin: auto;
+    transform: rotate(-90deg);
+    -sand-transform: rotate(-90deg);
+    border: 1px solid;
+    padding: 7px;
+    background: #EFEEF0;
+    z-index: 100;
+}
+
+#filterForm
+{
+	margin:10px;
+}
+#DivRef label {
+     padding: 0px 10px; 
+}
+
+#RetiInCorso{
+    position: fixed;
+    right:10px;
+    top: 120px;
+    width: 100px;
+    border:1px solid black;
+    text-align:center;
+}
+.tabreti, .tabreti th , .tabreti td{
+    border:0px!important;
+	color:black;
+}
+
+.tabreti th,.tabreti .NoBordBot ,.tabreti .EsitoE {
+    border: 0px !important;
+    color: white;
+}
+
+.tabreti td.EsitoN{
+    border:0px!important;
+	color:white;
+}
+
+
+.Passo{
+	color: white;
+    width:100%;
+    font-size:15px;
+    height:25px;
+}
+
+.BordBot{
+    border-bottom: 1px solid lightgray !important;
+}
+
+td.BordBot {
+    color: black;
+}
+
+.NoBordBot{
+    border-bottom: 0px !important;
+}
+
+.Old{background:gray;}
+.EsitoF, .tabreti td.EsitoF ,.tabreti th.EsitoF  {background:rgb(67, 168, 51) !important;color:white!important;}
+.EsitoE{background:rgb(198, 66, 66) !important;color:white!important;}
+.EsitoW{background:orange !important;color:white!important;}
+.EsitoI{background:rgb(192, 181, 54) !important;color:white!important;}
+.EsitoN{background:gray !important;color:white!important;}
+.EsitoM{background:darkgreen !important;color:white;}
+.EsitoR{background:#327a7a !important;color:white!important;}
+
+.UlReti {
+    padding: 0px 21px;
+}
+
+.liReti{
+    border:1px solid black;
+    width:335px;
+    background: white;
+    margin: 5px;
+    list-style-type: none;
+    cursor:pointer;
+}
+.liPassi{
+    border:1px solid black;
+    width:320px;
+    background: white;
+    margin:5px;
+    list-style-type: none;
+    cursor:pointer;
+    margin-left: 300px;
+}
+
+.ObjectImg{
+    position: absolute;
+    left: 286px;
+    width: 25px;
+    border: 1px solid black;
+}
+
+.RETE{
+    width: 100%;
+    font-size: 18px;
+    color: white;
+}
+
+.TabDett{
+    width:100%;
+    border: none !important;
+}
+.ListShell {
+    height: auto !important;
+    width: 2000px;
+    top: 0px !important;
+    margin-left: 20px !important;
+}
+
+#TitShowDett{
+    left:10px;
+}
+
+#ShowDett{
+    position:fixed;
+    top:130px;
+    left:325px;
+}   
+
+#RCLegend{
+    display:none;
+}
+
+
+
+.ReteConclusa{
+    position: relative;
+    top: -2px;
+    background: white;
+    width: 20px;
+    margin-right: 5px;
+    border: 1px solid black;
+    padding: 2px;
+}
+
+.ReteRichiesta{
+    position: relative;
+    top: -2px;
+    background: white;
+    width: 20px;
+    margin-right: 5px;
+    border: 1px solid black;
+    padding: 2px;   
+}
+
+#AutoRefresh11, #ShowHidden{
+    margin: 5px;
+    color: white;
+}
+
+.Esito{
+  /*  width:10px;*/
+}
+
+#Refresh1{
+    background: yellow;
+    width:100px;
+    text-align:center;
+    cursor:pointer;
+    vertical-align: text-bottom;
+}
+
+.TimeOld{
+    position: relative;
+}
+.Repeat{
+    width: 25px;
+    position: absolute;
+    left: 681px;
+    border: 1px solid black;    
+}
+
+
+td.EsitoW {
+    color: white;
+}
+
+ul .fileter-aside
+{
+    display: none;
+}

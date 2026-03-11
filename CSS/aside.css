@@ -1,0 +1,105 @@
+
+
+.starlight-aside--tip {
+    --sl-color-asides-text-accent: var(--sl-color-purple-high);
+    border-color: var(--sl-color-purple);
+    background-color: var(--sl-color-purple-low)
+}
+
+.starlight-aside--caution {
+    --sl-color-asides-text-accent: var(--sl-color-orange-high);
+    border-color: var(--sl-color-orange);
+    background-color: var(--sl-color-orange-low)
+}
+
+.starlight-aside--danger {
+    --sl-color-asides-text-accent: var(--sl-color-red-high);
+    border-color: var(--sl-color-red);
+    background-color: var(--sl-color-red-low)
+}
+
+.sl-markdown-content :not(a,strong,em,del,span,input,code)+:not(a,strong,em,del,span,input,code,:where(.not-content *)) {
+    margin-top: 1rem;
+}
+
+.starlight-aside {
+    border-radius: 16px;
+}
+
+.starlight-aside__title {
+    width: 100%;
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--sl-color-blue-low);
+    margin-left: 0px;
+    margin-top: -30px;
+    background: dimgray;
+    margin-bottom: 5px;
+    gap: .5rem;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-asides-text-accent);
+    padding: 4px 15px;
+    color: white;
+    border: 1px solid black;
+}
+
+.starlight-aside--note {
+    --sl-color-asides-text-accent: var(--sl-color-blue-high);
+    border-color: var(--sl-color-blue);
+    background-color: var(--sl-color-blue-low);
+}
+/*.starlight-aside {
+    margin: 10px;
+    width: auto;
+    border: 1px solid darkslateblue;
+    background: ghostwhite;
+    padding: 1rem;
+    border-inline-start: .25rem solid;
+    color: black;
+    
+    float: left;
+    margin-top: 13px;
+}
+*/
+
+.starlight-aside {
+    margin: 10px;
+    width: auto;
+    border: 1px solid whitesmoke;
+    background: ghostwhite;
+    padding: 1rem;
+    /* border-inline-start: .25rem solid; */
+    color: black;
+    /* clear: both; */
+    float: left;
+    margin-top: 13px;
+    box-shadow: -1px 1px 2px 2px lightgray;
+  }
+  
+
+
+
+.fileter-aside {
+	margin-bottom: 19px !important;
+    margin-top: 16px !important;
+    margin: auto;
+    width: 100%;
+    background: darkgrey;
+    clear: both;
+}
+
+.asideContent {
+	margin: 10px;
+}
+.asideContent input{
+	height: 30px;
+	min-width: 300px;
+	margin: 0px 3px;
+}
+/* .asideContent select{ */
+	/* height: 30px; */
+	/* min-width: 300px; */
+	/* margin: 0px 3px; */
+/* } */

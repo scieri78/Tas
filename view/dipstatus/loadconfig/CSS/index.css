@@ -1,0 +1,127 @@
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    /* clear: both; */
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+
+.FileInput {
+    width: 20%;
+    float: left;
+    margin-right: 10px;
+}
+
+.Target {
+    width: 79%;
+    float: left
+}
+
+.Target input ,.FileInput input{
+    width: 100%;
+}
+
+
+.FileInput caption {
+    padding: 3px;
+    font-size: 13px;  
+    background-color: antiquewhite;
+}
+
+.Target caption {
+    padding: 3px;
+    font-size: 13px;;
+    background-color: darksalmon;
+}
+
+
+.input_container {
+    border: 1px solid #e5e5e5;
+    display: inline;
+    padding: 10px 0;
+    margin-left: 15px;
+}
+
+input[type=file]::file-selector-button {
+    background-color: #fff;
+    color: #000;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background-color: #eee;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+  }
+
+  .formelement{
+    float: left;
+  }
+
+
+  .LabeladdConfig {
+    display: inline-block;
+    position: relative;
+    top: 6px;
+    margin-left: 13px;
+}
+
+.formula{
+    width: 100%;
+}
+
+.thModImgIco{ 
+	width:25px;
+	text-align:center;
+}
+
+.thModTest{ 
+    width: 55%;
+}
+
+#azioni {
+   padding: 12px 0;
+}
+
+.actionSave{   
+    margin-top: 10px;
+    clear: both;  
+    margin-right: 30px;
+    float: left;    
+}
+
+.actionSave input {
+    width: 350px;
+    border-radius: 7px;
+    padding-left: 5px;
+}
+
+
+input[type=text]:read-only {
+    font-weight: bold;
+    background-color: lightgray;
+    cursor: no-drop;
+}
+
+
+input[type=file] {
+    font-weight: bold;
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+
+.TabDip td{
+    margin:10px;
+
+}
+.TabDip input{
+   width: 300px;
+
+}

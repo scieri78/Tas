@@ -1,0 +1,53 @@
+.ExcelTable {
+	border: 1px solid #B0CBEF;
+	border-width: 1px 0px 0px 1px;
+	font-size: 12px;
+	/* font-family: verdana,arial,sans-serif; */
+	font-weight: 100;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.ExcelTable TH {
+	#background-image: url(excel-2007-header-bg.gif);
+	background-repeat: repeat-x; 
+	font-weight: bold;
+	font-size: 12px;
+	border: 1px solid #9EB6CE;
+	border-width: 0px 1px 1px 0px;
+	height: 17px;
+	/* padding: 0px 5px; */
+}
+
+.ExcelTable TD {
+	text-align: left;
+	border: 0px;
+	background-color: white;
+	padding: 0px 4px 0px 2px;
+	border: 1px solid #D0D7E5;
+	/* padding: 0px 5px; */
+
+}
+
+.ExcelTable TD B {
+	border: 0px;
+	background-color: white;
+	font-weight: bold;
+}
+
+.ExcelTable TD.heading {
+	text-align: center;
+	border: 1px solid #9EB6CE;
+	border-width: 0px 1px 1px 0px;
+}
+
+.ExcelTable TH.heading {
+	#background-image: url(excel-2007-header-left.gif);
+	background-repeat: none;
+}
+
+
+.ExcelTable td.iconStatus {
+    width: 110px;
+}

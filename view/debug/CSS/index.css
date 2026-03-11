@@ -1,0 +1,43 @@
+.asideContent input[type="checkbox"] {
+    position: relative;
+    top: 8px;
+    /* width: 11px; */
+    height: 23px;
+    min-width: auto;
+    min-height: 15px;
+}
+
+/* Crea un nuovo stile per il checkbox */
+.asideContent .custom-checkbox {
+  display: inline-block;
+  width: 20px; /* Imposta la larghezza desiderata */
+  height: 20px; /* Imposta l'altezza desiderata */
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Stile per il checkbox selezionato */
+.asideContent input[type="checkbox"]:checked + .custom-checkbox {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Aggiungi un segno di spunta */
+.asideContent .custom-checkbox:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.asideContent input[type="checkbox"]:checked + .custom-checkbox:after {
+  display: block;
+  left: 5px;
+  top: 2px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

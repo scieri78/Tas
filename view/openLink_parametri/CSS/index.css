@@ -1,0 +1,16 @@
+input[type="radio"]:disabled:checked::before,
+input[type="checkbox"]:disabled:checked::before {
+    content: '';
+    display: inline-block;
+    width: 12px; /* Dimensione del cerchio o quadrato */
+    height: 12px;
+    background-color: #a6a6a6; /* Colore più scuro per la parte selezionata */
+    border-radius: 50%; /* Per i radio, rende il cerchio */
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+input[type="checkbox"]:disabled:checked::before {
+    border-radius: 2px; /* Per i checkbox, rende il quadrato */
+}

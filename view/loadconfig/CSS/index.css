@@ -1,0 +1,197 @@
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    /* clear: both; */
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+
+.FileInput {
+    width: 40%;
+    float: left;
+    margin-right: 10px;
+    clear: both;
+}
+
+.Target {
+    width: 59%;
+    float: left
+}
+
+.Target input ,.FileInput input{
+    width: 100%;
+}
+
+#FileInput{
+    overflow: auto;
+}
+
+.FileInput caption {
+    padding: 3px;
+    font-size: 13px;  
+    background-color: antiquewhite;
+}
+
+.Target caption {
+    padding: 3px;
+    font-size: 13px;;
+    background-color: darksalmon;
+}
+
+
+.input_container {
+    border: 1px solid #e5e5e5;
+    display: inline;
+    padding: 10px 0;
+    margin-left: 15px;
+}
+
+input[type=file]::file-selector-button {
+    background-color: #fff;
+    color: #000;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background-color: #eee;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+  }
+
+.formelement {
+    min-height: 42px;
+    float: left;
+}
+
+
+  .LabeladdConfig {
+   /* display: inline-block;*/
+    position: relative; 
+    margin-left: 13px;
+    
+}
+
+.formula{
+    width: 100%;
+}
+
+.thModImgIco{ 
+	width:25px;
+	text-align:center;
+}
+
+.thModTest{ 
+    width: 55%;
+}
+
+#azioni {
+   padding: 12px 0;
+}
+
+.actionSave {
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    clear: both;
+    /* margin-right: 30px; */
+    float: left;
+    position: relative;
+    /* top: 50%; */
+    left: 0%;
+    /* transform: translate(-50%, -50%); */
+    border-radius: 15px;
+    padding: 15px;
+    color: rgb(73, 69, 69);
+    background-color: rgb(226, 220, 220);
+    font-family: arial;
+    font-size: 15px;
+    line-height: 20px;
+    border: 1px solid;
+}
+
+
+.actionSave input, .actionSave textarea {
+    width: 350px;
+    border-radius: 7px;
+    padding-left: 5px;
+}
+
+
+.actionSave .formelement input[type=text] {
+    width: 350px;
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.formelement input[type=text] {   
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.formelement input[type=file] {
+    width: 250px;
+    border-radius: 7px;
+    padding: 5px;
+}
+
+
+input[type=text]:read-only {
+    font-weight: bold;
+    background-color: lightgray;
+    cursor: no-drop;
+}
+
+
+input[type=file] {
+    font-weight: bold;
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+
+td.TdDip {
+    padding: 7px;
+}
+
+td.TdDip input{
+   width: 100%;
+
+}
+
+input, button, select, textarea {  
+    font-size: 0.9em;
+ /*   height: auto!important;*/
+}
+
+.labelFiltro {
+    right: 7px;
+    text-align: right;
+    /* height: 42px; */
+    vertical-align: top;
+    /* text-align: unset; */
+    width: 115px;
+    padding: 0px;
+    position: relative;
+    top: 7px;
+    margin-left: 15px;
+    margin-bottom: -3px;
+}
+
+
+table.dataTable th{
+    height: 50px;
+}
+
+table.dataTable td{
+    height: 35px;
+}
+
+.headerStyle {    
+    position: relative;   
+}

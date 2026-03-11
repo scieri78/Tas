@@ -1,0 +1,22 @@
+#FormParametri label{
+    width: 115px;
+}
+
+#FormParametri textarea {
+    width: 50%;
+    height: 65px;
+}
+
+
+.valueSelect,.valueText {
+    font-family: Arial, sans-serif; /* Imposta il font */
+    font-size: 1.1em; /* Imposta la dimensione del testo */
+    font-style: italic; /* Imposta il testo in corsivo */
+    color: #333; /* Imposta il colore del testo */
+    background-color: #f9f9f9; /* Imposta il colore di sfondo del box */
+    padding: 10px; /* Aggiungi spazio interno al box */
+    border: 1px solid #ccc; /* Aggiungi un bordo al box */
+    border-radius: 5px; /* Arrotonda gli angoli del box */
+    line-height: 1.5; /* Imposta l'interlinea per una migliore leggibilità */
+}
+

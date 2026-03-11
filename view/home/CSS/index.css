@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.processing {
+   
+    padding: 4px;
+    width:30%;
+}
+
+.ticket {
+
+    
+    padding: 4px;
+    width: 30%;
+}
+
+.workflow {   
+    padding: 4px;
+    width: 30%;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card ul li {
+    margin-bottom: 10px;
+}
+
+.completion-bar {
+    height: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: whitesmoke;
+    /* Colore di sfondo standard */
+    overflow: hidden;
+    position: relative;
+}
+
+.completion-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fill-yellow {
+    background-color: yellow;
+    color: black;
+    /* Colore del testo per sfondo giallo */
+}
+
+.fill-orange {
+    background-color: orange;
+    color: black;
+    /* Colore del testo per sfondo arancione */
+}
+
+.fill-green {
+    background-color: green;
+    color: white;
+    /* Colore del testo per sfondo verde */
+}
+
+.fill-greenyellow {
+    background-color:greenyellow;
+    color: white;
+    /* Colore del testo per sfondo verde */
+}
+
+.completion-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    /* Allineamento verticale del testo */
+}
+
+.completion-white {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    font-weight: bold;
+    /* Allineamento verticale del testo */
+}
+
+
+div .fileter-aside{
+    min-height: 400px;
+}
+
+
+    .last-3-days {
+        background-color: #FFDDC1!important; /* Pastel Peach */
+    }
+    .last-6-months {
+        background-color: #C1E1FF!important; /* Pastel Blue */
+    }
+    .year-2025 {
+        background-color: #D1FFC1!important; /* Pastel Green */
+    }
+    .year-2024 {
+        background-color: #FFC1E1!important; /* Pastel Pink */
+    }
+
+    #refresh{
+        margin-bottom: 5px;
+    }

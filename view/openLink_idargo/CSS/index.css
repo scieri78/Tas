@@ -1,0 +1,6 @@
+
+input[type=text]:read-only {
+    font-weight: bold;
+    background-color: lightgray;
+    cursor: no-drop;
+}

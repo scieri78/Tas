@@ -12,17 +12,17 @@ class processing extends helper
         $this->setDebug_attivo(1);
         $DATABASE = $_SESSION['DATABASE'];
 
-        if ($_REQUEST['DAPROCESSING'] != 1) {
-            if ($_POST['resetSession'] == 1) {
+        if (!isset($_REQUEST['DAPROCESSING']) || $_REQUEST['DAPROCESSING'] != 1) {
+            if (isset($_POST['resetSession']) && $_POST['resetSession'] == 1) {
                 $_SESSION[$DATABASE] = [];
                 $_POST = [];
-            } elseif ($_POST) {
+            } elseif (!empty($_POST)) {
                 $_SESSION[$DATABASE] = $_POST;
-            } elseif ($_SESSION[$DATABASE]) {
+            } elseif (isset($_SESSION[$DATABASE]) && !empty($_SESSION[$DATABASE])) {
                 $_POST = $_SESSION[$DATABASE];
             }
         }
-        $db_name = $_GET['sito'] ? $_GET['sito'] : $_POST["db_name"];
+        $db_name = isset($_GET['sito']) ? $_GET['sito'] : (isset($_POST["db_name"]) ? $_POST["db_name"] : '');
 
         $this->include_css = '
                     <link rel="stylesheet" href="./view/processing/CSS/index.css?p=' . rand(1000, 9999) . '">';
@@ -33,19 +33,19 @@ class processing extends helper
         $this->_datiprocessing->DB2database = $db_name;
         
         // Carica i dati dalla sessione POST
-        if ($_POST['meseElab']) {
+        if (isset($_POST['meseElab'])) {
             $this->_datiprocessing->setMeseElab($_POST['meseElab']);
         }
-        if ($_POST['meseDiff']) {
+        if (isset($_POST['meseDiff'])) {
             $this->_datiprocessing->setMeseDiff($_POST['meseDiff']);
         }
-        if ($_POST['limitRows']) {
+        if (isset($_POST['limitRows'])) {
             $this->_datiprocessing->setLimit($_POST['limitRows']);
         }
-        if ($_POST['SelNumPage']) {
+        if (isset($_POST['SelNumPage'])) {
             $this->_datiprocessing->setSelNumPage($_POST['SelNumPage']);
         }
-        if ($_POST['idRunSh']) {
+        if (isset($_POST['idRunSh'])) {
             $this->_datiprocessing->setIdRunSh($_POST['idRunSh']);
         }
     }
@@ -58,13 +58,14 @@ class processing extends helper
      */
     public function index()
     {
+        $_view = [];
         $_view['include_css'] = $this->include_css;
         include "view/header.php";
         $_modelprocessing = $this->_model;
         $datiprocessing = $this->_datiprocessing;
         
         // Verifica se deve mostrare il dettaglio oppure la lista
-        if ($_POST['action'] == 'detail' && $this->_datiprocessing->getIdRunSh()) {
+        if (isset($_POST['action']) && $_POST['action'] == 'detail' && $this->_datiprocessing->getIdRunSh()) {
             $this->detail();
         } else {
             include 'view/processing/filtroProcessing.php';
@@ -97,6 +98,7 @@ class processing extends helper
      */
     public function detail()
     {
+        $_view = [];
         $_view['include_css'] = $this->include_css;
         include "view/header.php";
         $_modelprocessing = $this->_model;

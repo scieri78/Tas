@@ -1,0 +1,13 @@
+.ModSt {
+    width: 152px;
+}
+
+caption{
+	font-weight:bold;
+	padding:5px;
+}
+
+.dataTable caption
+{
+text-align:left;	
+}

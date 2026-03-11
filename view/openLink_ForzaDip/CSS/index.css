@@ -1,0 +1,37 @@
+.Err {
+    background: #ff4040 !important;
+  }
+
+  .Run {
+    background: yellow !important;
+  }
+
+  .Com {
+    background: #27ff27 !important;
+  }
+
+  .War {
+    background: orange !important;
+  }
+
+  .OldRun th {
+    background: lightgray !important;
+    width: 110px;
+  }
+
+  .LastRun th {
+    width: 110px;
+  }
+
+  .progress {
+    margin-bottom: 0px;
+    border: 1px solid white;
+    border-radius: 7px;
+    height: 20px;
+  }
+
+
+  .dataTable .fas, .dataTable .fa-solid {
+    font-weight: bold;
+    font-size: 1em;
+}

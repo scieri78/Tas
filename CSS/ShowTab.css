@@ -1,0 +1,170 @@
+
+#Indietro{
+    position: absolute;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+    text-align: center;	
+}
+
+.pari{
+	background: #e6e1e1;
+}
+
+.dispari{
+	background: whitesmoke;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	font-size: 13px;
+	font-family: initial;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 30px;
+	position: absolute;	
+	width: 95%;
+}
+
+th {
+	border-top:1px solid black; 
+	border-left:1px solid black; 
+	border-right:1px solid black; 
+	padding: 2px 7px;
+	text-align: center;
+}
+
+tr {
+	border-bottom:1px solid black;
+	height:27px;
+}
+
+td {
+	border-left:1px solid black;
+	border-right:1px solid black;
+	padding: 2px 7px;
+	font-size: 1em;
+}
+
+.int{
+	text-align: right;
+}
+
+.string{
+	text-align: left;
+}
+
+.type{
+	font-size: 12px;
+}
+
+.Select {
+	text-align: center;
+}
+
+.invsel{
+	text-align: center;
+	height: 100%;
+	box-shadow: 1px 1px 1px 1px black;
+}
+
+.LinkPage{
+	height: 20px;
+	width: 20px;
+	float:left;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 1px;
+}
+
+.ListaPage{
+	position:relative;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	width: 20px;
+	margin:5px;
+	float: left;
+}
+
+.PagTab{
+    float:left;
+	position: relative;
+    width: 100%;
+}
+
+.Aggiungi{
+    float: left;
+    position: relative;
+    width: 100%;
+	height: 100px;
+}
+
+.SalvaTab{
+
+}
+
+#Titolo{
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;	  
+	text-align: center;	
+	font-size: 14px;
+}
+	  
+.FormGestione{
+    padding: 1%;
+}
+
+.IcoImg{
+ height: 20px; 
+ float: left;
+}
+
+.val{
+    float:left;
+}
+
+.NomeTab{
+	font-size: 25px;
+	width: 100%;
+	text-align: center;
+}
+
+.inser{
+	width: 100%;
+	height: 100%;
+}
+	
+.IcoBack {
+    height: 30px;
+    float: left;
+    position: absolute;
+    margin: 6px;
+}
+
+ .ShowTab{
+    float: left;
+ }
+ 
+ .varchar{
+    text-align: left;
+ }
+ 
+ .integer, .real{
+    text-align: right; 
+ }
+ 
+ .ShowQuery{
+    top: 106px;
+    position: relative;
+	height: 100%;
+}
+ 

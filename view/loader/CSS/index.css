@@ -1,0 +1,50 @@
+#DivLoad{
+    position:absolute;
+    left:0;
+    right:0;
+    margin:auto;
+    width:600px;
+    height:200px;
+    background:white;
+    color:black;
+    border:1px solid black;
+    padding:10px;
+}
+
+#EsitoImg{
+	width:30px;
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+#EsitoUpload{
+	position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+	width:300px;
+	height:300px;
+	background:white;
+	border:1px solid black;
+	z-index:9999;
+	text-align: center;
+    padding: 20px;
+	overload:auto;
+}
+
+.labelFiltro {
+    
+    width: 114px;
+}
+
+input[type=file] {
+    font-size: 16px;
+    display: inline;
+    background: white;
+    margin-right: 20px;
+    border: 1px solid;
+    padding-left: 0px;
+}

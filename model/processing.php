@@ -18,7 +18,7 @@ class processing_model
     /**
      * getDbName
      *
-     * @return void
+     * @return mixed
      */
     public function getDbName()
     {
@@ -29,7 +29,7 @@ class processing_model
      * getListProcessing - Lista principale dei processing padre
      *
      * @param  mixed $_datiprocessing
-     * @return void
+     * @return array
      */
     public function getListProcessing($_datiprocessing)
     {
@@ -48,7 +48,7 @@ class processing_model
                     ORDER BY START_TIME DESC
                     FETCH FIRST ? ROWS ONLY";
             
-            return $this->_db->getArrayByQuery($sql, array($meseElab, $limit));
+            return $this->_db->getArrayByQuery($sql, [$meseElab, $limit]);
         } catch (Exception $e) {
             throw $e;
         }
@@ -73,7 +73,7 @@ class processing_model
                     AND TRIM(TAGS) = TRIM(?)
                     AND STATUS = 'F'";
             
-            $result = $this->_db->getArrayByQuery($sql, array($meseDiff, $idSh, $tag));
+            $result = $this->_db->getArrayByQuery($sql, [$meseDiff, $idSh, $tag]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
             throw $e;
@@ -94,7 +94,7 @@ class processing_model
                     WHERE 1=1
                     AND ID_RUN_SH = ?";
             
-            $result = $this->_db->getArrayByQuery($sql, array($idRunShOld));
+            $result = $this->_db->getArrayByQuery($sql, [$idRunShOld]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
             throw $e;
@@ -120,7 +120,7 @@ class processing_model
                     AND ID_RUN_SH_FATHER = ?
                     ORDER BY START_TIME DESC";
             
-            return $this->_db->getArrayByQuery($sql, array($idRunSh));
+            return $this->_db->getArrayByQuery($sql, [$idRunSh]);
         } catch (Exception $e) {
             throw $e;
         }
@@ -143,7 +143,7 @@ class processing_model
                     AND ID_RUN_SH = ?
                     ORDER BY START_TIME DESC";
             
-            return $this->_db->getArrayByQuery($sql, array($idRunSh));
+            return $this->_db->getArrayByQuery($sql, [$idRunSh]);
         } catch (Exception $e) {
             throw $e;
         }
@@ -165,7 +165,7 @@ class processing_model
                     AND ID_RUN_SH = ?
                     ORDER BY TIME DESC";
             
-            return $this->_db->getArrayByQuery($sql, array($idRunSh));
+            return $this->_db->getArrayByQuery($sql, [$idRunSh]);
         } catch (Exception $e) {
             throw $e;
         }
@@ -203,7 +203,7 @@ class processing_model
                     ORDER BY TIME DESC)
                     ORDER BY START_TIME DESC";
             
-            return $this->_db->getArrayByQuery($sql, array($idRunSh, $idRunSh, $idRunSh));
+            return $this->_db->getArrayByQuery($sql, [$idRunSh, $idRunSh, $idRunSh]);
         } catch (Exception $e) {
             throw $e;
         }
@@ -225,7 +225,7 @@ class processing_model
                     AND ID_SH = ?
                     AND TRIM(TAGS) = TRIM(?)";
             
-            $result = $this->_db->getArrayByQuery($sql, array($idRunShOld, $idSh, $tag));
+            $result = $this->_db->getArrayByQuery($sql, [$idRunShOld, $idSh, $tag]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
             throw $e;
@@ -247,7 +247,7 @@ class processing_model
                     AND ID_RUN_SH = ?
                     AND STEP = ?";
             
-            $result = $this->_db->getArrayByQuery($sql, array($idRunShOld, $step));
+            $result = $this->_db->getArrayByQuery($sql, [$idRunShOld, $step]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
             throw $e;

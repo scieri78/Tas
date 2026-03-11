@@ -1,0 +1,111 @@
+<table id="StoricoLanci" class="display dataTable tableStorico">
+  <thead class="headerStyle">
+    <tr>
+      <th>INIZIO</th>
+      <th>FINE</th>
+      <th>TIME</th>
+      <th>FLUSSO</th>
+      <th>TIPO</th>
+      <th>DIPENDENZA</th>
+      <th>ESITO</th>
+      <th>NOTE</th>
+      <th>UTENTE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    foreach ($DatiStoricoFlussi as $rowTabRead) {
+      $IdProcess = $rowTabRead['ID_PROCESS'];
+      $IdFlu     = $rowTabRead['ID_FLU'];
+      $Flusso    = $rowTabRead['FLUSSO'];
+      $Tipo      = $rowTabRead['TIPO'];
+      $Dipendenza = $rowTabRead['DIPENDENZA'];
+      $IdDip     = $rowTabRead['ID_DIP'];
+      $Azione    = $rowTabRead['AZIONE'];
+      $Utente    = $rowTabRead['UTENTE'];
+      $File      = $rowTabRead['FILE'];
+      $DStart    = $rowTabRead['INIZIO'];
+      $DEnd      = $rowTabRead['FINE'];
+      $DipDiff   = $rowTabRead['DIFF'];
+      $Parall    = $rowTabRead['SHELL_PARALL'];
+      $Note      = $rowTabRead['NOTE'];
+      $Esito     = $rowTabRead['ESITO'];
+      $IdRunSh   = $rowTabRead['ID_RUN_SH'];
+
+      switch ($Tipo) {
+        case "C":
+          $ImgTipo = "Carica";
+          break;
+        case "F":
+          $ImgTipo = "Flusso";
+          break;
+        case "V":
+          $ImgTipo = "Valida";
+          break;
+        case "E":
+          $ImgTipo = "Elaborazione";
+          break;
+        case "L":
+          $ImgTipo = "Link";
+          break;
+      }
+      $ImgDip = "";
+      switch ($Esito) {
+        case "E":
+          $ImgDip = './images/KO.png';
+          break;
+        case "F":
+          $ImgDip = './images/OK.png';
+          break;
+        case "C":
+          $ImgDip = './images/Loading.gif';
+          break;
+        case "W":
+          $ImgDip = './images/Warning.png';
+          break;
+        default:
+          $ImgDip = './images/OK.png';
+      }
+    ?>
+    <tr>
+      <td><?php echo $DStart; ?></td>
+      <td><?php echo $DEnd; ?></td>
+      <td><?php echo gmdate('H:i:s', $DipDiff); ?></td>
+      <td><?php echo $Flusso; ?></td>
+      <td>
+        <img class="ImgIco" src="./images/<?php echo $ImgTipo; ?>.png" title="<?php echo $IdDip; ?>">
+        <?php if ($Tipo == "E") {
+          if ($Parall == "Y") { ?>
+            <img class="ImgIco" style="padding-left:10px;" title="Parallelo" src="./images/Parall.png">
+          <?php } else { ?>
+            <img class="ImgIco" style="padding-left:10px;" title="Non Parallelo" src="./images/NoParall.png">
+          <?php }
+        } ?>
+      </td>
+      <td><?php echo $Dipendenza; ?></td>
+      <td><img class="ImgIco" src="<?php echo $ImgDip; ?>" title="<?php echo $IdDip; ?>"></td>
+      <td id="note" title="<?php echo $Note; ?>">
+        <?php if ($IdRunSh != "") { ?>
+          <img class="ImgIco" style="height:35px;cursor:pointer;" src="./images/LogProc.png" onclick="OpenProcessing(<?php echo $IdRunSh; ?>,<?php echo $SelIdProcess; ?>)">
+        <?php } else {
+          echo $Note;
+        } ?>
+      </td>
+      <td><?php echo $Utente; ?></td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
+
+<script>
+    // Inizializza DataTable
+    $(document).ready(function() {
+        $('#StoricoLanci').DataTable({
+           "lengthMenu": [ [-1, 10, 25, 50,100], ["All",10, 25, 50,100] ], 
+            paging: true,
+            searching: true,
+            ordering: true,
+            "order": [[1, "desc"]]
+        });
+    });
+</script>

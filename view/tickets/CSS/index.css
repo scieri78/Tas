@@ -1,0 +1,140 @@
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.kanban-board {
+    display: flex;
+    gap: 10px;
+}
+
+.kanban-column {
+    width: 30%;
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.ticket {
+    background: white;
+    border: 1px solid #aaa;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: move;
+    border-radius: 10px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    font-size: 1.3em;
+}
+
+input {
+    width: 100%;
+    font-size: 1.3em;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    /* Imposta la larghezza a auto */
+    height: auto;
+    /* Puoi anche regolare l'altezza se necessario */
+    margin: 10px;
+    /* Margine per distanziare */
+}
+
+.valido {
+    background-color: greenyellow;
+}
+
+
+
+.topnav {
+    margin-left: -20px;
+    top: 86px;
+    z-index: 99;
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+    background: var(--menuColor);
+    padding-left: 20px;
+}
+
+.fileter-aside {
+    float: none;
+}
+
+.btn {
+    display: inline !important;
+}
+
+.da_fare_poi {
+    background-color: Lavender;
+}
+
+.aperto {
+    background-color: lightpink;
+}
+
+.in_lavorazione {
+    background-color: whitesmoke;
+}
+
+.richiesta_info {
+    background-color: PeachPuff;
+}
+
+.test {
+    background-color: LightGoldenRodYellow;
+}
+
+.risolto {
+    background-color: palegreen;
+}
+
+label {
+    width: 105px;
+    font-weight: bold;
+    margin-bottom: 10px !important;
+}
+
+#posizione {
+    width: 205px;
+}
+
+
+.vertical-separator {
+    width: 1px;
+    /* Larghezza della linea */
+    background-color: #000;
+    /* Colore della linea */
+    height: 100px;
+    /* Altezza della linea */
+    margin: 0 10px;
+    /* Margine per separare gli elementi */
+    display: inline-block;
+    /* Permette di posizionare la linea tra elementi */
+}
+
+
+.horizontal-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.horizontal-separator::before,
+.horizontal-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.horizontal-separator span {
+    margin: 0 10px;
+    font-weight: bold;
+}

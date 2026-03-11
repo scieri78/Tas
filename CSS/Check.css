@@ -1,0 +1,21 @@
+
+.divElab {
+   width: 90%;
+   margin: 0 auto;
+   align: center;
+   border: 1px solid black;
+   padding-top: 30px;
+   padding-bottom:30px;
+   font-size: 30px;
+   margin-bottom: 30px;
+   background: whitesmoke;
+   border-radius:10px;
+   position: relative;
+   height:100%;
+}
+
+#tablediv {
+  text-align: center;
+  align: center;
+  font-size: 12px;
+}

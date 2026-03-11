@@ -1,0 +1,1 @@
+<img style="display: block; margin: 1px auto; border: 1px solid blue;" src="../images/SfondoStat.jpg" alt="SfondoStat" height="384" width="663">

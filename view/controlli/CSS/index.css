@@ -1,0 +1,137 @@
+caption {
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10px;
+}
+.cpointer { cursor: pointer; }
+.esitoKO{
+    background-color: salmon!important;
+    
+    }
+
+.esitoDB{
+    background-color: orange!important;
+    }
+
+.NOEsito{
+    background-color: lightgray!important;
+}
+.esitoOK{
+    background-color: white!important;
+    color: green!important;
+    
+    }
+.esitoNV{
+    background-color: gold!important;    
+}
+
+.esitoKO a ,.esitoDB a{
+    color: ghostwhite;
+    
+}
+.esitoKO a:hover ,.esitoDB a:hover{
+    color: yellow;
+    text-decoration: revert-layer;
+}
+
+
+.red {color: red};
+.blue {color: blue};
+.xgreen {color: green!important;};
+.yellow {color: yellow};
+.white {color: white};
+.grey {color: grey};
+
+
+
+table.dataTable td {
+    font-size: 0.7em;
+  }
+  table.dataTable th {
+    font-size: 0.8em;
+  }
+
+  .labelForm{
+    margin:5px 10px;
+  }
+
+  .labelInput{
+    margin:10px 10px;
+  }
+
+
+  #idTabella caption {
+    text-align: left;
+    font-size: 1.3em;
+    font-weight: normal;
+    margin: 0px;
+}
+
+.divisoreLancio {
+    border-left: 1px solid burlywood;
+}
+
+.bgcLancio{
+    background-color: darkgreen;
+}
+
+
+.bgcAction{
+    background-color: azure;
+}
+
+.trControlli{
+    background-color: darkblue;
+}
+
+thead.fixed {position:fixed;top:130px;}
+
+
+#idTabella caption i {   
+    font-size: 1em;
+}
+
+.actionButton {
+    float: right;
+    /* margin-right: 12px; */
+    margin: 8px 0px;
+}
+#selectAllContr{
+    cursor: pointer;
+}
+
+
+.titlehover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: auto!important;
+}
+
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: auto!important;
+    max-width: 535px;
+}
+
+.bootstrap-select {
+    width: auto!important;
+    max-width: 535px;
+    /*IE9 and below*/
+  }
+#TitoloLoadLancio{
+    background-color: orange;
+    display: none;
+    padding: 5px 0;
+    
+}
+#message{
+    top: 0;
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index:99999;
+    background:url("../../../images/Loading3.gif") no-repeat center center rgba(255, 255, 255, 0.25)
+  }

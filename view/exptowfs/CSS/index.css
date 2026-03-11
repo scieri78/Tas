@@ -1,0 +1,14 @@
+.ShLine{
+	border-left:0px;
+	border-right:0px;
+	border-bottom: 1px solid black;
+	padding:5px;
+	padding-bottom:10px;
+}
+.Puls{
+	cursor:pointer;
+}
+.LabelMails{
+	float:left;
+	margin:5px;
+}

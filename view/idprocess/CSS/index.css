@@ -1,0 +1,214 @@
+.WorkFlow {
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-bottom: auto;
+    padding: 5px;
+    border: 1px solid;
+    background: white;
+    margin-bottom: 10px;
+    text-align:center;
+	cursor: pointer;
+}
+
+#AddIdProcess{
+    position:fixed;
+    width: 600px;
+    height: 450px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid;
+    background: white;
+    text-align:center;
+    box-shadow: 0px 0px 10px 0px black;
+}
+
+.Titolo{
+    font-size:20px;
+}
+
+.Bottone {
+    color: blue;
+    border: 1px solid blue;
+    height: 25px;
+    text-align: center;
+    box-shadow: 0px 0px 7px 1px lightblue inset;
+    -o-box-shadow: 0px 0px 7px 1px lightblue inset;
+    -moz-box-shadow: 0px 0px 7px 1px lightblue inset;
+    border-radius: 5px;
+    width: 200px;
+    background-color: white;
+    padding: 4px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+
+
+
+#ShowStatusCopy{
+    
+    width:95%;
+    height:500px;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    border: 2px solid black;    
+    box-shadow: 0px 0px 10px 0px solid black;
+    background:white;
+    z-index:9999;
+    scroll:auto;
+    overflow:auto;
+}
+#ShowTab {
+    /* width: 95%; */
+    height: 94%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9999;
+    scroll: auto;
+    overflow: auto;
+}
+
+.fa-xmark{
+	font-size:1.5em;
+	color:red;
+	cursor:pointer;
+}
+
+.fa-glasses{
+	font-size:1.5em;
+	cursor:pointer;
+}
+
+
+#azioni {
+    padding-top: 3px;    
+    margin-bottom: 10px;
+    /* margin-top: 10px; */
+}
+/*
+.idProcessConteiner {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+   
+}*/
+
+
+label.labelIdproces {
+     width: 100px;
+}
+
+label.labelFromTo {
+     width: 50px;
+	 margin-left:10px;
+}
+
+.FieldMand{
+	 width: 200px;
+}
+
+.rowIdProcess {
+    margin-bottom: 12px;
+}
+
+
+
+.starlight-aside--tip {
+    --sl-color-asides-text-accent: var(--sl-color-purple-high);
+    border-color: var(--sl-color-purple);
+    background-color: var(--sl-color-purple-low)
+}
+
+.starlight-aside--caution {
+    --sl-color-asides-text-accent: var(--sl-color-orange-high);
+    border-color: var(--sl-color-orange);
+    background-color: var(--sl-color-orange-low)
+}
+
+.starlight-aside--danger {
+    --sl-color-asides-text-accent: var(--sl-color-red-high);
+    border-color: var(--sl-color-red);
+    background-color: var(--sl-color-red-low)
+}
+
+.sl-markdown-content :not(a,strong,em,del,span,input,code)+:not(a,strong,em,del,span,input,code,:where(.not-content *)) {
+    margin-top: 1rem;
+}
+
+.starlight-aside {
+    border-radius: 16px;
+}
+
+.starlight-aside--note {
+    --sl-color-asides-text-accent: var(--sl-color-blue-high);
+    border-color: var(--sl-color-blue);
+    background-color: var(--sl-color-blue-low);
+}
+.starlight-aside {
+    margin: 10px;
+    width: auto;
+    border: 1px solid darkslateblue;
+    background: ghostwhite;
+    padding: 1rem;
+    border-inline-start: .25rem solid;
+    color: black;
+    /* clear: both; */
+    float: left;
+    margin-top: 13px;
+}
+
+.fileter-aside {
+	margin-bottom: 19px !important;
+    margin-top: 16px !important;
+    margin: auto;
+    width: 100%;
+    background: darkgrey;
+    clear: both;
+}
+
+
+.bootstrap-select.btn-group:not(.input-group-btn), .bootstrap-select.btn-group[class*="col-"] {
+    float: none;
+    display: none;
+    margin-left: 0;
+}
+
+.gestionerow {
+    margin-top: 15px;
+}
+
+.gestionerow input {
+    height: 31px;
+}
+
+
+#divAddIdProcess {
+    padding: 13px;
+}
+
+.InSvec{
+	background-color:red!important;
+	color:white;
+	font-weight:bold;
+}
+
+.InSvec select {
+    font-weight: normal;
+    color: black;
+}
