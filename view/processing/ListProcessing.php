@@ -106,4 +106,3 @@ function openDetail(idRunSh) {
     form.submit();
 }
 </script>
-"}}]
