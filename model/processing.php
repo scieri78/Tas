@@ -110,7 +110,7 @@ class processing_model
     public function getArrayShell($idRunSh)
     {
         try {
-            $sql = "SELECT ROW_NUMBER() OVER (ORDER BY START_TIME DESC) POS,
+            $sql = "SELECT ROWNUM POS,
                     ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME, 
                     ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME, 
                     ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES, 
@@ -126,16 +126,10 @@ class processing_model
         }
     }
 
-    /**
-     * getArraySql - Array delle query SQL
-     *
-     * @param  mixed $idRunSh
-     * @return array
-     */
     public function getArraySql($idRunSh)
     {
         try {
-            $sql = "SELECT ROW_NUMBER() OVER (ORDER BY START_TIME DESC) POS,
+            $sql = "SELECT ROWNUM POS,
                     ID_RUN_SQL, ID_RUN_SH, TYPE_RUN, STEP, FILE_SQL, FILE_IN, 
                     START_TIME, END_TIME, STATUS
                     FROM WORK_CORE.CORE_DB
@@ -158,12 +152,12 @@ class processing_model
     public function getArrayStep($idRunSh)
     {
         try {
-            $sql = "SELECT ROW_NUMBER() OVER (ORDER BY TIME DESC) POS,
+            $sql = "SELECT ROWNUM POS,
                     ID_RUN_SH, STEP, \"TIME\"
                     FROM WORK_CORE.CORE_STEP
                     WHERE 1=1
                     AND ID_RUN_SH = ?
-                    ORDER BY TIME DESC";
+                    ORDER BY \"TIME\" DESC";
             
             return $this->_db->getArrayByQuery($sql, [$idRunSh]);
         } catch (Exception $e) {
@@ -171,31 +165,25 @@ class processing_model
         }
     }
 
-    /**
-     * getArrayShow - Vista unificata ordinata per tempo
-     *
-     * @param  mixed $idRunSh
-     * @return array
-     */
     public function getArrayShow($idRunSh)
     {
         try {
             $sql = "SELECT * FROM 
-                    (SELECT ROW_NUMBER() OVER (ORDER BY START_TIME DESC) POS, 
+                    (SELECT ROWNUM POS, 
                     'ARRAY_SHELL' TIPO, START_TIME
                     FROM WORK_CORE.CORE_SH
                     WHERE 1=1
                     AND ID_RUN_SH_FATHER = ?
                     ORDER BY START_TIME DESC)
                     UNION ALL
-                    (SELECT ROW_NUMBER() OVER (ORDER BY START_TIME DESC) POS, 
+                    (SELECT ROWNUM POS, 
                     'ARRAY_SQL' TIPO, START_TIME
                     FROM WORK_CORE.CORE_DB
                     WHERE 1=1
                     AND ID_RUN_SH = ?
                     ORDER BY START_TIME DESC)
                     UNION ALL
-                    (SELECT ROW_NUMBER() OVER (ORDER BY TIME DESC) POS, 
+                    (SELECT ROWNUM POS,  
                     'ARRAY_STEP' TIPO, TIME START_TIME
                     FROM WORK_CORE.CORE_STEP
                     WHERE 1=1
