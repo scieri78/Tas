@@ -80,14 +80,14 @@
 
 .processing-table th,
 .processing-table td {
-    padding: 10px;
+    padding-left: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 /* tiny status column indicator */
 .processing-table th.status {
-    width: 20px;
+    width: 8px;
     padding: 0; /* remove interior padding so color block is small */
 }
 
@@ -361,6 +361,7 @@
     text-align: left;
     border-bottom: 1px solid #ddd;
     vertical-align: middle;
+    background: white;
 }
 
 .array-step-table th {
