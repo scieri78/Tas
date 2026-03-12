@@ -447,6 +447,10 @@
     margin: 0 0 10px 0;
 }
 
+..starlight-aside {
+    float: none;
+}
+
 #divFiltroShell {
     display: flex;
     align-items: center;
