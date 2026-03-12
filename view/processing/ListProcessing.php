@@ -23,6 +23,7 @@
                     $rc = $row['RC'];
                     $tags = $row['TAGS'];
                     $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
+                    $mese = isset($row['ESER_MESE']) ? $row['ESER_MESE'] : '';
                     $ambito = isset($row['ID_PROCESS']) ? $row['ID_PROCESS'] : '';
 
                     // calcola durata
@@ -51,11 +52,16 @@
                             <i class="fa fa-list-alt" title="Log"></i>
                             <i class="fa fa-file" title="File"></i>
                         </td>
-                        <th>Eser&nbsp;Esame</th><td class="col-esame"><?php echo $esame; ?></td>
+                        <th>EserEsame<br/>
+                        EserMese</th><td><?php echo $esame . "<br/>" . $mese; ?></td>
+
+                       
+
                         <th>Tags</th><td class="col-tags"><?php echo $tags; ?></td>
-                        <th>Start</th><td class="col-start"><?php echo $startTime; ?></td>
-                        <th>Time</th><td class="col-duration"><?php echo $duration; ?></td>
-                        <th>OldTime</th><td class="col-oldtime"></td>
+
+
+                        <th>Start<br>End</th><td class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
+                        <th>Time<br>OldTime</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime; ?></td>
                         <th>User</th><td class="col-user"><?php echo $username; ?></td>
                         <th>Ambito</th><td class="col-ambito"><?php echo $ambito; ?></td>
                     </tr>
