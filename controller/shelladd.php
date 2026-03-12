@@ -35,7 +35,7 @@ class shelladd extends helper
 		$datiShList = $this->_model->getShList();
 		$datiTableList = $this->_model->getTableList();
 		//debugga($datiTableList);
-		$this->debug("", $datiShList);
+		$this->debug("", $datiTableList);
 		$mailPage = @$_POST['mailPage'];
         $mailLength = @$_POST['mailLength'];		
         $mailSearch = @$_POST['mailSearch'];		
