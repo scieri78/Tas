@@ -349,6 +349,20 @@
     border-bottom: 1px solid #ddd;
 }
 
+.array-step-table .array-step-marker {
+    width: 8px;
+    padding: 0;
+    background-color: #6f42c1;
+}
+
+.array-step-table .array-step-desc {
+    font-weight: 600;
+}
+
+.array-step-table .array-step-time {
+    white-space: nowrap;
+}
+
 .array-show-table tbody tr:hover,
 .array-shell-table tbody tr:hover,
 .array-sql-table tbody tr:hover,
