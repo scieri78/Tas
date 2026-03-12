@@ -18,8 +18,13 @@
                     $name = $row['NAME'];
                     $startTime = $row['START_TIME'];
                     $endTime = $row['END_TIME'];
+                    $log = isset($row['LOG']) ? $row['LOG'] : '';
                     $status = $row['STATUS'];
                     $username = $row['USERNAME'];
+                    $mail = isset($row['MAIL']) ? $row['MAIL'] : '';
+                    $debugDb = isset($row['DEBUG_DB']) ? $row['DEBUG_DB'] : '';
+                    $debugSh = isset($row['DEBUG_SH']) ? $row['DEBUG_SH'] : '';
+                    $message = isset($row['MESSAGE']) ? $row['MESSAGE'] : '';
                     $rc = $row['RC'];
                     $tags = $row['TAGS'];
                     $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
@@ -29,29 +34,76 @@
 
                     // determina classe colore status
                     $statusClass = '';
+                    $statusText = '';
                     switch ($status) {
                         case 'F':
                             $statusClass = 'status-success';
+                            $statusText = 'Finished';
                             break;
                         case 'E':
                             $statusClass = 'status-error';
+                            $statusText = 'Error';
                             break;
                         case 'R':
                             $statusClass = 'status-running';
+                            $statusText = 'Running';
                             break;
                         case 'M':
                             $statusClass = 'status-manual';
+                            $statusText = 'Manual';
                             break;
                          case 'W':
                             $statusClass = 'status-warning';
+                            $statusText = 'Warning';
+                            break;
+                        case 'I':
+                            $statusClass = 'status-running';
+                            $statusText = 'Interrupted';
                             break;
                         default:
                             $statusClass = 'status-pending';
+                            $statusText = 'Pending';
                             break;
+                    }
+
+                    $iconStatus = '<img title="' . (int) $idRunSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenShSel(' . (int) $idRunSh . ');" />';
+                    if (isset($_SESSION['SERVER_NAME']) && $_SESSION['SERVER_NAME'] === 'SVIL') {
+                        $iconStatus .= '<img src="./images/Cestino.png" class="IconFile" title="deleteSh" onclick="deleteSh(' . (int) $idRunSh . ')">';
+                    }
+                    if ($status === 'E') {
+                        $iconStatus .= '<img src="./images/ManualOk.png" class="IconFile" title="Manual Ok" onclick="ManualOk(' . (int) $idRunSh . ')">';
+                    }
+                    if ($status === 'I') {
+                        $iconStatus .= '<img src="./images/Skull.png" title="Put this Shell in an error state" onclick="ForceEnd(' . (int) $idRunSh . ')" class="IconSh processing-icon-large">';
+                    }
+
+                    $jsFileTitle = htmlspecialchars(json_encode('File: ' . $name), ENT_QUOTES, 'UTF-8');
+                    $jsLogTitle = htmlspecialchars(json_encode('Log: ' . $name), ENT_QUOTES, 'UTF-8');
+                    $jsName = htmlspecialchars(json_encode($name), ENT_QUOTES, 'UTF-8');
+                    $jsTags = htmlspecialchars(json_encode((string) $tags), ENT_QUOTES, 'UTF-8');
+
+                    $iconAction = '';
+                    if (!empty($idSh)) {
+                        $iconAction .= '<img src="./images/File.png" class="IconFile" title="File" onclick="openDialog(' . (int) $idSh . ', ' . $jsFileTitle . ', \'apriFile\')">';
+                    }
+                    if (!empty($log)) {
+                        $iconAction .= '<img src="./images/Log.png" class="IconSh" title="Log" onclick="openDialog(' . (int) $idRunSh . ', ' . $jsLogTitle . ', \'apriLog\')">';
+                    }
+                    if ($debugSh === 'Y') {
+                        $iconAction .= '<img src="./images/DebugSh.png" title="DebugSh" class="IconDebug">';
+                    }
+                    if ($debugDb === 'Y') {
+                        $iconAction .= '<img src="./images/DebugDb.png" title="DebugDb" class="IconDebug">';
+                    }
+                    $iconAction .= '<img src="./images/Graph.png" title="Grafico" onclick="openGrafici(' . $jsName . ', ' . $jsTags . ', ' . (int) $idSh . ')" class="IconSh">';
+                    $iconAction .= '<img src="./images/PlsqlTab.png" title="Relazioni" onclick="openRelTab(' . (int) $idSh . ', ' . (int) $idRunSh . ', \'\', ' . $jsName . ')" class="IconSh">';
+                    if ($mail === 'Y') {
+                        $iconAction .= '<img src="./images/Mail.png" title="Mail" class="IconDebug">';
                     }
 
                     // calcola durata
                     $duration = '';
+                    $oldTime = '';
                     if (!empty($startTime) && !empty($endTime)) {
                         try {
                             $dt1 = new DateTime($startTime);
@@ -65,19 +117,12 @@
 
                     ?> 
                     <tr class="processing-row">
-                        <th class="status <?php echo $statusClass; ?>"></th>
-                        <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc">RC:<?php echo $rc; ?></td>
+                        <th class="status <?php echo $statusClass; ?>" title="<?php echo $statusText; ?>"></th>
+                        <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc" title="<?php echo htmlspecialchars((string) $message, ENT_QUOTES, 'UTF-8'); ?>">RC:<?php echo $rc; ?></td>
                         <th style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)">Nome</th>                        
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>
-                        <th></th><td class="col-actions">
-                            <i class="fa fa-trash" title="Cancella"></i>
-                            <i class="fa fa-folder-open" title="Apri"></i>
-                            <i class="fa fa-clock-o" title="Orario"></i>
-                            <i class="fa fa-file-text-o" title="Testo"></i>
-                            <i class="fa fa-bar-chart" title="Grafico"></i>
-                            <i class="fa fa-list-alt" title="Log"></i>
-                            <i class="fa fa-file" title="File"></i>
-                        </td>
+                        <th>Stato</th><td class="col-status-icons"><?php echo $iconStatus; ?></td>
+                        <th>Azioni</th><td class="col-actions"><?php echo $iconAction; ?></td>
                         <th>EserEsame<br/>
                         EserMese</th><td><?php echo $esame . "<br/>" . $mese; ?></td>
 

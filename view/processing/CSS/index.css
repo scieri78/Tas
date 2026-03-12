@@ -112,15 +112,28 @@
     vertical-align: middle;
 }
 
-.processing-table .col-actions i {
-    margin-right: 6px;
-    cursor: pointer;
-    color: #000; /* make icons black */
-    font-size: 18px; /* increase size */
+.processing-table .col-status-icons,
+.processing-table .col-actions {
+    white-space: nowrap;
 }
 
-.processing-table .col-actions i:hover {
-    color: #000;
+.processing-table .col-status-icons img,
+.processing-table .col-actions img {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.processing-table .col-status-icons img:last-child,
+.processing-table .col-actions img:last-child {
+    margin-right: 0;
+}
+
+.processing-icon-large {
+    width: 28px !important;
+    height: 28px !important;
 }
 
 /* row headers preceding each value */
