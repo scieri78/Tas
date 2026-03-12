@@ -42,6 +42,9 @@
                         case 'M':
                             $statusClass = 'status-manual';
                             break;
+                         case 'W':
+                            $statusClass = 'status-warning';
+                            break;
                         default:
                             $statusClass = 'status-pending';
                             break;

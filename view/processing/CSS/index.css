@@ -174,8 +174,15 @@
     border-radius: 3px;
 }
 
+.status-warning {
+    background-color: #fd7e14 !important;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
 .status-pending {
-    background-color: orange !important;
+    background-color: gray !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
