@@ -175,7 +175,7 @@
 }
 
 .status-pending {
-    background-color: #17a2b8 !important;
+    background-color: orange !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
