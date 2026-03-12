@@ -107,7 +107,7 @@ class processing_model
      * @param  mixed $idRunSh
      * @return array
      */
-    public function getArrayShell($idRunSh)
+    public function getArrayShell($idRunSh, $pos = null)
     {
         try {
             $sql = "SELECT ROWNUM POS,
@@ -118,6 +118,7 @@ class processing_model
                     FROM WORK_CORE.CORE_SH
                     WHERE 1=1
                     AND ID_RUN_SH_FATHER = ?
+                    and (POS = ? or ? is null)
                     ORDER BY START_TIME DESC";
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
@@ -134,7 +135,7 @@ class processing_model
         }
     }
 
-    public function getArraySql($idRunSh)
+    public function getArraySql($idRunSh,$pos = null)
     {
         try {
             $sql = "SELECT ROWNUM POS,
@@ -143,9 +144,10 @@ class processing_model
                     FROM WORK_CORE.CORE_DB
                     WHERE 1=1
                     AND ID_RUN_SH = ?
+                    and (POS = ? or ? is null)
                     ORDER BY START_TIME DESC";
             //trasforma il return in array associativo con chiave ID_RUN_SH
-            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
             //stampa sql
             $this->_db->printSql();
 
@@ -161,7 +163,7 @@ class processing_model
      * @param  mixed $idRunSh
      * @return array
      */
-    public function getArrayStep($idRunSh)
+    public function getArrayStep($idRunSh, $pos = null)
     {
         try {
             $sql = "SELECT ROWNUM POS,
@@ -169,7 +171,8 @@ class processing_model
                     FROM WORK_CORE.CORE_STEP
                     WHERE 1=1
                     AND ID_RUN_SH = ?
-                    ORDER BY \"TIME\" DESC";
+                    and (POS = ? or ? is null)
+                    ORDER BY "TIME" DESC";
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
             //stampa sql

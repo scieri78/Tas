@@ -6,15 +6,6 @@
 ?>
 
 <table class="array-step-table">
-    <thead>
-        <tr>
-            <th>Pos</th>
-            <th>ID RUN SH</th>
-            <th>Step</th>
-            <th>Data/Ora</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
     <tbody>
         <?php
             if (is_array($ArrayStep) && count($ArrayStep) > 0) {
@@ -25,18 +16,16 @@
                     $time = $row['TIME'];
                     ?>
                     <tr class="array-step-row">
-                        <td><?php echo $pos; ?></td>
-                        <td><?php echo $idRunSh; ?></td>
-                        <td><?php echo $step; ?></td>
-                        <td><?php echo $time; ?></td>
-                        <td>
-                            <button class="btn-small" onclick="alert('Step: <?php echo htmlspecialchars($step); ?>')">Info</button>
-                        </td>
+                        <th>Pos</th><td><?php echo $pos; ?></td>
+                        <th>ID Run SH</th><td><?php echo $idRunSh; ?></td>
+                        <th>Step</th><td><?php echo $step; ?></td>
+                        <th>Data/Ora</th><td><?php echo $time; ?></td>
+                        <th>Azioni</th><td><button class="btn-small" onclick="alert('Step: <?php echo htmlspecialchars($step); ?>')">Info</button></td>
                     </tr>
                     <?php
                 }
             } else {
-                echo "<tr><td colspan='5'>Nessuno step disponibile</td></tr>";
+                echo "<tr><td colspan='10'>Nessuno step disponibile</td></tr>";
             }
         ?>
     </tbody>

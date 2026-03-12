@@ -133,11 +133,35 @@ class processing extends helper
         $idRunSh = isset($_GET['idRunSh']) ? $_GET['idRunSh'] : 0;
         
         if ($idRunSh) {
-            // Recupera gli shell figli ordinati per tempo
-            $ArrayShell = $this->_model->getArrayShell($idRunSh);
+            $ArrayShell = $this->_model->getArrayShow($idRunSh);         // Recupera gli shell figli ordinati per tempo
+            //per ogni tipo di shell recupera il dettaglio puoi visualizzare il dettagio corrispondente in base al tipo (shell, sql, step)
+        foreach ($ArrayShell as $key => $shell) {
+                if ($shell['TIPO'] == 'ARRAY_SHELL') {
+                    $ArrayShell[$key]['DETTAGLIO'] = $this->_model->getArrayShell($idRunSh, $shell['POS']);
+                } elseif ($shell['TIPO'] == 'ARRAY_SQL') {
+                    $ArrayShell[$key]['DETTAGLIO'] = $this->_model->getArraySql($idRunSh, $shell['POS']);
+                } elseif ($shell['TIPO'] == 'ARRAY_STEP') {
+                    $ArrayShell[$key]['DETTAGLIO'] = $this->_model->getArrayStep($idRunSh, $shell['POS']);
+                }
+            }
+           //richiama la view corrispondente per mostrare il dettaglio degli shell figli, puoi passare l'array completo con i dettagli alla view e gestire la visualizzazione in base al tipo di shell
+           foreach ($ArrayShell as $shell) {
+                if ($shell['TIPO'] == 'ARRAY_SHELL') {
+                    // mostra dettaglio shell
+                    include 'view/processing/ArrayShell.php';
+                } elseif ($shell['TIPO'] == 'ARRAY_SQL') {
+                    // mostra dettaglio sql
+                    include 'view/processing/ArraySql.php';
+                } elseif ($shell['TIPO'] == 'ARRAY_STEP') {
+                    // mostra dettaglio step
+                    include 'view/processing/ArrayStep.php';
+                }
+            }
+
+           // $ArrayShell = $this->_model->getArrayShell($idRunSh);
             
             // Restituisci il contenuto degli shell come HTML
-            include 'view/processing/ArrayShell.php';
+           // include 'view/processing/ArrayShell.php';
         }
     }
 }

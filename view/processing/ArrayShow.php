@@ -6,14 +6,6 @@
 ?>
 
 <table class="array-show-table">
-    <thead>
-        <tr>
-            <th>Tipo</th>
-            <th>Data/Ora</th>
-            <th>Posizione</th>
-            <th>Dettagli</th>
-        </tr>
-    </thead>
     <tbody>
         <?php
             if (is_array($ArrayShow) && count($ArrayShow) > 0) {
@@ -56,15 +48,15 @@
                     }
                     ?>
                     <tr class="array-show-row">
-                        <td><span class="badge badge-<?php echo strtolower($tipo); ?>"><?php echo str_replace('ARRAY_', '', $tipo); ?></span></td>
-                        <td><?php echo $startTime; ?></td>
-                        <td><?php echo $pos; ?></td>
-                        <td><?php echo $dettaglio; ?></td>
+                        <th>Tipo</th><td><span class="badge badge-<?php echo strtolower($tipo); ?>"><?php echo str_replace('ARRAY_', '', $tipo); ?></span></td>
+                        <th>Data/Ora</th><td><?php echo $startTime; ?></td>
+                        <th>Pos</th><td><?php echo $pos; ?></td>
+                        <th>Dettagli</th><td><?php echo $dettaglio; ?></td>
                     </tr>
                     <?php
                 }
             } else {
-                echo "<tr><td colspan='4'>Nessun evento disponibile</td></tr>";
+                echo "<tr><td colspan='8'>Nessun evento disponibile</td></tr>";
             }
         ?>
     </tbody>
