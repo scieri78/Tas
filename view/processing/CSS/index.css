@@ -101,7 +101,7 @@
 
 /* Status badge */
 .status-success {
-    background-color: #28a745;
+    background-color: #28a745 !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
@@ -154,28 +154,28 @@
 }
 
 .status-error {
-    background-color: #dc3545;
+    background-color: #dc3545 !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
 }
 
 .status-running {
-    background-color: #ffc107;
+    background-color: #ffc107 !important;
     color: black;
     padding: 4px 8px;
     border-radius: 3px;
 }
 
 .status-manual {
-    background-color: #6c757d;
+    background-color: #6c757d !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
 }
 
 .status-pending {
-    background-color: #17a2b8;
+    background-color: #17a2b8 !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
