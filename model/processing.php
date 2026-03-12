@@ -166,15 +166,15 @@ class processing_model
     public function getArrayStep($idRunSh, $pos = null)
     {
         try {
-            $sql = "SELECT ROWNUM POS,
-                    ID_RUN_SH, STEP, \"TIME\"
+            $sql = 'SELECT ROWNUM POS,
+                    ID_RUN_SH, STEP, "TIME"
                     FROM WORK_CORE.CORE_STEP
                     WHERE 1=1
                     AND ID_RUN_SH = ?
                     and (POS = ? or ? is null)
-                    ORDER BY "TIME" DESC";
+                    ORDER BY "TIME" DESC';
             //trasforma il return in array associativo con chiave ID_RUN_SH
-            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
             //stampa sql
             $this->_db->printSql();
 
