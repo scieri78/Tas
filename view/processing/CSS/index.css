@@ -67,6 +67,10 @@
     margin-bottom: 15px;
 }
 
+.processing-list-container table td {
+    border-bottom: 1px solid #ddd;
+}
+
 .processing-table {
     width: 100%;
     border-collapse: collapse;

@@ -119,7 +119,6 @@
                     <tr class="processing-row">
                         <th class="status <?php echo $statusClass; ?>" title="<?php echo $statusText; ?>"></th>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc" title="<?php echo htmlspecialchars((string) $message, ENT_QUOTES, 'UTF-8'); ?>">RC:<?php echo $rc; ?></td>
-                        <th style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)">Nome</th>                        
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>
                         <th></th><td class="col-status-icons"><?php echo $iconStatus; ?></td>
                         <th></th><td class="col-actions"><?php echo $iconAction; ?></td>
