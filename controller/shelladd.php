@@ -32,6 +32,7 @@ class shelladd extends helper
 	public function contentList()
     {
 		$this->get_errors_message($this->messafeType);
+		$hideParall = ($this->_model->getDbName() == 'TASPCWRK');
 		$datiShList = $this->_model->getShList();
 		$datiTableList = $this->_model->getTableList();
 		$mailPage = @$_POST['mailPage'];
@@ -76,6 +77,7 @@ class shelladd extends helper
 
 public function formSh()
     {
+	$hideParall = ($this->_model->getDbName() == 'TASPCWRK');
 	$ID_SH = @$_POST['ID_SH'];
 	$SHELL = @$_POST['SHELL'];
 	$SHELL_PATH = @$_POST['SHELL_PATH'];

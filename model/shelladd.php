@@ -15,12 +15,31 @@
 		{
 		    $this->_db = new db_driver();		  
 		}
+
+		public function getDbName()
+		{
+			return $this->_db->getDb();
+		}
+
+		private function ignoreParallColumn()
+		{
+			return $this->_db->getDb() == 'TASPCWRK';
+		}
+
+		private function getParallSelect()
+		{
+			if ($this->ignoreParallColumn()) {
+				return 'null PARALL';
+			}
+
+			return 'PARALL';
+		}
 		
 		public function getShList()
 		{
 			try
 			{
-					$sql = "SELECT ID_SH, SHELL, SHELL_PATH,PARALL
+					$sql = "SELECT ID_SH, SHELL, SHELL_PATH, " . $this->getParallSelect() . "
 					FROM WORK_CORE.CORE_SH_ANAG 
 					ORDER BY SHELL_PATH, SHELL";
                 $res = $this->_db->getArrayByQuery($sql);	
@@ -38,17 +57,9 @@
 		{
 			try
 			{
-				//se db_name = work allora fai questa query altrimenti fai quella con il prefisso del db_name
-				$sql = "";
-				if($this->_db->getDb() == 'TASPCWRK'){
-					$sql = "SELECT ID_SH, SHELL, SHELL_PATH,null PARALL
+				$sql = "SELECT ID_SH, SHELL, SHELL_PATH, " . $this->getParallSelect() . "
 					FROM WORK_CORE.CORE_SH_ANAG 
 					ORDER BY SHELL_PATH, SHELL";
-			}else{
-				$sql = "SELECT ID_SH, SHELL, SHELL_PATH, PARALL
-					FROM WORK_CORE.CORE_SH_ANAG 
-					ORDER BY SHELL_PATH, SHELL";
-			}
                 $res = $this->_db->getArrayByQuery($sql);	
 				 
                 return $res;
@@ -66,12 +77,21 @@
 		{
 			try
 			{
-					$sql = "update 
-					 WORK_CORE.CORE_SH_ANAG 
-					SET SHELL = ? , SHELL_PATH = ?, PARALL = ?
-					WHERE ID_SH = ?
-					";
-                $res = $this->_db->updateDb($sql,[$SHELL,$SHELL_PATH,$PARALL,$ID_SH]);	
+					if ($this->ignoreParallColumn()) {
+						$sql = "update 
+						 WORK_CORE.CORE_SH_ANAG 
+						SET SHELL = ? , SHELL_PATH = ?
+						WHERE ID_SH = ?
+						";
+                			$res = $this->_db->updateDb($sql,[$SHELL,$SHELL_PATH,$ID_SH]);
+					} else {
+						$sql = "update 
+						 WORK_CORE.CORE_SH_ANAG 
+						SET SHELL = ? , SHELL_PATH = ?, PARALL = ?
+						WHERE ID_SH = ?
+						";
+                			$res = $this->_db->updateDb($sql,[$SHELL,$SHELL_PATH,$PARALL,$ID_SH]);
+					}	
 				 
                 return $res;
 			}

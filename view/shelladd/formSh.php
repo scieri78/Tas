@@ -10,6 +10,7 @@
         <td class="TdDip"><label style="width:300px;text-align:left;">Shell Name</label></td>
         <td class="TdDip"><input type="text" id="SHELL" Name="SHELL" style="width: 100%;" class="ModificaField" value="<?php echo $SHELL; ?>" /></td>
         </tr>
+      <?php if (!$hideParall) { ?>
       <tr>
         <td class="TdDip"><label style="width:300px;text-align:left;">Parall</label></td>
         <td class="TdDip">
@@ -19,6 +20,7 @@
           </select>
         </td>
       </tr>
+      <?php } ?>
       <td>
         <button id="PulMod" onclick="modificaSh();return false;" class="btn AggiungiFlusso">
           <i class="fa-solid fa-pencil-square-o"> </i> Modifica</button>

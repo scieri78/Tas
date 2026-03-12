@@ -23,7 +23,9 @@
 	<tr>
 	  <th>PATH</th>
 	  <th>SHELL</th>
+      <?php if (!$hideParall) { ?>
 	  <th>PARALL</th>
+      <?php } ?>
 	  <th></th>  
       <th></th>
 	</tr> 
@@ -49,8 +51,10 @@
 									<img src="./images/File.png" class="IconSh" style="width:25px;">
 									<?php echo $SHELL; ?></div>                    
                 </td>
+                                <?php if (!$hideParall) { ?>
                  <td class="ShLine ">
 				<?=$PARALL=='Y'?'Si':'No'?></td>
+                                <?php } ?>
 
                 <td class="ShLine" >
                   <i class="fa-solid fa-pen-to-square" onclick="formSh('<?php echo $SHELL; ?>','<?php echo $SHELL_PATH; ?>','<?php echo $ID_SH; ?>','<?php echo $PARALL; ?>')"/>
