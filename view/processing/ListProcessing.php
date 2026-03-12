@@ -40,9 +40,10 @@
                     }
 
                     ?>
-                    <tr class="processing-row" onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;">
-                        <td class="col-rc">RC: <?php echo $rc; ?></td>
-                        <th>Nome</th><td class="col-name"><?php echo $name; ?></td>
+                    <tr class="processing-row"   >
+                        <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc">RC:<?php echo $rc; ?></td>
+                        <th style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)">Nome</th>                        
+                        <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>
                         <th></th><td class="col-actions">
                             <i class="fa fa-trash" title="Cancella"></i>
                             <i class="fa fa-folder-open" title="Apri"></i>
@@ -60,7 +61,7 @@
                         <th>Tags</th><td class="col-tags"><?php echo $tags; ?></td>
 
 
-                        <th>Start<br>End</th><td class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
+                        <th>Start<br>End</th><td style="width: 205px;" class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
                         <th>Time<br>OldTime</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime; ?></td>
                         <th>User</th><td class="col-user"><?php echo $username; ?></td>
                         <th>Ambito</th><td class="col-ambito"><?php echo $ambito; ?></td>
