@@ -352,7 +352,34 @@
 .array-step-table .array-step-marker {
     width: 8px;
     padding: 0;
-    background-color: #6f42c1;
+    background-color: #6f42c1!important;
+}
+
+.array-step-table th,
+.array-step-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+.array-step-table th {
+    font-weight: bold;
+    padding: 4px 8px;
+    background-color: #f0f0f0;
+}
+
+.array-step-table .array-step-marker {
+    padding: 0;
+    background-color: #6f42c1 !important;
+}
+
+.array-step-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.array-step-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 .array-step-table .array-step-desc {
@@ -368,6 +395,28 @@
 .array-sql-table tbody tr:hover,
 .array-step-table tbody tr:hover {
     background-color: #f8f9fa;
+}
+
+.array-sql-table th,
+.array-sql-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+.array-sql-table th {
+    font-weight: bold;
+    padding: 4px 8px;
+    background-color: #f0f0f0;
+}
+
+.array-sql-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.array-sql-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 /* Detail actions */

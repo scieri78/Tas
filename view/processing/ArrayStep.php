@@ -15,7 +15,7 @@
                     ?>
                     <tr class="array-step-row">
                         <th class="array-step-marker"></th>
-                        <th>Eseguo Shell in WORK :</th><td class="array-step-desc"><?php echo htmlspecialchars($step, ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td class="array-step-desc"><?php echo htmlspecialchars($step, ENT_QUOTES, 'UTF-8'); ?></td>
                         <th>TimeStamp</th><td class="array-step-time"><?php echo htmlspecialchars($time, ENT_QUOTES, 'UTF-8'); ?></td>
                     </tr>
                     <?php
