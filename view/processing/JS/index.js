@@ -5,6 +5,23 @@
 //metti al cricametno $('#Waiting').hide(); al caricamento della pagina, così non si vede il messaggio di attesa
 $(document).ready(function() {
     $('#Waiting').hide();
+
+    if ($('.selectSearch').length > 0 && $.fn.select2) {
+        $('.selectSearch').select2();
+    }
+
+    if ($('#SelAmbito').length > 0 && $.fn.select2) {
+        $('#SelAmbito').select2({
+            placeholder: 'Seleziona Ambito',
+            allowClear: true
+        });
+    }
+
+    if ($('#AutoRefresh').is(':checked')) {
+        setInterval(function () {
+            Refresh();
+        }, 30000);
+    }
 });
 
 function getCurrentSito() {
@@ -39,6 +56,72 @@ function getValueDARETI() {
 function Refresh() {
     $('#Waiting').show();
     getProcessingForm().submit();
+}
+
+function resetSession() {
+    $('#resetSession').val('1');
+    Refresh();
+}
+
+function viewFilter() {
+    var icon = $('#viewfilter i');
+    var hiddenPanel = $('.divHiden, .divshow');
+    if (icon.hasClass('fa-eye')) {
+        icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        hiddenPanel.removeClass('divHiden').addClass('divshow');
+        $('#viewFilterH').val('Si');
+    } else {
+        icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        hiddenPanel.removeClass('divshow').addClass('divHiden');
+        $('#viewFilterH').val('No');
+    }
+}
+
+function NumLastSubmit() {
+    $('#SelNumPage').val('1');
+    Refresh();
+}
+
+function NumLastNoSubmit() {
+    $('#Waiting').show();
+}
+
+function selectSelShell() {
+    $('#SelNumPage').val('1');
+    Refresh();
+}
+
+function selectSelInDate() {
+    $('#SelNumPage').val('1');
+    Refresh();
+}
+
+function selectSelIdProc() {
+    $('#SelNumPage').val('1');
+    Refresh();
+}
+
+function apriLegendProcessing() {
+    $.ajax({
+        type: 'POST',
+        data: { IDSH: 1 },
+        encode: true,
+        url: 'index.php?sito=' + getCurrentSito() + '&controller=statoshell&action=rcLegend',
+        success: function (risposta) {
+            if ($('#dialogMail').length > 0) {
+                $('#dialogMail').dialog({ title: 'Rc legend' });
+                $('#dialogMail').dialog('open');
+                $('#dialogMail').html(risposta);
+            } else {
+                $('#Filedialog').dialog({ title: 'Rc legend' });
+                $('#Filedialog').dialog('open');
+                $('#Filedialog').html(risposta);
+            }
+        },
+        error: function (stato) {
+            errorMessage('apriLegendProcessing: andato in errore', stato);
+        }
+    });
 }
 
 function ManualOk(vIdSh) {

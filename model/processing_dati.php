@@ -5,12 +5,27 @@
  */
 class processing_dati
 {
+    const LAST_DAYS = 'LAST_DAYS';
+    const LAST_3_DAYS = 'LAST_3_DAYS';
+    const ALL_DAY = 'ALL_DAY';
+
     public $DB2database;
     private $_meseElab;
     private $_meseDiff;
     private $_limit;
     private $_idRunSh;
     private $_SelNumPage;
+    private $_autoRefresh;
+    private $_showDett;
+    private $_noTags;
+    private $_selShell;
+    private $_selInDate;
+    private $_numLast;
+    private $_selEsito;
+    private $_selEserMese;
+    private $_selIdProc;
+    private $_selAmbito;
+    private $_viewFilter;
     
     /**
      * __construct
@@ -23,6 +38,17 @@ class processing_dati
         $this->_limit = 100;
         $this->_idRunSh = '';
         $this->_SelNumPage = 1;
+        $this->_autoRefresh = '';
+        $this->_showDett = '';
+        $this->_noTags = '';
+        $this->_selShell = '';
+        $this->_selInDate = self::LAST_DAYS;
+        $this->_numLast = 100;
+        $this->_selEsito = '';
+        $this->_selEserMese = '';
+        $this->_selIdProc = '';
+        $this->_selAmbito = [];
+        $this->_viewFilter = 'No';
     }
     
     /**
@@ -128,6 +154,116 @@ class processing_dati
     public function setSelNumPage($selNumPage)
     {
         $this->_SelNumPage = $selNumPage;
+    }
+
+    public function getAutoRefresh()
+    {
+        return $this->_autoRefresh;
+    }
+
+    public function setAutoRefresh($autoRefresh)
+    {
+        $this->_autoRefresh = $autoRefresh;
+    }
+
+    public function getShowDett()
+    {
+        return $this->_showDett;
+    }
+
+    public function setShowDett($showDett)
+    {
+        $this->_showDett = $showDett;
+    }
+
+    public function getNoTags()
+    {
+        return $this->_noTags;
+    }
+
+    public function setNoTags($noTags)
+    {
+        $this->_noTags = $noTags;
+    }
+
+    public function getSelShell()
+    {
+        return $this->_selShell;
+    }
+
+    public function setSelShell($selShell)
+    {
+        $this->_selShell = $selShell;
+    }
+
+    public function getSelInDate()
+    {
+        return $this->_selInDate;
+    }
+
+    public function setSelInDate($selInDate)
+    {
+        $this->_selInDate = $selInDate;
+    }
+
+    public function getNumLast()
+    {
+        return $this->_numLast;
+    }
+
+    public function setNumLast($numLast)
+    {
+        $this->_numLast = $numLast;
+    }
+
+    public function getSelEsito()
+    {
+        return $this->_selEsito;
+    }
+
+    public function setSelEsito($selEsito)
+    {
+        $this->_selEsito = $selEsito;
+    }
+
+    public function getSelEserMese()
+    {
+        return $this->_selEserMese;
+    }
+
+    public function setSelEserMese($selEserMese)
+    {
+        $this->_selEserMese = $selEserMese;
+    }
+
+    public function getSelIdProc()
+    {
+        return $this->_selIdProc;
+    }
+
+    public function setSelIdProc($selIdProc)
+    {
+        $this->_selIdProc = $selIdProc;
+    }
+
+    public function getSelAmbito()
+    {
+        return $this->_selAmbito;
+    }
+
+    public function setSelAmbito($selAmbito)
+    {
+        $this->_selAmbito = is_array($selAmbito) ? $selAmbito : [];
+    }
+
+    public function getViewFilter()
+    {
+        return $this->_viewFilter;
+    }
+
+    public function setViewFilter($viewFilter)
+    {
+        $this->_viewFilter = ($viewFilter === 'Si') ? 'Si' : 'No';
     }
 }
 ?>

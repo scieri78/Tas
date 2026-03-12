@@ -43,11 +43,51 @@ class processing extends helper
         if (isset($_POST['limitRows'])) {
             $this->_datiprocessing->setLimit($_POST['limitRows']);
         }
+        if (isset($_POST['NumLast'])) {
+            $this->_datiprocessing->setNumLast($_POST['NumLast']);
+        }
         if (isset($_POST['SelNumPage'])) {
             $this->_datiprocessing->setSelNumPage($_POST['SelNumPage']);
         }
         if (isset($_POST['idRunSh'])) {
             $this->_datiprocessing->setIdRunSh($_POST['idRunSh']);
+        }
+        if (isset($_POST['AutoRefresh'])) {
+            $this->_datiprocessing->setAutoRefresh($_POST['AutoRefresh']);
+        }
+        if (isset($_POST['PLSSHOWDETT'])) {
+            $this->_datiprocessing->setShowDett($_POST['PLSSHOWDETT']);
+        }
+        if (isset($_POST['NoTags'])) {
+            $this->_datiprocessing->setNoTags($_POST['NoTags']);
+        }
+        if (isset($_POST['SelShell'])) {
+            $this->_datiprocessing->setSelShell($_POST['SelShell']);
+        }
+        if (isset($_POST['SelInDate'])) {
+            $this->_datiprocessing->setSelInDate($_POST['SelInDate']);
+        }
+        if (isset($_POST['Sel_Esito'])) {
+            $this->_datiprocessing->setSelEsito($_POST['Sel_Esito']);
+        }
+        if (isset($_POST['SelEserMese'])) {
+            $this->_datiprocessing->setSelEserMese($_POST['SelEserMese']);
+        }
+        if (isset($_POST['Sel_Id_Proc'])) {
+            $this->_datiprocessing->setSelIdProc($_POST['Sel_Id_Proc']);
+        }
+        if (isset($_POST['SelAmbito'])) {
+            $this->_datiprocessing->setSelAmbito($_POST['SelAmbito']);
+        }
+        if (isset($_POST['viewfilter'])) {
+            $this->_datiprocessing->setViewFilter($_POST['viewfilter']);
+        }
+
+        if (!$this->_datiprocessing->getMeseElab()) {
+            $this->_datiprocessing->setMeseElab(date('Ym'));
+        }
+        if (!$this->_datiprocessing->getMeseDiff()) {
+            $this->_datiprocessing->setMeseDiff(date('Ym'));
         }
     }
     
@@ -69,6 +109,14 @@ class processing extends helper
         if (isset($_POST['action']) && $_POST['action'] == 'detail' && $this->_datiprocessing->getIdRunSh()) {
             $this->detail();
         } else {
+            $DatiSelMeseElab = $this->_model->getSelMeseElab();
+            $DatiSelLastMeseElab = $this->_model->getSelLastMeseElab($this->_datiprocessing->getMeseElab());
+            $DatiSelShellFather = $this->_model->getSelShellFather($this->_datiprocessing->getMeseElab());
+            $DatiSelShellSons = $this->_model->getSelShellSons($this->_datiprocessing->getMeseElab());
+            $DatiSelInDate = $this->_model->getSelInDate($this->_datiprocessing->getMeseElab());
+            $DatiSelEserMese = $this->_model->getSelEserMese($this->_datiprocessing->getMeseElab());
+            $DatiSelIdProc = $this->_model->getSelIdProc($this->_datiprocessing->getMeseElab());
+            $DatiAmbiti = $this->_model->getDatiAmbiti($this->_datiprocessing->getMeseElab());
             include 'view/processing/filtroProcessing.php';
             $this->list();
         }

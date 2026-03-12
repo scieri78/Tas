@@ -35,23 +35,177 @@ class processing_model
     {
         try {
             $meseElab = $_datiprocessing->getMeseElab();
-            $limit = $_datiprocessing->getLimit();
-            
+            $selShell = $_datiprocessing->getSelShell();
+            $selInDate = $_datiprocessing->getSelInDate();
+            $selEsito = $_datiprocessing->getSelEsito();
+            $selEserMese = $_datiprocessing->getSelEserMese();
+            $selIdProc = $_datiprocessing->getSelIdProc();
+            $selAmbito = $_datiprocessing->getSelAmbito();
+            $limit = (int) $_datiprocessing->getNumLast();
+            if ($limit <= 0) {
+                $limit = (int) $_datiprocessing->getLimit();
+            }
+            if ($limit <= 0) {
+                $limit = 100;
+            }
+
             $sql = "SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME, 
                     ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME, 
                     ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES, 
                     MESSAGE, RC, TAGS, ID_RUN_SH_ROOT
                     FROM WORK_CORE.CORE_SH
                     WHERE 1=1
-                    AND TO_CHAR(START_TIME,'YYYYMM') = ?
-                    AND ID_RUN_SH_FATHER IS NULL
+                    AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                    AND (ID_RUN_SH_FATHER IS NULL OR ? IS NOT NULL)
+                    AND (? IS NULL OR STATUS = ?)
+                    AND (? IS NULL OR ESER_MESE = ?)
+                    AND (? IS NULL OR ID_PROCESS = ?)
                     ORDER BY START_TIME DESC
                     FETCH FIRST ? ROWS ONLY";
-            
-            return $this->_db->getArrayByQuery($sql, [$meseElab, $limit]);
+
+            $meseFilter = $meseElab ? $meseElab : '%';
+            $selEsito = $selEsito !== '' ? $selEsito : null;
+            $selEserMese = $selEserMese !== '' ? $selEserMese : null;
+            $selIdProc = $selIdProc !== '' ? $selIdProc : null;
+            $selShell = $selShell !== '' ? $selShell : null;
+
+            $params = [
+                $meseFilter,
+                $selShell,
+                $selEsito,
+                $selEsito,
+                $selEserMese,
+                $selEserMese,
+                $selIdProc,
+                $selIdProc,
+                $limit
+            ];
+
+            $rows = $this->_db->getArrayByQuery($sql, $params);
+
+            if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
+                $rows = array_values(array_filter($rows, function ($row) use ($selShell, $selAmbito, $selInDate) {
+                    if ($selShell !== null) {
+                        $runSh = isset($row['ID_RUN_SH']) ? (string) $row['ID_RUN_SH'] : '';
+                        $runFather = isset($row['ID_RUN_SH_FATHER']) ? (string) $row['ID_RUN_SH_FATHER'] : '';
+                        $runRoot = isset($row['ID_RUN_SH_ROOT']) ? (string) $row['ID_RUN_SH_ROOT'] : '';
+                        if ($runSh !== (string) $selShell && $runFather !== (string) $selShell && $runRoot !== (string) $selShell) {
+                            return false;
+                        }
+                    }
+
+                    if (!empty($selAmbito)) {
+                        $ambito = isset($row['ID_PROCESS']) ? (string) $row['ID_PROCESS'] : '';
+                        if (!in_array($ambito, $selAmbito, true)) {
+                            return false;
+                        }
+                    }
+
+                    if ($selInDate !== processing_dati::ALL_DAY) {
+                        $start = isset($row['START_TIME']) ? strtotime($row['START_TIME']) : false;
+                        if ($start !== false) {
+                            $today = strtotime(date('Y-m-d 00:00:00'));
+                            $diffDays = (int) floor(($today - strtotime(date('Y-m-d 00:00:00', $start))) / 86400);
+                            if ($selInDate === processing_dati::LAST_DAYS && $diffDays > 0) {
+                                return false;
+                            }
+                            if ($selInDate === processing_dati::LAST_3_DAYS && $diffDays > 2) {
+                                return false;
+                            }
+                            if ($selInDate !== processing_dati::LAST_DAYS && $selInDate !== processing_dati::LAST_3_DAYS) {
+                                $day = date('d', $start);
+                                if ($day !== str_pad((string) $selInDate, 2, '0', STR_PAD_LEFT)) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+
+                    return true;
+                }));
+            }
+
+            return $rows;
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function getSelMeseElab()
+    {
+        $sql = "SELECT DISTINCT TO_CHAR(START_TIME,'YYYYMM') MESEELAB
+                FROM WORK_CORE.CORE_SH
+                ORDER BY MESEELAB DESC";
+        return $this->_db->getArrayByQuery($sql, []);
+    }
+
+    public function getSelLastMeseElab($meseElab)
+    {
+        $sql = "SELECT DISTINCT TO_CHAR(START_TIME,'YYYYMM') MESEELAB
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') <= ?
+                ORDER BY MESEELAB DESC";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : date('Ym')]);
+    }
+
+    public function getSelShellFather($meseElab)
+    {
+        $sql = "SELECT ID_SH, NAME SHELL, TAGS, '' SHELL_PATH, ID_RUN_SH, ID_RUN_SH_ROOT
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                  AND ID_RUN_SH_FATHER IS NULL
+                ORDER BY START_TIME DESC
+                FETCH FIRST 200 ROWS ONLY";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
+    }
+
+    public function getSelShellSons($meseElab)
+    {
+        $sql = "SELECT ID_SH, NAME SHELL, TAGS, '' SHELL_PATH, ID_RUN_SH, ID_RUN_SH_ROOT
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                  AND ID_RUN_SH_FATHER IS NOT NULL
+                ORDER BY START_TIME DESC
+                FETCH FIRST 200 ROWS ONLY";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
+    }
+
+    public function getSelInDate($meseElab)
+    {
+        $sql = "SELECT DISTINCT TO_CHAR(START_TIME,'DD') DD
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                ORDER BY DD DESC";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
+    }
+
+    public function getSelEserMese($meseElab)
+    {
+        $sql = "SELECT DISTINCT ESER_MESE
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                ORDER BY ESER_MESE DESC";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
+    }
+
+    public function getSelIdProc($meseElab)
+    {
+        $sql = "SELECT DISTINCT ID_PROCESS
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                  AND ID_PROCESS IS NOT NULL
+                ORDER BY ID_PROCESS";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
+    }
+
+    public function getDatiAmbiti($meseElab)
+    {
+        $sql = "SELECT DISTINCT ID_PROCESS AMBITO
+                FROM WORK_CORE.CORE_SH
+                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
+                  AND ID_PROCESS IS NOT NULL
+                ORDER BY AMBITO";
+        return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
     }
 
     /**

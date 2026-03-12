@@ -82,7 +82,7 @@
                         <th>Start</th><td><?php echo htmlspecialchars($startTime, ENT_QUOTES, 'UTF-8'); ?></td>
                         <th>End</th><td><?php echo htmlspecialchars($endTime, ENT_QUOTES, 'UTF-8'); ?></td>
                         <th>Time</th><td><?php echo htmlspecialchars($durata, ENT_QUOTES, 'UTF-8'); ?></td>
-                        <th>File</th><td><?php echo htmlspecialchars($fileIn, ENT_QUOTES, 'UTF-8'); ?></td>
+                    <!--    <th>File</th><td><?php echo htmlspecialchars($fileIn, ENT_QUOTES, 'UTF-8'); ?></td>-->
                     </tr>
                     <?php
                 }

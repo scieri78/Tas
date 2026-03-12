@@ -404,6 +404,7 @@
     text-align: left;
     border-bottom: 1px solid #ddd;
     vertical-align: middle;
+    background: white;
 }
 
 .array-sql-table th {
@@ -434,4 +435,70 @@
 
 #processing-content {
     margin-top: 20px;
+}
+
+.fileter-aside {
+    margin-bottom: 10px;
+}
+
+.starlight-aside__title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+#divFiltroShell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.divFilterRight {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.divFilters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.divFilter {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.divFilter label {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.inputFilter,
+.inputFilterSelect {
+    min-height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    min-width: 120px;
+}
+
+.divHiden {
+    display: none;
+}
+
+.divshow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px;
 }
