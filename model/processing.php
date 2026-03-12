@@ -123,7 +123,7 @@ class processing_model
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
             //stanpa sql
-            $this->_db->printSql();
+            // $this->_db->printSql();
 
             return $result;     
 
@@ -149,7 +149,7 @@ class processing_model
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
             //stampa sql
-            $this->_db->printSql();
+            // $this->_db->printSql();
 
             return $result;
         } catch (Exception $e) {
@@ -176,7 +176,7 @@ class processing_model
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
             //stampa sql
-            $this->_db->printSql();
+            // $this->_db->printSql();
 
             return $result;
         } catch (Exception $e) {
@@ -212,7 +212,7 @@ class processing_model
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $idRunSh, $idRunSh]);
             //stampa sql
-            $this->_db->printSql();
+            // $this->_db->printSql();
 
             return $result;
         } catch (Exception $e) {

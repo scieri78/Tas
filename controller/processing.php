@@ -147,12 +147,15 @@ class processing extends helper
            //richiama la view corrispondente per mostrare il dettaglio degli shell figli, puoi passare l'array completo con i dettagli alla view e gestire la visualizzazione in base al tipo di shell
            foreach ($ArrayShell as $shell) {
                 if ($shell['TIPO'] == 'ARRAY_SHELL') {
+                    $DatiArrayShell = $shell['DETTAGLIO'];
                     // mostra dettaglio shell
                     include 'view/processing/ArrayShell.php';
                 } elseif ($shell['TIPO'] == 'ARRAY_SQL') {
+
                     // mostra dettaglio sql
                     include 'view/processing/ArraySql.php';
                 } elseif ($shell['TIPO'] == 'ARRAY_STEP') {
+                    $ArrayStep = $shell['DETTAGLIO']; // Passa i dettagli degli step alla view
                     // mostra dettaglio step
                     include 'view/processing/ArrayStep.php';
                 }
