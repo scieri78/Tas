@@ -151,7 +151,7 @@ class processing extends helper
                     // mostra dettaglio shell
                     include 'view/processing/ArrayShell.php';
                 } elseif ($shell['TIPO'] == 'ARRAY_SQL') {
-
+                    $ArraySql = $shell['DETTAGLIO']; // Passa i dettagli degli sql alla view
                     // mostra dettaglio sql
                     include 'view/processing/ArraySql.php';
                 } elseif ($shell['TIPO'] == 'ARRAY_STEP') {
