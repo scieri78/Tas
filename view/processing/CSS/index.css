@@ -168,7 +168,7 @@
 }
 
 .status-manual {
-    background-color: #6c757d !important;
+    background-color: darkgreen !important;
     color: white;
     padding: 4px 8px;
     border-radius: 3px;
