@@ -118,10 +118,10 @@ class processing_model
                     FROM WORK_CORE.CORE_SH
                     WHERE 1=1
                     AND ID_RUN_SH_FATHER = ?
-                    and (POS = ? or ? is null)
+                    and (ROWNUM = ? or ? is null)
                     ORDER BY START_TIME DESC";
             //trasforma il return in array associativo con chiave ID_RUN_SH
-            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
             //stanpa sql
             $this->_db->printSql();
 
@@ -144,7 +144,7 @@ class processing_model
                     FROM WORK_CORE.CORE_DB
                     WHERE 1=1
                     AND ID_RUN_SH = ?
-                    and (POS = ? or ? is null)
+                    and (ROWNUM = ? or ? is null)
                     ORDER BY START_TIME DESC";
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
@@ -171,7 +171,7 @@ class processing_model
                     FROM WORK_CORE.CORE_STEP
                     WHERE 1=1
                     AND ID_RUN_SH = ?
-                    and (POS = ? or ? is null)
+                    and (ROWNUM = ? or ? is null)
                     ORDER BY "TIME" DESC';
             //trasforma il return in array associativo con chiave ID_RUN_SH
             $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $pos, $pos]);
