@@ -147,6 +147,12 @@
     width: 100px;
 }
 
+/* keep combined fields on same line */
+.processing-table .col-esame,
+.processing-table .col-start {
+    white-space: nowrap;
+}
+
 .status-error {
     background-color: #dc3545;
     color: white;

@@ -23,6 +23,8 @@
                     $rc = $row['RC'];
                     $tags = $row['TAGS'];
                     $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
+                    
+                    $esameMese = isset($row['ESER_MESE']) ? $row['ESER_MESE'] : '';
                     $ambito = isset($row['ID_PROCESS']) ? $row['ID_PROCESS'] : '';
 
                     // calcola durata
@@ -39,9 +41,9 @@
                     }
 
                     ?>
-                    <tr class="processing-row" onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;">
-                        <td class="col-rc">RC: <?php echo $rc; ?></td>
-                        <th>Nome</th><td class="col-name"><?php echo $name; ?></td>
+                    <tr class="processing-row" >
+                        <td onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;" class="col-rc">RC:<?php echo $rc; ?></td>
+                        <th onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;">Nome</th><td class="col-name"><?php echo $name; ?></td>
                         <th></th><td class="col-actions">
                             <i class="fa fa-trash" title="Cancella"></i>
                             <i class="fa fa-folder-open" title="Apri"></i>
@@ -51,9 +53,9 @@
                             <i class="fa fa-list-alt" title="Log"></i>
                             <i class="fa fa-file" title="File"></i>
                         </td>
-                        <th>Eser&nbsp;Esame</th><td class="col-esame"><?php echo $esame; ?></td>
+                        <th>EserEsame/EserMese</th><td class="col-esame"><?php echo $esame; ?> / <?php echo $esameMese; ?></td>
                         <th>Tags</th><td class="col-tags"><?php echo $tags; ?></td>
-                        <th>Start</th><td class="col-start"><?php echo $startTime; ?></td>
+                        <th>Start/End</th><td class="col-start"><?php echo $startTime; ?> / <?php echo $endTime; ?></td>
                         <th>Time</th><td class="col-duration"><?php echo $duration; ?></td>
                         <th>OldTime</th><td class="col-oldtime"></td>
                         <th>User</th><td class="col-user"><?php echo $username; ?></td>
