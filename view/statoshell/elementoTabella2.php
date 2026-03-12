@@ -1,5 +1,3 @@
-
- 
  <?php
  $iconAction ="";
  if ( "$SqlType" == "PLSQL" and "$SqlUseRoutine" != "0" ){
