@@ -38,7 +38,7 @@
 		{
 			try
 			{
-					$sql = "SELECT ID_SH, SHELL, SHELL_PATH,PARALL
+					$sql = "SELECT ID_SH, SHELL, SHELL_PATH,null PARALL
 					FROM WORK_CORE.CORE_SH_ANAG 
 					ORDER BY SHELL_PATH, SHELL";
                 $res = $this->_db->getArrayByQuery($sql);	
