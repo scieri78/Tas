@@ -34,6 +34,8 @@ class shelladd extends helper
 		$this->get_errors_message($this->messafeType);
 		$datiShList = $this->_model->getShList();
 		$datiTableList = $this->_model->getTableList();
+		//debugga($datiTableList);
+		$this->debug("", $datiShList);
 		$mailPage = @$_POST['mailPage'];
         $mailLength = @$_POST['mailLength'];		
         $mailSearch = @$_POST['mailSearch'];		
