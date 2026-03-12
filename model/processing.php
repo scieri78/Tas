@@ -119,8 +119,16 @@ class processing_model
                     WHERE 1=1
                     AND ID_RUN_SH_FATHER = ?
                     ORDER BY START_TIME DESC";
+            //trasforma il return in array associativo con chiave ID_RUN_SH
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            //stanpa sql
+            $this->_db->printSql();
+
+            return $result;     
+
             
-            return $this->_db->getArrayByQuery($sql, [$idRunSh]);
+
+
         } catch (Exception $e) {
             throw $e;
         }
@@ -136,8 +144,12 @@ class processing_model
                     WHERE 1=1
                     AND ID_RUN_SH = ?
                     ORDER BY START_TIME DESC";
-            
-            return $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            //trasforma il return in array associativo con chiave ID_RUN_SH
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            //stampa sql
+            $this->_db->printSql();
+
+            return $result;
         } catch (Exception $e) {
             throw $e;
         }
@@ -158,8 +170,12 @@ class processing_model
                     WHERE 1=1
                     AND ID_RUN_SH = ?
                     ORDER BY \"TIME\" DESC";
-            
-            return $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            //trasforma il return in array associativo con chiave ID_RUN_SH
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            //stampa sql
+            $this->_db->printSql();
+
+            return $result;
         } catch (Exception $e) {
             throw $e;
         }
@@ -190,8 +206,12 @@ class processing_model
                     AND ID_RUN_SH = ?
                     ORDER BY TIME DESC)
                     ORDER BY START_TIME DESC";
-            
-            return $this->_db->getArrayByQuery($sql, [$idRunSh, $idRunSh, $idRunSh]);
+            //trasforma il return in array associativo con chiave ID_RUN_SH
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh, $idRunSh, $idRunSh]);
+            //stampa sql
+            $this->_db->printSql();
+
+            return $result;
         } catch (Exception $e) {
             throw $e;
         }
