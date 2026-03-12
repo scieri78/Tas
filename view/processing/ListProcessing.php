@@ -23,8 +23,29 @@
                     $rc = $row['RC'];
                     $tags = $row['TAGS'];
                     $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
-                    $mese = isset($row['ESER_MESE']) ? $row['ESER_MESE'] : '';
+                    //pre il mese prendi solo le ultime 2 cifre per non appesantire la tabella
+                    $mese = isset($row['ESER_MESE']) ? substr($row['ESER_MESE'], -2) : '';
                     $ambito = isset($row['ID_PROCESS']) ? $row['ID_PROCESS'] : '';
+
+                    // determina classe colore status
+                    $statusClass = '';
+                    switch ($status) {
+                        case 'F':
+                            $statusClass = 'status-success';
+                            break;
+                        case 'E':
+                            $statusClass = 'status-error';
+                            break;
+                        case 'R':
+                            $statusClass = 'status-running';
+                            break;
+                        case 'M':
+                            $statusClass = 'status-manual';
+                            break;
+                        default:
+                            $statusClass = 'status-pending';
+                            break;
+                    }
 
                     // calcola durata
                     $duration = '';
@@ -39,8 +60,9 @@
                         }
                     }
 
-                    ?>
-                    <tr class="processing-row"   >
+                    ?> 
+                    <tr class="processing-row">
+                        <th class="status <?php echo $statusClass; ?>"></th>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc">RC:<?php echo $rc; ?></td>
                         <th style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)">Nome</th>                        
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>

@@ -85,6 +85,12 @@
     border-bottom: 1px solid #ddd;
 }
 
+/* tiny status column indicator */
+.processing-table th.status {
+    width: 20px;
+    padding: 0; /* remove interior padding so color block is small */
+}
+
 .processing-table tbody tr:hover {
     background-color: #f9f9f9;
 }
