@@ -53,8 +53,8 @@ function ManualOk(vIdSh) {
             success: function () {
                 Refresh();
             },
-            error: function () {
-                alert('Qualcosa è andato storto');
+            error: function (stato) {
+                errorMessage('ManualOk: andato in errore', stato);
             }
         });
     }
@@ -72,8 +72,8 @@ function deleteSh(vIdSh) {
             success: function () {
                 Refresh();
             },
-            error: function () {
-                alert('Qualcosa è andato storto');
+            error: function (stato) {
+                errorMessage('deleteSh: andato in errore', stato);
             }
         });
     }
@@ -98,8 +98,8 @@ function openDialog(vIdSh, SHELL, vaction) {
             var dialogTitle = vaction === 'apriFile' ? shellFile : shellLog;
             $('#Filedialog').dialog({ title: dialogTitle || SHELL });
         },
-        error: function () {
-            alert('Qualcosa è andato storto');
+        error: function (stato) {
+            errorMessage('openDialog: andato in errore', stato);
         }
     });
 }
@@ -120,8 +120,8 @@ function openGrafici(ShName, ShTags, IdSh) {
             $('#Filedialog').dialog({ title: 'Grafico: ' + ShName });
             $('#Filedialog').dialog('open');
         },
-        error: function () {
-            alert('Qualcosa è andato storto');
+        error: function (stato) {
+            errorMessage('openGrafici: andato in errore', stato);
         }
     });
 }
@@ -138,8 +138,8 @@ function openRelTab(IDSH, IDRUNSH, IDRUNSQL, SHFILE) {
             $('#Filedialog').dialog({ title: 'TABELLE UTILIZZATE DAL FILE: ' + SHFILE });
             $('#Filedialog').dialog('open');
         },
-        error: function () {
-            alert('Qualcosa è andato storto');
+        error: function (stato) {
+            errorMessage('openRelTab: andato in errore', stato);
         }
     });
 }
@@ -184,11 +184,12 @@ function openDetail(idRunSh, button) {
         fetch('index.php?sito=' + getCurrentSito() + '&controller=processing&action=detailAjax&idRunSh=' + idRunSh + '&db_name=' + dbName)
             .then(response => response.text())
             .then(html => {
-                detailContent.innerHTML = '<div style="padding: 20px;">' + html + '</div>';
+                detailContent.innerHTML = '<div>' + html + '</div>';
             })
-            .catch(error => {
-                console.error('Errore nel caricamento del dettaglio:', error);
-                detailContent.innerHTML = '<p>Errore nel caricamento dei dati</p>';
+            .catch(stato => {
+                console.error('Errore nel caricamento del dettaglio:', stato);
+                errorMessage('openDetail: andato in errore', stato);
+                detailContent.innerHTML = '<p>openDetail: andato in errore</p>';
             });
     } else {
         // Chiudi il dettaglio

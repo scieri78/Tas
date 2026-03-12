@@ -56,10 +56,10 @@
 /* Lista principale */
 .processing-list-container {
     background-color: white;
-    padding: 15px;
+  /*  padding: 15px;*/
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+   /* margin-bottom: 20px; */
 }
 
 .processing-list-container h3 {
