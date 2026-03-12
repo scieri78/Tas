@@ -68,7 +68,12 @@
 }
 
 .processing-list-container table td {
+    border: 1px solid #ddd;
+}
+
+.processing-list-container table th {
     border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;    
 }
 
 .processing-table {
