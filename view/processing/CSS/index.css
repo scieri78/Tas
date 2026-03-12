@@ -101,6 +101,43 @@
     border-radius: 3px;
 }
 
+/* layout for custom row order */
+.processing-table td {
+    vertical-align: middle;
+}
+
+.processing-table .col-actions i {
+    margin-right: 6px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.processing-table .col-actions i:hover {
+    color: #0056b3;
+}
+
+.processing-table .col-rc {
+    width: 50px;
+    font-weight: bold;
+}
+
+.processing-table .col-name {
+    width: 220px;
+}
+
+.processing-table .col-start,
+.processing-table .col-duration,
+.processing-table .col-oldtime {
+    width: 120px;
+}
+
+.processing-table .col-user,
+.processing-table .col-ambito,
+.processing-table .col-tags,
+.processing-table .col-esame {
+    width: 100px;
+}
+
 .status-error {
     background-color: #dc3545;
     color: white;

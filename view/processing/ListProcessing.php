@@ -6,23 +6,9 @@
 ?>
 
 <div class="processing-list-container">
-    <h3>Lista Processing</h3>
+    <!-- header removed to match image style -->
 
     <table class="processing-table">
-        <thead>
-            <tr>
-                <th>ID SH</th>
-                <th>ID RUN SH</th>
-                <th>Nome</th>
-                <th>Data Inizio</th>
-                <th>Data Fine</th>
-                <th>Status</th>
-                <th>Utente</th>
-                <th>RC</th>
-                <th>Tags</th>
-                <th>Azioni</th>
-            </tr>
-        </thead>
         <tbody>
             <?php
             if (is_array($DatiListProcessing) && count($DatiListProcessing) > 0) {
@@ -36,55 +22,52 @@
                     $username = $row['USERNAME'];
                     $rc = $row['RC'];
                     $tags = $row['TAGS'];
+                    $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
+                    $ambito = isset($row['ID_PROCESS']) ? $row['ID_PROCESS'] : '';
 
-                    // Calcola il colore dello status
-                    $statusClass = '';
-                    switch ($status) {
-                        case 'F':
-                            $statusClass = 'status-success';
-                            $statusText = 'FINE';
-                            break;
-                        case 'E':
-                            $statusClass = 'status-error';
-                            $statusText = 'ERRORE';
-                            break;
-                        case 'R':
-                            $statusClass = 'status-running';
-                            $statusText = 'IN ESECUZIONE';
-                            break;
-                        case 'M':
-                            $statusClass = 'status-manual';
-                            $statusText = 'MANUALE';
-                            break;
-                        default:
-                            $statusClass = 'status-pending';
-                            $statusText = $status;
-                            break;
+                    // calcola durata
+                    $duration = '';
+                    if (!empty($startTime) && !empty($endTime)) {
+                        try {
+                            $dt1 = new DateTime($startTime);
+                            $dt2 = new DateTime($endTime);
+                            $interval = $dt2->diff($dt1);
+                            $duration = $interval->format('%H:%I:%S');
+                        } catch (Exception $e) {
+                            $duration = '';
+                        }
                     }
+
                     ?>
                     <tr class="processing-row" onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;">
-                        <td><?php echo $idSh; ?></td>
-                        <td><?php echo $idRunSh; ?></td>
-                        <td><?php echo $name; ?></td>
-                        <td><?php echo $startTime; ?></td>
-                        <td><?php echo $endTime; ?></td>
-                        <td><span class="<?php echo $statusClass; ?>"><?php echo $statusText; ?></span></td>
-                        <td><?php echo $username; ?></td>
-                        <td><?php echo $rc; ?></td>
-                        <td><?php echo $tags; ?></td>
-                        <td>
-                            <button type="button" class="btn-detail" onclick="openDetail(<?php echo $idRunSh; ?>, this); event.stopPropagation();">Dettagli</button>
+                        <td class="col-rc"><?php echo $rc; ?></td>
+                        <td class="col-name"><?php echo $name; ?></td>
+                        <td class="col-actions">
+                            <i class="fa fa-trash" title="Cancella"></i>
+                            <i class="fa fa-folder-open" title="Apri"></i>
+                            <i class="fa fa-clock-o" title="Orario"></i>
+                            <i class="fa fa-file-text-o" title="Testo"></i>
+                            <i class="fa fa-bar-chart" title="Grafico"></i>
+                            <i class="fa fa-list-alt" title="Log"></i>
+                            <i class="fa fa-file" title="File"></i>
                         </td>
+                        <td class="col-esame"><?php echo $esame; ?></td>
+                        <td class="col-tags"><?php echo $tags; ?></td>
+                        <td class="col-start"><?php echo $startTime; ?></td>
+                        <td class="col-duration"><?php echo $duration; ?></td>
+                        <td class="col-oldtime"></td>
+                        <td class="col-user"><?php echo $username; ?></td>
+                        <td class="col-ambito"><?php echo $ambito; ?></td>
                     </tr>
                     <tr class="detail-row" id="detail-row-<?php echo $idRunSh; ?>" style="display:none;">
-                        <td colspan="10">
+                        <td colspan="11">
                             <div id="detailContent-<?php echo $idRunSh; ?>" class="detail-content"></div>
                         </td>
                     </tr>
                     <?php
                 }
             } else {
-                echo "<tr><td colspan='10'>Nessun dato disponibile</td></tr>";
+                echo "<tr><td colspan='11'>Nessun dato disponibile</td></tr>";
             }
             ?>
         </tbody>
