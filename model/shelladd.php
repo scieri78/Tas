@@ -38,9 +38,17 @@
 		{
 			try
 			{
+				//se db_name = work allora fai questa query altrimenti fai quella con il prefisso del db_name
+				$sql = "";
+				if($this->_db->getDb() == 'TASPCWRK'){
 					$sql = "SELECT ID_SH, SHELL, SHELL_PATH,null PARALL
 					FROM WORK_CORE.CORE_SH_ANAG 
 					ORDER BY SHELL_PATH, SHELL";
+			}else{
+				$sql = "SELECT ID_SH, SHELL, SHELL_PATH, PARALL
+					FROM WORK_CORE.CORE_SH_ANAG 
+					ORDER BY SHELL_PATH, SHELL";
+			}
                 $res = $this->_db->getArrayByQuery($sql);	
 				 
                 return $res;
