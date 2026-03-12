@@ -40,9 +40,9 @@
 
                     ?>
                     <tr class="processing-row" onclick="openDetail(<?php echo $idRunSh; ?>)" style="cursor:pointer;">
-                        <td class="col-rc"><?php echo $rc; ?></td>
-                        <td class="col-name"><?php echo $name; ?></td>
-                        <td class="col-actions">
+                        <td class="col-rc">RC: <?php echo $rc; ?></td>
+                        <th>Nome</th><td class="col-name"><?php echo $name; ?></td>
+                        <th></th><td class="col-actions">
                             <i class="fa fa-trash" title="Cancella"></i>
                             <i class="fa fa-folder-open" title="Apri"></i>
                             <i class="fa fa-clock-o" title="Orario"></i>
@@ -51,16 +51,16 @@
                             <i class="fa fa-list-alt" title="Log"></i>
                             <i class="fa fa-file" title="File"></i>
                         </td>
-                        <td class="col-esame"><?php echo $esame; ?></td>
-                        <td class="col-tags"><?php echo $tags; ?></td>
-                        <td class="col-start"><?php echo $startTime; ?></td>
-                        <td class="col-duration"><?php echo $duration; ?></td>
-                        <td class="col-oldtime"></td>
-                        <td class="col-user"><?php echo $username; ?></td>
-                        <td class="col-ambito"><?php echo $ambito; ?></td>
+                        <th>Eser&nbsp;Esame</th><td class="col-esame"><?php echo $esame; ?></td>
+                        <th>Tags</th><td class="col-tags"><?php echo $tags; ?></td>
+                        <th>Start</th><td class="col-start"><?php echo $startTime; ?></td>
+                        <th>Time</th><td class="col-duration"><?php echo $duration; ?></td>
+                        <th>OldTime</th><td class="col-oldtime"></td>
+                        <th>User</th><td class="col-user"><?php echo $username; ?></td>
+                        <th>Ambito</th><td class="col-ambito"><?php echo $ambito; ?></td>
                     </tr>
                     <tr class="detail-row" id="detail-row-<?php echo $idRunSh; ?>" style="display:none;">
-                        <td colspan="11">
+                        <td colspan="22">
                             <div id="detailContent-<?php echo $idRunSh; ?>" class="detail-content"></div>
                         </td>
                     </tr>
