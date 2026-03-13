@@ -180,10 +180,6 @@ class processing_model
 
             $params = array_merge($baseParams, [$searchLimit, $searchLimit, $offset, $upperBound]);
             $rows = $this->_db->getArrayByQuery($sql, $params);
-            //debug risultato query
-            echo "<pre>";
-             print_r($rows);
-             echo "</pre>";
 
             // Arricchisce la lista principale con OLD_TIME e METER del vecchio lancio.
             $oldRunCache = [];
@@ -228,9 +224,6 @@ class processing_model
                     $rows[$idx]['METER'] = (string) round(($currentSeconds / $oldSeconds) * 100);
                 }
             }*/
-
-            //stampa sql
-            $this->_db->printSql();
 
             return [
                 'rows' => $rows,
