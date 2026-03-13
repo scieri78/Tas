@@ -83,7 +83,7 @@ class processing_model
 
             $rows = $this->_db->getArrayByQuery($sql, $params);
 
-            if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
+        /*    if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
                 $rows = array_values(array_filter($rows, function ($row) use ($selShell, $selAmbito, $selInDate) {
                     if ($selShell !== null) {
                         $runSh = isset($row['ID_RUN_SH']) ? (string) $row['ID_RUN_SH'] : '';
@@ -123,7 +123,7 @@ class processing_model
 
                     return true;
                 }));
-            }
+            }*/
 
             return $rows;
         } catch (Exception $e) {
