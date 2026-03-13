@@ -243,13 +243,13 @@ class db_driver extends abs_db
 
 				$this->res  = db2_prepare($this->conn, $sql);
 				$result = db2_execute($this->res, $values);
+				db2_free_stmt($this->res);
 				$ret = array();
 				if ($result) {
 					while ($row = db2_fetch_assoc($this->res)) {
 						$ret[] = $row;
 					}
 				}
-				db2_free_stmt($this->res);
 			//	$this->db_log_debug("DB2.getArrayByQuery getsqlQuery:","Message:",$this->getsqlQuery());
 				//$this->close_db();
 				return $ret;
@@ -276,13 +276,14 @@ class db_driver extends abs_db
 
 				$this->res  = db2_prepare($this->conn, $sql);
 				$result = db2_execute($this->res, $values);
+				db2_free_stmt($this->res);
 				$ret = array();
 				if ($result) {
 					while ($row = db2_fetch_array($this->res)) {
 						$ret[] = $row;
 					}
 				}
-				db2_free_stmt($this->res);
+				db2_free_result($this->res);
 				//$this->close_db();
 				return $ret;
 			}
