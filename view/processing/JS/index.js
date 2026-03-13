@@ -22,6 +22,8 @@ $(document).ready(function() {
             Refresh();
         }, 30000);
     }
+
+    applyProcessingTextTruncation(document);
 });
 
 function getCurrentSito() {
@@ -30,6 +32,75 @@ function getCurrentSito() {
 
 function getProcessingForm() {
     return $('#formProcessing');
+}
+
+function applyProcessingTextTruncation(rootNode) {
+    var maxLen = 15;
+    var root = rootNode || document;
+    var selectors = [
+        '.processing-table td',
+        '.processing-table th',
+        '.array-shell-table td',
+        '.array-shell-table th',
+        '.array-sql-table td',
+        '.array-sql-table th',
+        '.array-step-table td',
+        '.array-step-table th',
+        '.array-show-table td',
+        '.array-show-table th',
+        '.detail-processing-container h3',
+        '.detail-processing-container h4',
+        '.detail-processing-container .tab-link',
+        '.divFilter label',
+        '.divFilter button',
+        '#formProcessing select option'
+    ];
+
+    function truncateText(text) {
+        var normalized = (text || '').replace(/\s+/g, ' ').trim();
+        if (normalized.length <= maxLen) {
+            return null;
+        }
+        return {
+            full: normalized,
+            short: normalized.substring(0, maxLen) + '...'
+        };
+    }
+
+    var nodes = root.querySelectorAll(selectors.join(', '));
+    nodes.forEach(function (el) {
+        if (el.closest('.col-actions, .col-status-icons')) {
+            return;
+        }
+
+        if (el.tagName === 'OPTION') {
+            if (el.dataset.truncated === '1') {
+                return;
+            }
+            var optInfo = truncateText(el.textContent);
+            if (optInfo) {
+                el.title = optInfo.full;
+                el.textContent = optInfo.short;
+            }
+            el.dataset.truncated = '1';
+            return;
+        }
+
+        if (el.querySelector('img, svg, input, select, textarea, button')) {
+            return;
+        }
+
+        if (el.dataset.truncated === '1') {
+            return;
+        }
+
+        var info = truncateText(el.textContent);
+        if (info) {
+            el.title = info.full;
+            el.textContent = info.short;
+        }
+        el.dataset.truncated = '1';
+    });
 }
 
 function setTextarea() {
@@ -324,6 +395,7 @@ function openDetail(idRunSh, button) {
             .then(response => response.text())
             .then(html => {
                 detailContent.innerHTML = '<div>' + html + '</div>';
+                applyProcessingTextTruncation(detailContent);
             })
             .catch(stato => {
                 console.error('Errore nel caricamento del dettaglio:', stato);
