@@ -125,6 +125,9 @@ class processing_model
             $params = array_merge($baseParams, [$searchLimit, $searchLimit, $offset, $upperBound]);
             $rows = $this->_db->getArrayByQuery($sql, $params);
 
+            //stampa sql
+             $this->_db->printSql();
+
         /*    if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
                 $rows = array_values(array_filter($rows, function ($row) use ($selShell, $selAmbito, $selInDate) {
                     if ($selShell !== null) {
