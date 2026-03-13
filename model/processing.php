@@ -135,29 +135,28 @@ class processing_model
                 $upperBound = $searchLimit;
             }
 
-            $sql = "WITH BASE AS (
-                        SELECT s.ID_SH, s.ID_RUN_SH, s.ID_PROCESS, s.NAME, s.START_TIME, s.END_TIME,
-                               s.ID_RUN_SH_FATHER, s.LOG, s.STATUS, s.USERNAME, s.MAIL, s.MESE_ESAME,
-                               s.ESER_ESAME, s.ESER_MESE, s.DEBUG_DB, s.DEBUG_SH, s.PID, s.VARIABLES,
-                               s.MESSAGE, s.RC, s.TAGS, s.ID_RUN_SH_ROOT,
-                               (
-                                   SELECT SUBSTR(a.SHELL_PATH, INSTR(a.SHELL_PATH, '/', -1) + 1)
-                                   FROM WORK_CORE.CORE_SH_ANAG a
-                                   WHERE a.ID_SH = s.ID_SH
-                                   FETCH FIRST 1 ROW ONLY
-                               ) AS AMBITO,
-                               ROW_NUMBER() OVER (ORDER BY s.START_TIME DESC) AS RN
-                        " . $whereSql . "
-                    )
-                    SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
-                           ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
-                           ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
-                           MESSAGE, RC, TAGS, ID_RUN_SH_ROOT, AMBITO
-                    FROM BASE
-                    WHERE (? <= 0 OR RN <= ?)
-                      AND RN > ?
-                      AND RN <= ?
-                    ORDER BY RN";
+                        $sql = "SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
+                                                     ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
+                                                     ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
+                                                     MESSAGE, RC, TAGS, ID_RUN_SH_ROOT, AMBITO
+                                        FROM (
+                                                SELECT s.ID_SH, s.ID_RUN_SH, s.ID_PROCESS, s.NAME, s.START_TIME, s.END_TIME,
+                                                             s.ID_RUN_SH_FATHER, s.LOG, s.STATUS, s.USERNAME, s.MAIL, s.MESE_ESAME,
+                                                             s.ESER_ESAME, s.ESER_MESE, s.DEBUG_DB, s.DEBUG_SH, s.PID, s.VARIABLES,
+                                                             s.MESSAGE, s.RC, s.TAGS, s.ID_RUN_SH_ROOT,
+                                                             (
+                                                                     SELECT SUBSTR(a.SHELL_PATH, INSTR(a.SHELL_PATH, '/', -1) + 1)
+                                                                     FROM WORK_CORE.CORE_SH_ANAG a
+                                                                     WHERE a.ID_SH = s.ID_SH
+                                                                     FETCH FIRST 1 ROW ONLY
+                                                             ) AS AMBITO,
+                                                             ROW_NUMBER() OVER (ORDER BY s.START_TIME DESC) AS RN
+                                                " . $whereSql . "
+                                        ) BASE
+                                        WHERE (? <= 0 OR RN <= ?)
+                                            AND RN > ?
+                                            AND RN <= ?
+                                        ORDER BY RN";
 
             $params = array_merge($baseParams, [$searchLimit, $searchLimit, $offset, $upperBound]);
             $rows = $this->_db->getArrayByQuery($sql, $params);
