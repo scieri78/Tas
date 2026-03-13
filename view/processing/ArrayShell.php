@@ -114,6 +114,13 @@
                             $duration = '';
                         }
                     }
+                    if (isset($row['OLD_TIME']) && $row['OLD_TIME'] !== '') {
+                        $oldSeconds = (int) $row['OLD_TIME'];
+                        if ($oldSeconds < 0) {
+                            $oldSeconds = 0;
+                        }
+                        $oldTime = gmdate('H:i:s', $oldSeconds);
+                    }
 
                     ?> 
                     <tr class="processing-row">

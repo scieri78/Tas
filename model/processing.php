@@ -125,8 +125,52 @@ class processing_model
             $params = array_merge($baseParams, [$searchLimit, $searchLimit, $offset, $upperBound]);
             $rows = $this->_db->getArrayByQuery($sql, $params);
 
+            // Arricchisce la lista principale con OLD_TIME e METER del vecchio lancio.
+            $oldRunCache = [];
+            $oldTimeCache = [];
+            foreach ($rows as $idx => $row) {
+                $rows[$idx]['OLD_TIME'] = '';
+                $rows[$idx]['METER'] = '';
+
+                $idSh = isset($row['ID_SH']) ? $row['ID_SH'] : null;
+                $tags = isset($row['TAGS']) ? (string) $row['TAGS'] : '';
+                if ($idSh === null || $tags === '') {
+                    continue;
+                }
+
+                $cacheKey = (string) $idSh . '|' . trim($tags);
+                if (!array_key_exists($cacheKey, $oldRunCache)) {
+                    $oldRun = $this->getOldRunId($_datiprocessing, $idSh, $tags);
+                    $oldRunCache[$cacheKey] = ($oldRun && isset($oldRun['ID_RUN_SH_OLD'])) ? (int) $oldRun['ID_RUN_SH_OLD'] : 0;
+                }
+
+                $oldRunId = $oldRunCache[$cacheKey];
+                if ($oldRunId <= 0) {
+                    continue;
+                }
+
+                if (!array_key_exists($oldRunId, $oldTimeCache)) {
+                    $oldTimeRow = $this->getOldTimeParent($oldRunId);
+                    $oldTimeCache[$oldRunId] = ($oldTimeRow && isset($oldTimeRow['OLD_TIME'])) ? (int) $oldTimeRow['OLD_TIME'] : 0;
+                }
+
+                $oldSeconds = $oldTimeCache[$oldRunId];
+                if ($oldSeconds <= 0) {
+                    continue;
+                }
+
+                $rows[$idx]['OLD_TIME'] = $oldSeconds;
+
+                $startTs = isset($row['START_TIME']) ? strtotime($row['START_TIME']) : false;
+                $endTs = isset($row['END_TIME']) ? strtotime($row['END_TIME']) : false;
+                if ($startTs !== false && $endTs !== false && $endTs >= $startTs) {
+                    $currentSeconds = $endTs - $startTs;
+                    $rows[$idx]['METER'] = (string) round(($currentSeconds / $oldSeconds) * 100);
+                }
+            }
+
             //stampa sql
-             $this->_db->printSql();
+           //  $this->_db->printSql();
 
         /*    if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
                 $rows = array_values(array_filter($rows, function ($row) use ($selShell, $selAmbito, $selInDate) {
@@ -257,6 +301,26 @@ class processing_model
                   AND ID_PROCESS IS NOT NULL
                 ORDER BY AMBITO";
         return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
+    }
+
+    /**
+     * getRunByIdRunSh - Recupera dati run padre corrente
+     *
+     * @param mixed $idRunSh
+     * @return array|null
+     */
+    public function getRunByIdRunSh($idRunSh)
+    {
+        try {
+            $sql = "SELECT ID_SH, TAGS
+                    FROM WORK_CORE.CORE_SH
+                    WHERE ID_RUN_SH = ?";
+
+            $result = $this->_db->getArrayByQuery($sql, [$idRunSh]);
+            return isset($result[0]) ? $result[0] : null;
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     /**

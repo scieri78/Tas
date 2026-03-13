@@ -195,13 +195,32 @@ class processing extends helper
         $idRunSh = isset($_GET['idRunSh']) ? $_GET['idRunSh'] : 0;
         
         if ($idRunSh) {
+            $oldRunId = null;
+            $runCorrente = $this->_model->getRunByIdRunSh($idRunSh);
+            if ($runCorrente && isset($runCorrente['ID_SH']) && isset($runCorrente['TAGS'])) {
+                $oldRun = $this->_model->getOldRunId($this->_datiprocessing, $runCorrente['ID_SH'], $runCorrente['TAGS']);
+                if ($oldRun && isset($oldRun['ID_RUN_SH_OLD'])) {
+                    $oldRunId = (int) $oldRun['ID_RUN_SH_OLD'];
+                }
+            }
+
             $ArrayShell = $this->_model->getArrayShow($idRunSh);         // Recupera gli shell figli ordinati per tempo
             //per ogni tipo di shell recupera il dettaglio puoi visualizzare il dettagio corrispondente in base al tipo (shell, sql, step)
         foreach ($ArrayShell as $key => $shell) {
                 if ($shell['TIPO'] == 'ARRAY_SHELL') {
-                    $ArrayShell[$key]['DETTAGLIO'] = $this->_model->getArrayShell($idRunSh, $shell['POS']);
+                    $dettaglio = $this->_model->getArrayShell($idRunSh, $shell['POS']);
+                    if ($oldRunId && isset($dettaglio[0]['ID_SH'])) {
+                        $oldTime = $this->_model->getOldTimeShellChild($oldRunId, $dettaglio[0]['ID_SH'], isset($dettaglio[0]['TAGS']) ? $dettaglio[0]['TAGS'] : '');
+                        $dettaglio[0]['OLD_TIME'] = ($oldTime && isset($oldTime['OLD_TIME'])) ? $oldTime['OLD_TIME'] : '';
+                    }
+                    $ArrayShell[$key]['DETTAGLIO'] = $dettaglio;
                 } elseif ($shell['TIPO'] == 'ARRAY_SQL') {
-                    $ArrayShell[$key]['DETTAGLIO'] = $this->_model->getArraySql($idRunSh, $shell['POS']);
+                    $dettaglio = $this->_model->getArraySql($idRunSh, $shell['POS']);
+                    if ($oldRunId && isset($dettaglio[0]['STEP'])) {
+                        $oldTime = $this->_model->getOldTimeSqlChild($oldRunId, $dettaglio[0]['STEP']);
+                        $dettaglio[0]['OLD_TIME'] = ($oldTime && isset($oldTime['OLD_TIME'])) ? $oldTime['OLD_TIME'] : '';
+                    }
+                    $ArrayShell[$key]['DETTAGLIO'] = $dettaglio;
                 } elseif ($shell['TIPO'] == 'ARRAY_STEP') {
                     $ArrayShell[$key]['DETTAGLIO'] = $this->_model->getArrayStep($idRunSh, $shell['POS']);
                 }

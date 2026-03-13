@@ -104,6 +104,7 @@
                     // calcola durata
                     $duration = '';
                     $oldTime = '';
+                    $meter = '';
                     if (!empty($startTime) && !empty($endTime)) {
                         try {
                             $dt1 = new DateTime($startTime);
@@ -113,6 +114,15 @@
                         } catch (Exception $e) {
                             $duration = '';
                         }
+                    }
+                    if (isset($row['OLD_TIME']) && $row['OLD_TIME'] !== '') {
+                        $oldSeconds = (int) $row['OLD_TIME'];
+                        if ($oldSeconds > 0) {
+                            $oldTime = gmdate('H:i:s', $oldSeconds);
+                        }
+                    }
+                    if (isset($row['METER']) && $row['METER'] !== '') {
+                        $meter = $row['METER'] . '%';
                     }
 
                     ?> 
@@ -131,7 +141,7 @@
 
 
                         <th>Start<br>End</th><td style="width: 205px;" class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
-                        <th>Time<br>OldTime</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime; ?></td>
+                        <th>Time<br>OldTime<br>Meter</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime . "<br/>" . htmlspecialchars($meter, ENT_QUOTES, 'UTF-8'); ?></td>
                         <th>User</th><td class="col-user"><?php echo $username; ?></td>
                         <th>Ambito</th><td class="col-ambito"><?php echo $ambito; ?></td>
                     </tr>
