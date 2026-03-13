@@ -5,8 +5,6 @@
  */
 
 $dbName = isset($_GET['sito']) ? $_GET['sito'] : (isset($_POST['db_name']) ? $_POST['db_name'] : $datiprocessing->DB2database);
-$classView = ($datiprocessing->getViewFilter() === 'Si') ? 'divshow' : 'divHiden';
-$classEye = ($datiprocessing->getViewFilter() === 'Si') ? 'fa-eye-slash' : 'fa-eye';
 $selectedAmbiti = $datiprocessing->getSelAmbito();
 ?>
 
@@ -21,10 +19,8 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
             <div class="divFilterRight">
                 <span onclick="Refresh()" id="refresh" class="btn"><i class="fa-solid fa-refresh"> </i> </span>
                 <span onclick="resetSession()" id="resetSessionbtn" class="btn"><i class="fa-solid fa-eraser"></i> </span>
-                <span value="No" name="viewfilter" id="viewfilter" onclick="viewFilter()" class="btn"><i class="fa-solid <?php echo $classEye; ?>"></i> </span>
                 <span id="RCLegend2" onclick="apriLegendProcessing()" class="btn"><i class="fa-solid fa-circle-question"></i></span>
 
-                <input type="hidden" id="viewFilterH" name="viewfilter" value="<?php echo $datiprocessing->getViewFilter(); ?>" />
                 <input type="hidden" id="resetSession" name="resetSession" value="0" />
                 <input type="hidden" id="SelNumPage" name="SelNumPage" value="<?php echo (int) $datiprocessing->getSelNumPage(); ?>" />
                 <input type="hidden" name="db_name" value="<?php echo htmlspecialchars((string) $dbName, ENT_QUOTES, 'UTF-8'); ?>">
@@ -108,7 +104,7 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
             </div>
         </div>
 
-        <div class="<?php echo $classView; ?>">
+        <div class="divshow">
             <div class="divFilter">
                 <label for="Sel_Esito">ESITO</label>
                 <select class="inputFilter selectSearch" id="Sel_Esito" name="Sel_Esito" onchange="document.getElementById('formProcessing').submit();">
