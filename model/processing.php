@@ -41,6 +41,20 @@ class processing_model
             $selEserMese = $_datiprocessing->getSelEserMese();
             $selIdProc = $_datiprocessing->getSelIdProc();
             $selAmbito = $_datiprocessing->getSelAmbito();
+
+            $ambitoFilter = '';
+            $ambitoParams = [];
+            if (!empty($selAmbito)) {
+                $placeholders = implode(', ', array_fill(0, count($selAmbito), '?'));
+                $ambitoFilter = "AND (
+                        SELECT SUBSTR(a.SHELL_PATH, INSTR(a.SHELL_PATH, '/', -1) + 1)
+                        FROM WORK_CORE.CORE_SH_ANAG a
+                        WHERE a.ID_SH = s.ID_SH
+                        FETCH FIRST 1 ROW ONLY
+                    ) IN ($placeholders)";
+                $ambitoParams = array_values($selAmbito);
+            }
+
             $searchLimit = (int) $_datiprocessing->getNumLast();
             if ($searchLimit <= 0) {
                 $searchLimit = (int) $_datiprocessing->getLimit();
@@ -59,13 +73,14 @@ class processing_model
                 $selNumPage = 1;
             }
 
-            $whereSql = "FROM WORK_CORE.CORE_SH
+            $whereSql = "FROM WORK_CORE.CORE_SH s
                     WHERE 1=1
                     AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
                     AND (? IS NULL OR ID_RUN_SH = ?)
                     AND (? IS NULL OR STATUS = ?)
                     AND (? IS NULL OR ESER_MESE = ?)
-                    AND (? IS NULL OR ID_PROCESS = ?)";
+                    AND (? IS NULL OR ID_PROCESS = ?)
+                    " . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
             $selEsito = $selEsito !== '' ? $selEsito : null;
@@ -84,6 +99,10 @@ class processing_model
                 $selIdProc,
                 $selIdProc
             ];
+
+            if (!empty($ambitoParams)) {
+                $baseParams = array_merge($baseParams, $ambitoParams);
+            }
 
             $sqlCount = "SELECT COUNT(1) CNT " . $whereSql;
             $countRows = $this->_db->getArrayByQuery($sqlCount, $baseParams);
@@ -105,17 +124,23 @@ class processing_model
             }
 
             $sql = "WITH BASE AS (
-                        SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
-                               ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
-                               ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
-                               MESSAGE, RC, TAGS, ID_RUN_SH_ROOT,
-                               ROW_NUMBER() OVER (ORDER BY START_TIME DESC) AS RN
+                        SELECT s.ID_SH, s.ID_RUN_SH, s.ID_PROCESS, s.NAME, s.START_TIME, s.END_TIME,
+                               s.ID_RUN_SH_FATHER, s.LOG, s.STATUS, s.USERNAME, s.MAIL, s.MESE_ESAME,
+                               s.ESER_ESAME, s.ESER_MESE, s.DEBUG_DB, s.DEBUG_SH, s.PID, s.VARIABLES,
+                               s.MESSAGE, s.RC, s.TAGS, s.ID_RUN_SH_ROOT,
+                               (
+                                   SELECT SUBSTR(a.SHELL_PATH, INSTR(a.SHELL_PATH, '/', -1) + 1)
+                                   FROM WORK_CORE.CORE_SH_ANAG a
+                                   WHERE a.ID_SH = s.ID_SH
+                                   FETCH FIRST 1 ROW ONLY
+                               ) AS AMBITO,
+                               ROW_NUMBER() OVER (ORDER BY s.START_TIME DESC) AS RN
                         " . $whereSql . "
                     )
                     SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
                            ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
                            ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
-                           MESSAGE, RC, TAGS, ID_RUN_SH_ROOT
+                           MESSAGE, RC, TAGS, ID_RUN_SH_ROOT, AMBITO
                     FROM BASE
                     WHERE (? <= 0 OR RN <= ?)
                       AND RN > ?
@@ -295,10 +320,12 @@ class processing_model
 
     public function getDatiAmbiti($meseElab)
     {
-        $sql = "SELECT DISTINCT ID_PROCESS AMBITO
-                FROM WORK_CORE.CORE_SH
-                WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
-                  AND ID_PROCESS IS NOT NULL
+        $sql = "SELECT DISTINCT
+                    SUBSTR(a.SHELL_PATH, INSTR(a.SHELL_PATH, '/', -1) + 1) AMBITO
+                FROM WORK_CORE.CORE_SH_ANAG a
+                JOIN WORK_CORE.CORE_SH s ON s.ID_SH = a.ID_SH
+                WHERE TO_CHAR(s.START_TIME,'YYYYMM') LIKE ?
+                  AND a.SHELL_PATH IS NOT NULL
                 ORDER BY AMBITO";
         return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
     }

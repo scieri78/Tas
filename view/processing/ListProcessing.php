@@ -30,7 +30,7 @@
                     $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
                     //pre il mese prendi solo le ultime 2 cifre per non appesantire la tabella
                     $mese = isset($row['ESER_MESE']) ? substr($row['ESER_MESE'], -2) : '';
-                    $ambito = isset($row['ID_PROCESS']) ? $row['ID_PROCESS'] : '';
+                    $ambito = isset($row['AMBITO']) ? $row['AMBITO'] : '');
 
                     // determina classe colore status
                     $statusClass = '';
@@ -110,8 +110,20 @@
                             $oldTime = gmdate('H:i:s', $oldSeconds);
                         }
                     }
+                    $meterHtml = '';
                     if (isset($row['METER']) && $row['METER'] !== '') {
-                        $meter = $row['METER'] . '%';
+                        $meterVal = (int) $row['METER'];
+                        if ($meterVal < 110) {
+                            $meterColor = 'meter-green';
+                        } elseif ($meterVal < 120) {
+                            $meterColor = 'meter-yellow';
+                        } elseif ($meterVal <= 200) {
+                            $meterColor = 'meter-orange';
+                        } else {
+                            $meterColor = 'meter-red';
+                        }
+                        $barWidth = min($meterVal, 200);
+                        $meterHtml = '<div class="meter-bar ' . $meterColor . '" style="width:' . $barWidth . '%;">' . $meterVal . '%</div>';
                     }
 
                     ?> 
@@ -125,7 +137,7 @@
 
                        
 
-                        <th>Tags<br>Meter</th><td class="col-tags"><?php echo $tags . "<br/>" . htmlspecialchars($meter, ENT_QUOTES, 'UTF-8'); ?></td>
+                        <th>Tags<br>Meter</th><td class="col-tags"><?php echo $tags . '<br/>' . $meterHtml; ?></td>
 
 
                         <th>Start<br>End</th><td style="width: 205px;" class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
