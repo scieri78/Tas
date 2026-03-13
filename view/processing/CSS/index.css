@@ -92,7 +92,7 @@
 /* tiny status column indicator */
 .processing-table th.status {
     width: 8px;
-    padding: 0; /* remove interior padding so color block is small */
+    padding: 0;
 }
 
 .processing-table tbody tr:hover {

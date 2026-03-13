@@ -66,17 +66,6 @@
                             break;
                     }
 
-                    $iconStatus = '<img title="' . (int) $idRunSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenShSel(' . (int) $idRunSh . ');" />';
-                    if (isset($_SESSION['SERVER_NAME']) && $_SESSION['SERVER_NAME'] === 'SVIL') {
-                        $iconStatus .= '<img src="./images/Cestino.png" class="IconFile" title="deleteSh" onclick="deleteSh(' . (int) $idRunSh . ')">';
-                    }
-                    if ($status === 'E') {
-                        $iconStatus .= '<img src="./images/ManualOk.png" class="IconFile" title="Manual Ok" onclick="ManualOk(' . (int) $idRunSh . ')">';
-                    }
-                    if ($status === 'I') {
-                        $iconStatus .= '<img src="./images/Skull.png" title="Put this Shell in an error state" onclick="ForceEnd(' . (int) $idRunSh . ')" class="IconSh processing-icon-large">';
-                    }
-
                     $jsFileTitle = htmlspecialchars(json_encode('File: ' . $name), ENT_QUOTES, 'UTF-8');
                     $jsLogTitle = htmlspecialchars(json_encode('Log: ' . $name), ENT_QUOTES, 'UTF-8');
                     $jsName = htmlspecialchars(json_encode($name), ENT_QUOTES, 'UTF-8');
@@ -130,18 +119,17 @@
                         <th class="status <?php echo $statusClass; ?>" title="<?php echo $statusText; ?>"></th>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc" title="<?php echo htmlspecialchars((string) $message, ENT_QUOTES, 'UTF-8'); ?>">RC:<?php echo $rc; ?></td>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>
-                        <td class="col-status-icons"><?php echo $iconStatus; ?></td>
                         <td class="col-actions"><?php echo $iconAction; ?></td>
                         <th>EserEsame<br/>
                         EserMese</th><td><?php echo $esame . "<br/>" . $mese; ?></td>
 
                        
 
-                        <th>Tags</th><td class="col-tags"><?php echo $tags; ?></td>
+                        <th>Tags<br>Meter</th><td class="col-tags"><?php echo $tags . "<br/>" . htmlspecialchars($meter, ENT_QUOTES, 'UTF-8'); ?></td>
 
 
                         <th>Start<br>End</th><td style="width: 205px;" class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
-                        <th>Time<br>OldTime<br>Meter</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime . "<br/>" . htmlspecialchars($meter, ENT_QUOTES, 'UTF-8'); ?></td>
+                        <th>Time<br>OldTime</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime; ?></td>
                         <th>User</th><td class="col-user"><?php echo $username; ?></td>
                         <th>Ambito</th><td class="col-ambito"><?php echo $ambito; ?></td>
                     </tr>
