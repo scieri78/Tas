@@ -85,10 +85,10 @@ class processing_model
                     AND (? IS NULL OR ESER_MESE = ?)
                     AND (? IS NULL OR ID_PROCESS = ?)
                     AND (
-                    ? IN ('ALL_DAY', '" . $allDayNum . "')
-                    OR (? IN ('LAST_DAYS', '" . $lastDaysNum . "') AND DATE(s.START_TIME) = CURRENT DATE)
-                    OR (? IN ('LAST_3_DAYS', '" . $last3DaysNum . "') AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
-                    OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS', '" . $allDayNum . "', '" . $lastDaysNum . "', '" . $last3DaysNum . "') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
+                    ? IN ( '" . $allDayNum . "')
+                    OR (? IN ('" . $lastDaysNum . "') AND DATE(s.START_TIME) = CURRENT DATE)
+                    OR (? IN ('" . $last3DaysNum . "') AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
+                    OR (? NOT IN ('" . $allDayNum . "', '" . $lastDaysNum . "', '" . $last3DaysNum . "') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
                     )" . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
@@ -113,16 +113,9 @@ class processing_model
             }
 
             // Parametro raw (stringa originale) e parametro numerico (alias) per debug SQL piu leggibile.
-            $selInDateRaw = $selInDate;
-            if ($selInDate === processing_dati::LAST_DAYS) {
-                $selInDateCode = processing_dati::LAST_DAYS_NUM;
-            } elseif ($selInDate === processing_dati::LAST_3_DAYS) {
-                $selInDateCode = processing_dati::LAST_3_DAYS_NUM;
-            } elseif ($selInDate === processing_dati::ALL_DAY) {
-                $selInDateCode = processing_dati::ALL_DAY_NUM;
-            } else {
-                $selInDateCode = $selInDate;
-            }
+          
+            $selInDateCode = $selInDate;
+        
 
             $selEsito = $selEsito !== '' ? $selEsito : null;
             $selEserMese = $selEserMese !== '' ? $selEserMese : null;
@@ -139,11 +132,11 @@ class processing_model
                 $selEserMese,
                 $selIdProc,
                 $selIdProc,
-                $selInDateRaw,
+                $selInDate,
                 $selInDateCode,
                 $selInDateCode,
                 $selInDateCode,
-                $selInDateRaw
+                $selInDateCode,
             ];
 
             if (!empty($ambitoParams)) {
