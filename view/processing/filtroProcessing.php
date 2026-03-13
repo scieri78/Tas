@@ -104,7 +104,7 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
             </div>
         </div>
 
-        <div class="divshow">
+        <div class="divFilters">
             <div class="divFilter">
                 <label for="Sel_Esito">ESITO</label>
                 <select class="inputFilter selectSearch" id="Sel_Esito" name="Sel_Esito" onchange="document.getElementById('formProcessing').submit();">

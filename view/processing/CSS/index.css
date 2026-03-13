@@ -54,13 +54,7 @@
 }
 
 /* Lista principale */
-.processing-list-container {
-    background-color: white;
-  /*  padding: 15px;*/
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   /* margin-bottom: 20px; */
-}
+
 
 .processing-list-container h3 {
     color: #333;
@@ -77,6 +71,7 @@
 }
 
 .processing-table {
+    background-color: white;
     width: 100%;
     border-collapse: collapse;
     font-size: 12px;
