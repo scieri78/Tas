@@ -6,8 +6,11 @@
 
 $dbName = isset($_GET['sito']) ? $_GET['sito'] : (isset($_POST['db_name']) ? $_POST['db_name'] : $datiprocessing->DB2database);
 $selectedAmbiti = $datiprocessing->getSelAmbito();
+$isIdElemFilter = isset($_GET['IDSELEM']) && $_GET['IDSELEM'] !== '';
+$hideFilters = isset($_GET['DARETI']) && (string) $_GET['DARETI'] === '1';
 ?>
 
+<?php if (!$hideFilters) { ?>
 <aside aria-label="Filtri processing" class="fileter-aside starlight-aside starlight-aside--note">
     <p class="starlight-aside__title" aria-hidden="true">
         <i class="fa fa-regular fa-star-shooting fa-rotate-180"></i>
@@ -18,9 +21,11 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
         <div id="divFilters">
             <div class="divFilter">
                 <span onclick="Refresh()" id="refresh" class="btn"><i class="fa-solid fa-refresh"> </i> </span>
+                <?php if (!$isIdElemFilter) { ?>
                 <span onclick="resetSession()" id="resetSessionbtn" class="btn"><i class="fa-solid fa-eraser"></i> </span>
                  <span  id="viewLast5" class="btn"><i onclick="viewLastRunx()" class="fa-solid fa-table-list"></i> </span>
                 <span id="RCLegend2" onclick="apriLegendProcessing()" class="btn"><i class="fa-solid fa-circle-question"></i></span>
+                <?php } ?>
 
                 <input type="hidden" id="resetSession" name="resetSession" value="0" />
                 <input type="hidden" id="SelNumPage" name="SelNumPage" value="<?php echo (int) $datiprocessing->getSelNumPage(); ?>" />
@@ -34,12 +39,15 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
                 <input type="checkbox" id="PLSSHOWDETT" name="PLSSHOWDETT" value="PLSSHOWDETT" <?php if ($datiprocessing->getShowDett() === 'PLSSHOWDETT') { echo 'checked'; } ?>>
                 <label for="PLSSHOWDETT">Show Dett</label>
 
+                <?php if (!$isIdElemFilter) { ?>
                 <input onchange="document.getElementById('formProcessing').submit()" type="checkbox" id="NoTags" name="NoTags" value="NoTags" <?php if ($datiprocessing->getNoTags() === 'NoTags') { echo 'checked'; } ?>>
                 <label for="NoTags">NoTags</label>
+                <?php } ?>
             </div>
         </div>
 
         <div class="divFilters">
+            <?php if (!$isIdElemFilter) { ?>
             <div class="divFilter">
                 <label for="SelMeseElab">MESE ELAB.</label>
                 <select class="inputFilter selectSearch" name="meseElab" id="SelMeseElab" onchange="document.getElementById('SelNumPage').value='1';document.getElementById('formProcessing').submit();">
@@ -103,8 +111,22 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
                 <label for="NumLast">LAST</label>
                 <input onblur="NumLastSubmit()" class="inputFilter" id="NumLast" name="NumLast" value="<?php echo (int) $datiprocessing->getNumLast(); ?>">
             </div>
+            <?php } else { ?>
+            <div class="divFilter">
+                <label for="SelLastMeseElab">MESE DIFF</label>
+                <select class="inputFilter selectSearch" name="meseDiff" id="SelLastMeseElab" onchange="document.getElementById('formProcessing').submit();">
+                    <option value="0">NoDiff</option>
+                    <?php foreach ($DatiSelLastMeseElab as $row) {
+                        $mese = $row['MESEELAB'];
+                        $selected = ($datiprocessing->getMeseDiff() === $mese) ? 'selected' : '';
+                        echo '<option value="' . $mese . '" ' . $selected . '>' . $mese . '</option>';
+                    } ?>
+                </select>
+            </div>
+            <?php } ?>
         </div>
 
+        <?php if (!$isIdElemFilter) { ?>
         <div class="divFilters">
             <div class="divFilter">
                 <label for="Sel_Esito">ESITO</label>
@@ -154,5 +176,7 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
                 <button id="filter" class="btn"><i class="fa-solid fa-filter"> </i> </button>
             </div>
         </div>
+        <?php } ?>
     </form>
 </aside>
+<?php } ?>

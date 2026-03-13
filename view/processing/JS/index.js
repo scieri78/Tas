@@ -222,7 +222,7 @@ function openDialog(vIdSh, SHELL, vaction) {
 }
 
 function OpenShSel(vId) {
-    window.open('index.php?sito=' + getCurrentSito() + '&controller=statoshell&action=index&IDSELEM=' + vId + '&DARETI=' + getValueDARETI());
+    window.open('index.php?sito=' + getCurrentSito() + '&controller=processing&action=index&IDSELEM=' + vId + '&DARETI=' + getValueDARETI());
 }
 
 function openGrafici(ShName, ShTags, IdSh) {
