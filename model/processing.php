@@ -73,6 +73,10 @@ class processing_model
                 $selNumPage = 1;
             }
 
+            $allDayNum = processing_dati::ALL_DAY_NUM;
+            $lastDaysNum = processing_dati::LAST_DAYS_NUM;
+            $last3DaysNum = processing_dati::LAST_3_DAYS_NUM;
+
             $whereSql = "FROM WORK_CORE.CORE_SH s
                     WHERE 1=1
                     AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
@@ -81,15 +85,22 @@ class processing_model
                     AND (? IS NULL OR ESER_MESE = ?)
                     AND (? IS NULL OR ID_PROCESS = ?)
                     AND (
-                    ? = 'ALL_DAY'
-                    OR (? = 'LAST_DAYS' AND DATE(s.START_TIME) = CURRENT DATE)
-                    OR (? = 'LAST_3_DAYS' AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
-                    OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
+                    ? IN ('ALL_DAY', '" . $allDayNum . "')
+                    OR (? IN ('LAST_DAYS', '" . $lastDaysNum . "') AND DATE(s.START_TIME) = CURRENT DATE)
+                    OR (? IN ('LAST_3_DAYS', '" . $last3DaysNum . "') AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
+                    OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS', '" . $allDayNum . "', '" . $lastDaysNum . "', '" . $last3DaysNum . "') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
                     )" . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
             $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
-            $allowedSelInDate = [processing_dati::ALL_DAY, processing_dati::LAST_DAYS, processing_dati::LAST_3_DAYS];
+            $allowedSelInDate = [
+                processing_dati::ALL_DAY,
+                processing_dati::LAST_DAYS,
+                processing_dati::LAST_3_DAYS,
+                processing_dati::ALL_DAY_NUM,
+                processing_dati::LAST_DAYS_NUM,
+                processing_dati::LAST_3_DAYS_NUM
+            ];
             if (!in_array($selInDate, $allowedSelInDate, true)) {
                 if (!ctype_digit($selInDate)) {
                     $selInDate = processing_dati::LAST_DAYS;

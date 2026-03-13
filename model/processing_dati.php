@@ -8,6 +8,9 @@ class processing_dati
     const LAST_DAYS = 'LAST_DAYS';
     const LAST_3_DAYS = 'LAST_3_DAYS';
     const ALL_DAY = 'ALL_DAY';
+    const LAST_DAYS_NUM = '88';
+    const LAST_3_DAYS_NUM = '87';
+    const ALL_DAY_NUM = '89';
     const PAGINATION_SIZE = 10;
 
     public $DB2database;
