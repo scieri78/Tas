@@ -41,27 +41,31 @@ class processing_model
             $selEserMese = $_datiprocessing->getSelEserMese();
             $selIdProc = $_datiprocessing->getSelIdProc();
             $selAmbito = $_datiprocessing->getSelAmbito();
-            $limit = (int) $_datiprocessing->getNumLast();
-            if ($limit <= 0) {
-                $limit = (int) $_datiprocessing->getLimit();
+            $searchLimit = (int) $_datiprocessing->getNumLast();
+            if ($searchLimit <= 0) {
+                $searchLimit = (int) $_datiprocessing->getLimit();
             }
-            if ($limit <= 0) {
-                $limit = 100;
+            if ($searchLimit <= 0) {
+                $searchLimit = 100;
             }
 
-            $sql = "SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME, 
-                    ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME, 
-                    ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES, 
-                    MESSAGE, RC, TAGS, ID_RUN_SH_ROOT
-                    FROM WORK_CORE.CORE_SH
+            $pageSize = (int) $_datiprocessing->getPaginationSize();
+            if ($pageSize <= 0) {
+                $pageSize = 10;
+            }
+
+            $selNumPage = (int) $_datiprocessing->getSelNumPage();
+            if ($selNumPage <= 0) {
+                $selNumPage = 1;
+            }
+
+            $whereSql = "FROM WORK_CORE.CORE_SH
                     WHERE 1=1
                     AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
                     AND (ID_RUN_SH_FATHER IS NULL OR ? IS NOT NULL)
                     AND (? IS NULL OR STATUS = ?)
                     AND (? IS NULL OR ESER_MESE = ?)
-                    AND (? IS NULL OR ID_PROCESS = ?)
-                    ORDER BY START_TIME DESC
-                    FETCH FIRST ? ROWS ONLY";
+                    AND (? IS NULL OR ID_PROCESS = ?)";
 
             $meseFilter = $meseElab ? $meseElab : '%';
             $selEsito = $selEsito !== '' ? $selEsito : null;
@@ -69,7 +73,7 @@ class processing_model
             $selIdProc = $selIdProc !== '' ? $selIdProc : null;
             $selShell = $selShell !== '' ? $selShell : null;
 
-            $params = [
+            $baseParams = [
                 $meseFilter,
                 $selShell,
                 $selEsito,
@@ -77,10 +81,47 @@ class processing_model
                 $selEserMese,
                 $selEserMese,
                 $selIdProc,
-                $selIdProc,
-                $limit
+                $selIdProc
             ];
 
+            $sqlCount = "SELECT COUNT(1) CNT " . $whereSql;
+            $countRows = $this->_db->getArrayByQuery($sqlCount, $baseParams);
+            $matchedRows = isset($countRows[0]['CNT']) ? (int) $countRows[0]['CNT'] : 0;
+            $totalRows = $searchLimit > 0 ? min($matchedRows, $searchLimit) : $matchedRows;
+            $totalPages = $totalRows > 0 ? (int) ceil($totalRows / $pageSize) : 1;
+
+            if ($selNumPage > $totalPages) {
+                $selNumPage = $totalPages;
+                if ($selNumPage <= 0) {
+                    $selNumPage = 1;
+                }
+            }
+
+            $offset = ($selNumPage - 1) * $pageSize;
+            $upperBound = $offset + $pageSize;
+            if ($searchLimit > 0 && $upperBound > $searchLimit) {
+                $upperBound = $searchLimit;
+            }
+
+            $sql = "WITH BASE AS (
+                        SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
+                               ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
+                               ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
+                               MESSAGE, RC, TAGS, ID_RUN_SH_ROOT,
+                               ROW_NUMBER() OVER (ORDER BY START_TIME DESC) AS RN
+                        " . $whereSql . "
+                    )
+                    SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
+                           ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
+                           ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
+                           MESSAGE, RC, TAGS, ID_RUN_SH_ROOT
+                    FROM BASE
+                    WHERE (? <= 0 OR RN <= ?)
+                      AND RN > ?
+                      AND RN <= ?
+                    ORDER BY RN";
+
+            $params = array_merge($baseParams, [$searchLimit, $searchLimit, $offset, $upperBound]);
             $rows = $this->_db->getArrayByQuery($sql, $params);
 
         /*    if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
@@ -125,7 +166,13 @@ class processing_model
                 }));
             }*/
 
-            return $rows;
+            return [
+                'rows' => $rows,
+                'page' => $selNumPage,
+                'pageSize' => $pageSize,
+                'totalRows' => $totalRows,
+                'totalPages' => $totalPages
+            ];
         } catch (Exception $e) {
             throw $e;
         }

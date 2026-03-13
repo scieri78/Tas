@@ -8,6 +8,7 @@ class processing_dati
     const LAST_DAYS = 'LAST_DAYS';
     const LAST_3_DAYS = 'LAST_3_DAYS';
     const ALL_DAY = 'ALL_DAY';
+    const PAGINATION_SIZE = 10;
 
     public $DB2database;
     private $_meseElab;
@@ -112,6 +113,11 @@ class processing_dati
     public function setLimit($limit)
     {
         $this->_limit = $limit;
+    }
+
+    public function getPaginationSize()
+    {
+        return self::PAGINATION_SIZE;
     }
     
     /**

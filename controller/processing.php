@@ -135,7 +135,15 @@ class processing extends helper
         $datiprocessing = $this->_datiprocessing;
         
         // Recupera la lista dei processing padre
-        $DatiListProcessing = $this->_model->getListProcessing($this->_datiprocessing);
+        $listResult = $this->_model->getListProcessing($this->_datiprocessing);
+        $DatiListProcessing = isset($listResult['rows']) ? $listResult['rows'] : [];
+        $pagination = [
+            'page' => isset($listResult['page']) ? (int) $listResult['page'] : 1,
+            'pageSize' => isset($listResult['pageSize']) ? (int) $listResult['pageSize'] : 10,
+            'totalRows' => isset($listResult['totalRows']) ? (int) $listResult['totalRows'] : 0,
+            'totalPages' => isset($listResult['totalPages']) ? (int) $listResult['totalPages'] : 1
+        ];
+        $this->_datiprocessing->setSelNumPage($pagination['page']);
         
         include 'view/processing/ListProcessing.php';
     }

@@ -86,6 +86,15 @@ function NumLastNoSubmit() {
     $('#Waiting').show();
 }
 
+function goToPage(page) {
+    var targetPage = parseInt(page, 10);
+    if (isNaN(targetPage) || targetPage < 1) {
+        targetPage = 1;
+    }
+    $('#SelNumPage').val(targetPage);
+    Refresh();
+}
+
 function selectSelShell() {
     $('#SelNumPage').val('1');
     Refresh();

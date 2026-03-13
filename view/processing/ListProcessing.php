@@ -148,4 +148,29 @@
             ?>
         </tbody>
     </table>
+
+    <?php
+    $currentPage = isset($pagination['page']) ? (int) $pagination['page'] : 1;
+    $totalPages = isset($pagination['totalPages']) ? (int) $pagination['totalPages'] : 1;
+    $pageSize = isset($pagination['pageSize']) ? (int) $pagination['pageSize'] : 10;
+    $totalRows = isset($pagination['totalRows']) ? (int) $pagination['totalRows'] : 0;
+    if ($totalPages > 1) {
+        $startPage = max(1, $currentPage - 2);
+        $endPage = min($totalPages, $startPage + 4);
+        $startPage = max(1, $endPage - 4);
+        ?>
+        <div class="processing-pagination" style="margin-top:12px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn" onclick="goToPage(<?php echo $currentPage - 1; ?>)" <?php echo ($currentPage <= 1) ? 'disabled' : ''; ?>>Prec</button>
+            <?php for ($p = $startPage; $p <= $endPage; $p++) { ?>
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="goToPage(<?php echo $p; ?>)"
+                    <?php echo ($p === $currentPage) ? 'style="font-weight:700; border:1px solid #3f8bfd;"' : ''; ?>
+                ><?php echo $p; ?></button>
+            <?php } ?>
+            <button type="button" class="btn" onclick="goToPage(<?php echo $currentPage + 1; ?>)" <?php echo ($currentPage >= $totalPages) ? 'disabled' : ''; ?>>Succ</button>
+            <span style="margin-left:8px;">Pagina <?php echo $currentPage; ?> / <?php echo $totalPages; ?> (<?php echo $totalRows; ?> record, <?php echo $pageSize; ?> per pagina)</span>
+        </div>
+    <?php } ?>
 </div>
