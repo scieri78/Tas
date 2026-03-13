@@ -71,7 +71,7 @@
                     $jsName = htmlspecialchars(json_encode($name), ENT_QUOTES, 'UTF-8');
                     $jsTags = htmlspecialchars(json_encode((string) $tags), ENT_QUOTES, 'UTF-8');
 
-                    $iconStatus = '<img title="' . (int) $idRunSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenShSel(' . (int) $idRunSh . ');" />';
+                    $iconStatus = '<img title="' . (int) $idSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenSelShell(' . (int) $idSh . ');" />';
 
                     $iconAction = '';
                     if (!empty($idSh)) {

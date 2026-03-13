@@ -71,7 +71,7 @@
                     $jsName = htmlspecialchars(json_encode($name), ENT_QUOTES, 'UTF-8');
                     $jsTags = htmlspecialchars(json_encode((string) $tags), ENT_QUOTES, 'UTF-8');
 
-                    $iconStatus = '<img title="' . (int) $idRunSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenShSel(' . (int) $idRunSh . ');" />';
+                    $iconStatus = '<img title="' . (int) $idSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenSelShell(' . (int) $idSh . ');" />';
                     if (isset($_SESSION['SERVER_NAME']) && $_SESSION['SERVER_NAME'] === 'SVIL') {
                         $iconStatus .= '<img src="./images/Cestino.png" class="IconFile" title="deleteSh" onclick="deleteSh(' . (int) $idRunSh . ')">';
                     }
@@ -110,7 +110,7 @@
                     $iconAction .= '<img src="./images/Graph.png" title="Grafico" onclick="openGrafici(' . $jsName . ', ' . $jsTags . ', ' . (int) $idSh . ')" class="IconSh">';
                     $iconAction .= '<img src="./images/PlsqlTab.png" title="Relazioni" onclick="openRelTab(' . (int) $idSh . ', ' . (int) $idRunSh . ', \'\', ' . $jsName . ')" class="IconSh">';
                     if (!isset($_GET['DARETI']) || (string) $_GET['DARETI'] !== '1') {
-                        $iconAction .= '<img src="./images/lanciShell.png" title="Storico lanci" class="IconSh" onclick="OpenShSel(' . (int) $idRunSh . ')">';
+                        $iconAction .= '<img src="./images/lanciShell.png" title="Storico lanci" class="IconSh" onclick="OpenSelShell(' . (int) $idSh . ')">';
                     }
                     if ($mail === 'Y') {
                         $iconAction .= '<img src="./images/Mail.png" title="Mail" class="IconDebug">';

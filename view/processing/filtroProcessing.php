@@ -78,18 +78,18 @@ $hideFilters = isset($_GET['DARETI']) && (string) $_GET['DARETI'] === '1';
                     <option value="" <?php if ($datiprocessing->getSelShell() === '') { echo 'selected'; } ?>>All</option>
                     <optgroup label="Shell Father">
                         <?php foreach ($DatiSelShellFather as $row) {
-                            $idRunSh = $row['ID_RUN_SH'];
-                            $selected = ((string) $datiprocessing->getSelShell() === (string) $idRunSh) ? 'selected' : '';
+                            $idSh = $row['ID_SH'];
+                            $selected = ((string) $datiprocessing->getSelShell() === (string) $idSh) ? 'selected' : '';
                             $label = $row['SHELL'] . ' ' . $row['TAGS'];
-                            echo '<option value="' . $idRunSh . '" ' . $selected . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</option>';
+                            echo '<option value="' . $idSh . '" ' . $selected . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</option>';
                         } ?>
                     </optgroup>
                     <optgroup label="Shell Sons">
                         <?php foreach ($DatiSelShellSons as $row) {
-                            $idRunSh = $row['ID_RUN_SH'];
-                            $selected = ((string) $datiprocessing->getSelShell() === (string) $idRunSh) ? 'selected' : '';
+                            $idSh = $row['ID_SH'];
+                            $selected = ((string) $datiprocessing->getSelShell() === (string) $idSh) ? 'selected' : '';
                             $label = $row['SHELL'] . ' ' . $row['TAGS'];
-                            echo '<option value="' . $idRunSh . '" ' . $selected . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</option>';
+                            echo '<option value="' . $idSh . '" ' . $selected . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</option>';
                         } ?>
                     </optgroup>
                 </select>

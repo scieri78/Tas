@@ -76,7 +76,7 @@ class processing_model
             $whereSql = "FROM WORK_CORE.CORE_SH s
                     WHERE 1=1
                     AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
-                    AND (? IS NULL OR ID_RUN_SH = ?)
+                    AND (? IS NULL OR s.ID_SH = ?)
                     AND (? IS NULL OR STATUS = ?)
                     AND (? IS NULL OR ESER_MESE = ?)
                     AND (? IS NULL OR ID_PROCESS = ?)
@@ -270,23 +270,21 @@ class processing_model
 
     public function getSelShellFather($meseElab)
     {
-        $sql = "SELECT ID_SH, NAME SHELL, TAGS, '' SHELL_PATH, ID_RUN_SH, ID_RUN_SH_ROOT
+        $sql = "SELECT DISTINCT ID_SH, NAME SHELL, TAGS
                 FROM WORK_CORE.CORE_SH
                 WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
                   AND ID_RUN_SH_FATHER IS NULL
-                ORDER BY START_TIME DESC
-                FETCH FIRST 200 ROWS ONLY";
+                ORDER BY NAME, TAGS";
         return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
     }
 
     public function getSelShellSons($meseElab)
     {
-        $sql = "SELECT ID_SH, NAME SHELL, TAGS, '' SHELL_PATH, ID_RUN_SH, ID_RUN_SH_ROOT
+        $sql = "SELECT DISTINCT ID_SH, NAME SHELL, TAGS
                 FROM WORK_CORE.CORE_SH
                 WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
                   AND ID_RUN_SH_FATHER IS NOT NULL
-                ORDER BY START_TIME DESC
-                FETCH FIRST 200 ROWS ONLY";
+                ORDER BY NAME, TAGS";
         return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
     }
 
