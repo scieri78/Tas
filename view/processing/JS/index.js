@@ -34,8 +34,11 @@ function getProcessingForm() {
     return $('#formProcessing');
 }
 
+// Configurazione centrale: numero caratteri dopo cui inserire uno spazio per il wrap.
+var PROCESSING_WRAP_CHARS = 35;
+
 function applyProcessingTextTruncation(rootNode) {
-    var chunkLen = 25;
+    var chunkLen = parseInt(PROCESSING_WRAP_CHARS, 10) || 35;
     var root = rootNode || document;
     var selectors = [
         '.processing-table td',
