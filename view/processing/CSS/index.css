@@ -511,3 +511,20 @@
     align-items: flex-end;
     gap: 10px;
 }
+
+#ShowRCLegend td,
+#ShowRCLegend th {
+    padding: 5px;
+}
+
+#ShowRCLegend .warning {
+    color: orange;
+}
+
+#ShowRCLegend .ok {
+    color: green;
+}
+
+#ShowRCLegend .error {
+    color: red;
+}

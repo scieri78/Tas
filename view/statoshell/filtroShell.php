@@ -50,7 +50,7 @@ if ($datishell->SelShTarget != "") {
         ?>
         <span onclick="Refresh()" id="refresh" class="btn"><i class="fa-solid fa-refresh"> </i> </span>
         <span onclick="resetSession()" id="resetSessionbtn" class="btn"><i class="fa-solid fa-eraser"></i> </span>
-        <span  id="viewLast5" class="btn"><i onclick="viewLastRunx()" class="fa-solid fa-table-list"></i> </span  >
+        <span  id="viewLast5" class="btn"><i onclick="viewLastRunx()" class="fa-solid fa-table-list"></i> </span>
         <span value="No" name="viewfilter" id="viewfilter" onclick="viewFilter()" class="btn"><i id="" class="fa-solid <?php echo $classEye; ?>"></i> </span>
         <span id="RCLegend2" onclick="apriLegend()" class="btn"><i class="fa-solid fa-circle-question"></i></button>
 

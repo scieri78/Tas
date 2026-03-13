@@ -133,6 +133,31 @@ function apriLegendProcessing() {
     });
 }
 
+function viewLastRunx() {
+    clearAutoRefresh();
+    $.ajax({
+        type: 'POST',
+        data: { IDSH: 1 },
+        encode: true,
+        url: 'index.php?sito=' + getCurrentSito() + '&controller=statoshell&action=lastRun',
+        success: function (risposta) {
+            if ($('#dialogMail').length > 0) {
+                $('#dialogMail').dialog({ title: 'Last Runs in the Month' });
+                $('#dialogMail').dialog('open');
+                $('#dialogMail').html(risposta);
+            } else {
+                $('#Filedialog').dialog({ title: 'Last Runs in the Month' });
+                $('#Filedialog').dialog('open');
+                $('#Filedialog').html(risposta);
+            }
+            setTimeout(setTextarea, 500);
+        },
+        error: function (stato) {
+            errorMessage('viewLastRunx: andato in errore', stato);
+        }
+    });
+}
+
 function ManualOk(vIdSh) {
     var re = confirm('Are you sure you want to change the status to manual ok?');
     if (re === true) {

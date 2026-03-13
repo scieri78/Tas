@@ -15,10 +15,11 @@ $selectedAmbiti = $datiprocessing->getSelAmbito();
     </p>
 
     <form id="formProcessing" method="POST" onsubmit="NumLastNoSubmit()">
-        <div id="divFiltroShell">
-            <div class="divFilterRight">
+        <div id="divFilters">
+            <div class="divFilter">
                 <span onclick="Refresh()" id="refresh" class="btn"><i class="fa-solid fa-refresh"> </i> </span>
                 <span onclick="resetSession()" id="resetSessionbtn" class="btn"><i class="fa-solid fa-eraser"></i> </span>
+                 <span  id="viewLast5" class="btn"><i onclick="viewLastRunx()" class="fa-solid fa-table-list"></i> </span>
                 <span id="RCLegend2" onclick="apriLegendProcessing()" class="btn"><i class="fa-solid fa-circle-question"></i></span>
 
                 <input type="hidden" id="resetSession" name="resetSession" value="0" />
