@@ -258,6 +258,34 @@
     color: white;
 }
 
+/* SHELL select2: larghezza e gestione testo lungo */
+.shell-select2-container {
+    width: 25ch !important;
+}
+
+.shell-select2-container .select2-selection--single {
+    min-height: 34px;
+    height: auto;
+}
+
+.shell-select2-container .select2-selection__rendered {
+    white-space: normal !important;
+    word-break: break-word;
+    line-height: 1.2;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 24px;
+}
+
+.shell-select2-container .select2-selection__arrow {
+    height: 100% !important;
+}
+
+.shell-select2-dropdown .select2-results__option {
+    white-space: normal;
+    word-break: break-word;
+}
+
 .badge-array_sql {
     background-color: #6f42c1;
     color: white;

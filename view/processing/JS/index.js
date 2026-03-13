@@ -7,7 +7,15 @@ $(document).ready(function() {
     $('#Waiting').hide();
 
     if ($('.selectSearch').length > 0 && $.fn.select2) {
-        $('.selectSearch').select2();
+        $('.selectSearch').not('#SelShell').select2();
+    }
+
+    if ($('#SelShell').length > 0 && $.fn.select2) {
+        $('#SelShell').select2({
+            width: '25ch',
+            containerCssClass: 'shell-select2-container',
+            dropdownCssClass: 'shell-select2-dropdown'
+        });
     }
 
     if ($('#SelAmbito').length > 0 && $.fn.select2) {

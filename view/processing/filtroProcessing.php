@@ -74,7 +74,7 @@ $hideFilters = isset($_GET['DARETI']) && (string) $_GET['DARETI'] === '1';
 
             <div class="divFilter">
                 <label for="SelShell">SHELL</label>
-                <select class="inputFilterSelect selectSearch" name="SelShell" id="SelShell" onchange="selectSelShell()">
+                <select class="inputFilterSelect selectSearch" name="SelShell" id="SelShell" style="width:25ch;" onchange="selectSelShell()">
                     <option value="" <?php if ($datiprocessing->getSelShell() === '') { echo 'selected'; } ?>>All</option>
                     <optgroup label="Shell Father">
                         <?php foreach ($DatiSelShellFather as $row) {
