@@ -445,7 +445,7 @@
 #processing-content {
     margin-top: 20px;
 }
-
+/*
 .fileter-aside {
     margin-bottom: 10px;
 }
@@ -458,7 +458,7 @@
 
 .starlight-aside {
     float: none;
-}
+}*7
 
 #divFiltroShell {
     display: flex;
