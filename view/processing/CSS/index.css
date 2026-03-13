@@ -532,6 +532,13 @@
     border-radius: 4px;
     padding: 4px 8px;
     min-width: 120px;
+    white-space: normal;
+}
+
+.select2-container .select2-selection__rendered,
+.select2-results__option {
+    white-space: normal !important;
+    word-break: break-word;
 }
 
 .divHiden {

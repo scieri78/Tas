@@ -35,36 +35,32 @@ function getProcessingForm() {
 }
 
 function applyProcessingTextTruncation(rootNode) {
-    var maxLen = 15;
+    var chunkLen = 25;
     var root = rootNode || document;
     var selectors = [
         '.processing-table td',
-        '.processing-table th',
         '.array-shell-table td',
-        '.array-shell-table th',
         '.array-sql-table td',
-        '.array-sql-table th',
         '.array-step-table td',
-        '.array-step-table th',
         '.array-show-table td',
-        '.array-show-table th',
-        '.detail-processing-container h3',
-        '.detail-processing-container h4',
-        '.detail-processing-container .tab-link',
-        '.divFilter label',
-        '.divFilter button',
         '#formProcessing select option'
     ];
 
-    function truncateText(text) {
-        var normalized = (text || '').replace(/\s+/g, ' ').trim();
-        if (normalized.length <= maxLen) {
-            return null;
+    function wrapLongTokens(text) {
+        if (!text) {
+            return text;
         }
-        return {
-            full: normalized,
-            short: normalized.substring(0, maxLen) + '...'
-        };
+        var parts = text.split(/(\s+)/);
+        for (var i = 0; i < parts.length; i++) {
+            if (!parts[i] || /\s+/.test(parts[i]) || parts[i].length <= chunkLen) {
+                continue;
+            }
+            var wrapped = parts[i].match(new RegExp('.{1,' + chunkLen + '}', 'g'));
+            if (wrapped && wrapped.length > 1) {
+                parts[i] = wrapped.join(' ');
+            }
+        }
+        return parts.join('');
     }
 
     var nodes = root.querySelectorAll(selectors.join(', '));
@@ -74,32 +70,34 @@ function applyProcessingTextTruncation(rootNode) {
         }
 
         if (el.tagName === 'OPTION') {
-            if (el.dataset.truncated === '1') {
+            if (el.dataset.wrapped === '1') {
                 return;
             }
-            var optInfo = truncateText(el.textContent);
-            if (optInfo) {
-                el.title = optInfo.full;
-                el.textContent = optInfo.short;
+            el.textContent = wrapLongTokens(el.textContent);
+            el.dataset.wrapped = '1';
+            return;
+        }
+
+        if (el.dataset.wrapped === '1') {
+            return;
+        }
+
+        var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+        var textNodes = [];
+        var currentNode;
+        while ((currentNode = walker.nextNode())) {
+            textNodes.push(currentNode);
+        }
+
+        for (var j = 0; j < textNodes.length; j++) {
+            var textNode = textNodes[j];
+            var parentTag = textNode.parentElement ? textNode.parentElement.tagName : '';
+            if (parentTag === 'SCRIPT' || parentTag === 'STYLE') {
+                continue;
             }
-            el.dataset.truncated = '1';
-            return;
+            textNode.nodeValue = wrapLongTokens(textNode.nodeValue);
         }
-
-        if (el.querySelector('img, svg, input, select, textarea, button')) {
-            return;
-        }
-
-        if (el.dataset.truncated === '1') {
-            return;
-        }
-
-        var info = truncateText(el.textContent);
-        if (info) {
-            el.title = info.full;
-            el.textContent = info.short;
-        }
-        el.dataset.truncated = '1';
+        el.dataset.wrapped = '1';
     });
 }
 
