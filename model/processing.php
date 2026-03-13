@@ -80,9 +80,16 @@ class processing_model
                     AND (? IS NULL OR STATUS = ?)
                     AND (? IS NULL OR ESER_MESE = ?)
                     AND (? IS NULL OR ID_PROCESS = ?)
+                    AND (
+                    ? = 'ALL_DAY'
+                    OR (? = 'LAST_DAYS' AND TRUNC(s.START_TIME) = TRUNC(SYSDATE))
+                    OR (? = 'LAST_3_DAYS' AND TRUNC(s.START_TIME) >= TRUNC(SYSDATE) - 2)
+                    OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
+                    )
                     " . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
+                $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
             $selEsito = $selEsito !== '' ? $selEsito : null;
             $selEserMese = $selEserMese !== '' ? $selEserMese : null;
             $selIdProc = $selIdProc !== '' ? $selIdProc : null;
@@ -97,7 +104,12 @@ class processing_model
                 $selEserMese,
                 $selEserMese,
                 $selIdProc,
-                $selIdProc
+                $selIdProc,
+                $selInDate,
+                $selInDate,
+                $selInDate,
+                $selInDate,
+                $selInDate
             ];
 
             if (!empty($ambitoParams)) {
@@ -196,48 +208,6 @@ class processing_model
 
             //stampa sql
            //  $this->_db->printSql();
-
-        /*    if ($selShell !== null || !empty($selAmbito) || $selInDate !== processing_dati::ALL_DAY) {
-                $rows = array_values(array_filter($rows, function ($row) use ($selShell, $selAmbito, $selInDate) {
-                    if ($selShell !== null) {
-                        $runSh = isset($row['ID_RUN_SH']) ? (string) $row['ID_RUN_SH'] : '';
-                        $runFather = isset($row['ID_RUN_SH_FATHER']) ? (string) $row['ID_RUN_SH_FATHER'] : '';
-                        $runRoot = isset($row['ID_RUN_SH_ROOT']) ? (string) $row['ID_RUN_SH_ROOT'] : '';
-                        if ($runSh !== (string) $selShell && $runFather !== (string) $selShell && $runRoot !== (string) $selShell) {
-                            return false;
-                        }
-                    }
-
-                    if (!empty($selAmbito)) {
-                        $ambito = isset($row['ID_PROCESS']) ? (string) $row['ID_PROCESS'] : '';
-                        if (!in_array($ambito, $selAmbito, true)) {
-                            return false;
-                        }
-                    }
-
-                    if ($selInDate !== processing_dati::ALL_DAY) {
-                        $start = isset($row['START_TIME']) ? strtotime($row['START_TIME']) : false;
-                        if ($start !== false) {
-                            $today = strtotime(date('Y-m-d 00:00:00'));
-                            $diffDays = (int) floor(($today - strtotime(date('Y-m-d 00:00:00', $start))) / 86400);
-                            if ($selInDate === processing_dati::LAST_DAYS && $diffDays > 0) {
-                                return false;
-                            }
-                            if ($selInDate === processing_dati::LAST_3_DAYS && $diffDays > 2) {
-                                return false;
-                            }
-                            if ($selInDate !== processing_dati::LAST_DAYS && $selInDate !== processing_dati::LAST_3_DAYS) {
-                                $day = date('d', $start);
-                                if ($day !== str_pad((string) $selInDate, 2, '0', STR_PAD_LEFT)) {
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-
-                    return true;
-                }));
-            }*/
 
             return [
                 'rows' => $rows,
