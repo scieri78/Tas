@@ -207,7 +207,7 @@ class processing_model
             }
 
             //stampa sql
-           //  $this->_db->printSql();
+             $this->_db->printSql();
 
             return [
                 'rows' => $rows,
