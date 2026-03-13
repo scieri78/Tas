@@ -30,7 +30,7 @@
                     $esame = isset($row['ESER_ESAME']) ? $row['ESER_ESAME'] : '';
                     //pre il mese prendi solo le ultime 2 cifre per non appesantire la tabella
                     $mese = isset($row['ESER_MESE']) ? substr($row['ESER_MESE'], -2) : '';
-                    $ambito = isset($row['AMBITO']) ? $row['AMBITO'] : '');
+                    $ambito = isset($row['AMBITO']) ? $row['AMBITO'] : (isset($row['ID_PROCESS']) ? $row['ID_PROCESS'] : '');
 
                     // determina classe colore status
                     $statusClass = '';
