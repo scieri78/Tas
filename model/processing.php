@@ -310,11 +310,15 @@ class processing_model
 
     public function getSelIdProc($meseElab)
     {
-        $sql = "SELECT DISTINCT ID_PROCESS
-                FROM WORK_CORE.CORE_SH
+        $sql = "SELECT c.ID_PROCESS, c.DESCR, c.TIPO, c.FLAG_STATO,
+                (SELECT t.TEAM FROM WFS.TEAM t WHERE t.ID_TEAM = c.ID_TEAM) TEAM
+            FROM WORK_CORE.ID_PROCESS c
+            WHERE c.ID_PROCESS IN (
+                SELECT DISTINCT ID_PROCESS FROM WORK_CORE.CORE_SH
                 WHERE TO_CHAR(START_TIME,'YYYYMM') LIKE ?
-                  AND ID_PROCESS IS NOT NULL
-                ORDER BY ID_PROCESS";
+                AND ID_PROCESS IS NOT NULL
+            )
+            ORDER BY c.ID_PROCESS DESC";
         return $this->_db->getArrayByQuery($sql, [$meseElab ? $meseElab : '%']);
     }
 

@@ -156,10 +156,29 @@ $hideFilters = isset($_GET['DARETI']) && (string) $_GET['DARETI'] === '1';
                 <label for="SelIdProc">PROCESS</label>
                 <select class="inputFilter selectSearch inputFilterSelect" id="SelIdProc" name="Sel_Id_Proc" onchange="selectSelIdProc()">
                     <option value="" <?php if ($datiprocessing->getSelIdProc() === '') { echo 'selected'; } ?>>All</option>
+                    <option value="b" <?php if ($datiprocessing->getSelIdProc() === 'b') { echo 'selected'; } ?>>Batch Run</option>
                     <?php foreach ($DatiSelIdProc as $row) {
-                        $idProc = $row['ID_PROCESS'];
+                        $idProc  = $row['ID_PROCESS'];
+                        $descr   = isset($row['DESCR'])      ? $row['DESCR']      : '';
+                        $tipo    = isset($row['TIPO'])       ? $row['TIPO']       : '';
+                        $stato   = isset($row['FLAG_STATO']) ? $row['FLAG_STATO'] : '';
+                        $team    = isset($row['TEAM'])       ? $row['TEAM']       : '';
+                        switch ($tipo) {
+                            case 'Q': $labelTipo = 'Quarter';     break;
+                            case 'M': $labelTipo = 'Mensile';     break;
+                            case 'R': $labelTipo = 'Restatement'; break;
+                            default:  $labelTipo = $tipo;         break;
+                        }
+                        switch ($stato) {
+                            case 'C': $labelStato = 'Chiuso';     break;
+                            case 'A': $labelStato = 'Aperto';     break;
+                            case 'S': $labelStato = 'Sospeso';    break;
+                            case 'D': $labelStato = 'Cancellato'; break;
+                            default:  $labelStato = $stato;        break;
+                        }
+                        $label = $idProc . ' ' . $team . ' ' . $descr . ' (' . $labelTipo . ' ' . $labelStato . ')';
                         $selected = ($datiprocessing->getSelIdProc() === $idProc) ? 'selected' : '';
-                        echo '<option value="' . htmlspecialchars($idProc, ENT_QUOTES, 'UTF-8') . '" ' . $selected . '>' . htmlspecialchars($idProc, ENT_QUOTES, 'UTF-8') . '</option>';
+                        echo '<option value="' . htmlspecialchars($idProc, ENT_QUOTES, 'UTF-8') . '" ' . $selected . '>' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</option>';
                     } ?>
                 </select>
             </div>

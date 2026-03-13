@@ -123,7 +123,7 @@
                         <th class="status <?php echo $statusClass; ?>" title="<?php echo $statusText; ?>"></th>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc" title="<?php echo htmlspecialchars((string) $message, ENT_QUOTES, 'UTF-8'); ?>">RC:<?php echo $rc; ?></td>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>
-                      <!--  <th>Stato</th><td class="col-status-icons"><?php echo $iconStatus; ?></td>-->
+                       <th>Stato</th><td class="col-status-icons"><?php echo $iconStatus; ?></td>
                         <td class="col-actions"><?php echo $iconAction; ?></td>
                         <th>EserEsame<br/>
                         EserMese</th><td><?php echo $esame . "<br/>" . $mese; ?></td>
