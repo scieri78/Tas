@@ -92,7 +92,7 @@ class processing_model
                     )" . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
-            $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
+         //   $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
             $allowedSelInDate = [
                 processing_dati::ALL_DAY,
                 processing_dati::LAST_DAYS,
@@ -101,7 +101,7 @@ class processing_model
                 processing_dati::LAST_DAYS_NUM,
                 processing_dati::LAST_3_DAYS_NUM
             ];
-            if (!in_array($selInDate, $allowedSelInDate, true)) {
+        /*    if (!in_array($selInDate, $allowedSelInDate, true)) {
                 if (!ctype_digit($selInDate)) {
                     $selInDate = processing_dati::LAST_DAYS;
                 } else {
@@ -110,7 +110,7 @@ class processing_model
                         $selInDate = processing_dati::LAST_DAYS;
                     }
                 }
-            }
+            }*/
 
             // Parametro raw (stringa originale) e parametro numerico (alias) per debug SQL piu leggibile.
           
