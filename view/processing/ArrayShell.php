@@ -71,6 +71,8 @@
                     $jsName = htmlspecialchars(json_encode($name), ENT_QUOTES, 'UTF-8');
                     $jsTags = htmlspecialchars(json_encode((string) $tags), ENT_QUOTES, 'UTF-8');
 
+                    $iconStatus = '<img title="' . (int) $idRunSh . '" src="./images/Shell.png" class="IconFile" onclick="OpenShSel(' . (int) $idRunSh . ');" />';
+
                     $iconAction = '';
                     if (!empty($idSh)) {
                         $iconAction .= '<img src="./images/File.png" class="IconFile" title="File" onclick="openDialog(' . (int) $idSh . ', ' . $jsFileTitle . ', \'apriFile\')">';
@@ -123,7 +125,7 @@
                         <th class="status <?php echo $statusClass; ?>" title="<?php echo $statusText; ?>"></th>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-rc" title="<?php echo htmlspecialchars((string) $message, ENT_QUOTES, 'UTF-8'); ?>">RC:<?php echo $rc; ?></td>
                         <td style="cursor:pointer;" onclick="openDetail(<?php echo $idRunSh; ?>)" class="col-name"><?php echo $name; ?></td>
-                       <th>Stato</th><td class="col-status-icons"><?php echo $iconStatus; ?></td>
+                        <td class="col-status-icons"><?php echo $iconStatus; ?></td>
                         <td class="col-actions"><?php echo $iconAction; ?></td>
                         <th>EserEsame<br/>
                         EserMese</th><td><?php echo $esame . "<br/>" . $mese; ?></td>
@@ -136,7 +138,7 @@
                         <th>Start<br>End</th><td style="width: 205px;" class="col-start"><?php echo $startTime . "<br/>" . $endTime; ?></td>
                         <th>Time<br>OldTime</th><td class="col-duration"><?php echo $duration . "<br/>" . $oldTime; ?></td>
                         <th>User</th><td class="col-user"><?php echo $username; ?></td>
-                        <th>Ambito</th><td class="col-ambito"><?php echo $ambito; ?></td>
+                       
                     </tr>
                     <tr class="detail-row" id="detail-row-<?php echo $idRunSh; ?>" style="display:none;">
                         <td colspan="22">

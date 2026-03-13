@@ -221,8 +221,30 @@ function openDialog(vIdSh, SHELL, vaction) {
     });
 }
 
+function OpenSelShell(vId) {
+    var form = $('#formProcessing');
+    if (form.length === 0) {
+        window.open('index.php?sito=' + getCurrentSito() + '&controller=processing&action=index&IDSELEM=' + vId + '&DARETI=' + getValueDARETI());
+        return;
+    }
+
+    $('#SelInDate').val('ALL_DAY').prop('selected', true);
+    $('#NumLast').val(10);
+
+    var shellSelect = $('#SelShell');
+    if (shellSelect.length > 0) {
+        var vIdStr = String(vId);
+        if (shellSelect.find('option[value="' + vIdStr + '"]').length === 0) {
+            shellSelect.append($('<option>', { value: vIdStr, text: vIdStr }));
+        }
+        shellSelect.val(vIdStr);
+    }
+
+    form.trigger('submit');
+}
+
 function OpenShSel(vId) {
-    window.open('index.php?sito=' + getCurrentSito() + '&controller=processing&action=index&IDSELEM=' + vId + '&DARETI=' + getValueDARETI());
+    OpenSelShell(vId);
 }
 
 function openGrafici(ShName, ShTags, IdSh) {
