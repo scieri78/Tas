@@ -162,7 +162,7 @@ class processing_model
             // Arricchisce la lista principale con OLD_TIME e METER del vecchio lancio.
             $oldRunCache = [];
             $oldTimeCache = [];
-            foreach ($rows as $idx => $row) {
+      /*      foreach ($rows as $idx => $row) {
                 $rows[$idx]['OLD_TIME'] = '';
                 $rows[$idx]['METER'] = '';
 
@@ -201,7 +201,7 @@ class processing_model
                     $currentSeconds = $endTs - $startTs;
                     $rows[$idx]['METER'] = (string) round(($currentSeconds / $oldSeconds) * 100);
                 }
-            }
+            }*/
 
             //stampa sql
             $this->_db->printSql();
