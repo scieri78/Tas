@@ -109,6 +109,9 @@
                     }
                     $iconAction .= '<img src="./images/Graph.png" title="Grafico" onclick="openGrafici(' . $jsName . ', ' . $jsTags . ', ' . (int) $idSh . ')" class="IconSh">';
                     $iconAction .= '<img src="./images/PlsqlTab.png" title="Relazioni" onclick="openRelTab(' . (int) $idSh . ', ' . (int) $idRunSh . ', \'\', ' . $jsName . ')" class="IconSh">';
+                    if (!isset($_GET['DARETI']) || (string) $_GET['DARETI'] !== '1') {
+                        $iconAction .= '<img src="./images/lanciShell.png" title="Storico lanci" class="IconSh" onclick="OpenShSel(' . (int) $idRunSh . ')">';
+                    }
                     if ($mail === 'Y') {
                         $iconAction .= '<img src="./images/Mail.png" title="Mail" class="IconDebug">';
                     }
