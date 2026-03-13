@@ -111,6 +111,19 @@ class processing_model
                     }
                 }
             }
+
+            // Parametro raw (stringa originale) e parametro numerico (alias) per debug SQL piu leggibile.
+            $selInDateRaw = $selInDate;
+            if ($selInDate === processing_dati::LAST_DAYS) {
+                $selInDateCode = processing_dati::LAST_DAYS_NUM;
+            } elseif ($selInDate === processing_dati::LAST_3_DAYS) {
+                $selInDateCode = processing_dati::LAST_3_DAYS_NUM;
+            } elseif ($selInDate === processing_dati::ALL_DAY) {
+                $selInDateCode = processing_dati::ALL_DAY_NUM;
+            } else {
+                $selInDateCode = $selInDate;
+            }
+
             $selEsito = $selEsito !== '' ? $selEsito : null;
             $selEserMese = $selEserMese !== '' ? $selEserMese : null;
             $selIdProc = $selIdProc !== '' ? $selIdProc : null;
@@ -126,11 +139,11 @@ class processing_model
                 $selEserMese,
                 $selIdProc,
                 $selIdProc,
-                $selInDate,
-                $selInDate,
-                $selInDate,
-                $selInDate,
-                $selInDate
+                $selInDateRaw,
+                $selInDateCode,
+                $selInDateCode,
+                $selInDateCode,
+                $selInDateRaw
             ];
 
             if (!empty($ambitoParams)) {
