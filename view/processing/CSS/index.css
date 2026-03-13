@@ -125,9 +125,10 @@
 .processing-table .col-actions img {
     width: 22px;
     height: 22px;
-    margin-right: 6px;
+    /* margin-right: 6px; */
     cursor: pointer;
     vertical-align: middle;
+    float: right;
 }
 
 .processing-table .col-status-icons img:last-child,
@@ -168,6 +169,14 @@
 .processing-table .col-tags,
 .processing-table .col-esame {
     width: 100px;
+}
+
+.processing-table .col-tags {
+    width: 205px !important;
+}
+
+.processing-table .col-actions {
+    width: 125px !important;
 }
 
 .meter-bar {
