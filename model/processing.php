@@ -62,7 +62,7 @@ class processing_model
             $whereSql = "FROM WORK_CORE.CORE_SH
                     WHERE 1=1
                     AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
-                    AND (ID_RUN_SH_FATHER IS NULL OR ? IS NOT NULL)
+                    AND (? IS NULL OR ID_RUN_SH = ?)
                     AND (? IS NULL OR STATUS = ?)
                     AND (? IS NULL OR ESER_MESE = ?)
                     AND (? IS NULL OR ID_PROCESS = ?)";
@@ -75,6 +75,7 @@ class processing_model
 
             $baseParams = [
                 $meseFilter,
+                $selShell,
                 $selShell,
                 $selEsito,
                 $selEsito,

@@ -24,6 +24,12 @@ class processing extends helper
         }
         $db_name = isset($_GET['sito']) ? $_GET['sito'] : (isset($_POST["db_name"]) ? $_POST["db_name"] : '');
 
+        // Deep-link: IDSELEM corrisponde a ID_RUN_SH (filtro puntuale).
+        if (isset($_GET['IDSELEM']) && $_GET['IDSELEM'] !== '') {
+            $_POST['SelShell'] = $_GET['IDSELEM'];
+            $_POST['SelNumPage'] = 1;
+        }
+
         $this->include_css = '
                     <link rel="stylesheet" href="./view/processing/CSS/index.css?p=' . rand(1000, 9999) . '">
                     <script src="./view/processing/JS/index.js?p=' . rand(1000, 9999) . '"></script>';
