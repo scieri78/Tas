@@ -82,13 +82,24 @@ class processing_model
                     AND (? IS NULL OR ID_PROCESS = ?)
                     AND (
                     ? = 'ALL_DAY'
-                    OR (? = '88' AND DATE(s.START_TIME) = CURRENT DATE) -- last day
+                    OR (? = 'LAST_DAYS' AND DATE(s.START_TIME) = CURRENT DATE)
                     OR (? = 'LAST_3_DAYS' AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
                     OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
                     )" . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
             $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
+            $allowedSelInDate = [processing_dati::ALL_DAY, processing_dati::LAST_DAYS, processing_dati::LAST_3_DAYS];
+            if (!in_array($selInDate, $allowedSelInDate, true)) {
+                if (!ctype_digit($selInDate)) {
+                    $selInDate = processing_dati::LAST_DAYS;
+                } else {
+                    $dayInt = (int) $selInDate;
+                    if ($dayInt < 1 || $dayInt > 31) {
+                        $selInDate = processing_dati::LAST_DAYS;
+                    }
+                }
+            }
             $selEsito = $selEsito !== '' ? $selEsito : null;
             $selEserMese = $selEserMese !== '' ? $selEserMese : null;
             $selIdProc = $selIdProc !== '' ? $selIdProc : null;
