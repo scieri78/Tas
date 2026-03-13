@@ -77,6 +77,8 @@ class processing_model
             $lastDaysNum = processing_dati::LAST_DAYS_NUM;
             $last3DaysNum = processing_dati::LAST_3_DAYS_NUM;
 
+
+
             $whereSql = "FROM WORK_CORE.CORE_SH s
                     WHERE 1=1
                     AND TO_CHAR(START_TIME,'YYYYMM') LIKE ?
@@ -114,7 +116,7 @@ class processing_model
 
             // Parametro raw (stringa originale) e parametro numerico (alias) per debug SQL piu leggibile.
           
-            $selInDateCode = $selInDate;
+            $selInDate= ($selInDate== 'LAST_DAY')? processing_dati::LAST_DAYS_NUM : (($selInDate == 'LAST_3_DAYS')? processing_dati::LAST_3_DAYS_NUM : (($selInDate == 'ALL_DAY')? processing_dati::ALL_DAY_NUM : $selInDate))  ;
         
 
             $selEsito = $selEsito !== '' ? $selEsito : null;
