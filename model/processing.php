@@ -180,7 +180,8 @@ class processing_model
 
             $params = array_merge($baseParams, [$searchLimit, $searchLimit, $offset, $upperBound]);
             $rows = $this->_db->getArrayByQuery($sql, $params);
-
+            //print sql
+            $this->_db->printSql();
             // Arricchisce la lista principale con OLD_TIME e METER del vecchio lancio.
             $oldRunCache = [];
             $oldTimeCache = [];
