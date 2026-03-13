@@ -85,11 +85,10 @@ class processing_model
                     OR (? = 'LAST_DAYS' AND DATE(s.START_TIME) = CURRENT DATE)
                     OR (? = 'LAST_3_DAYS' AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
                     OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
-                    )
-                    " . $ambitoFilter;
+                    )" . $ambitoFilter;
 
             $meseFilter = $meseElab ? $meseElab : '%';
-                $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
+            $selInDate = $selInDate ? (string) $selInDate : processing_dati::LAST_DAYS;
             $selEsito = $selEsito !== '' ? $selEsito : null;
             $selEserMese = $selEserMese !== '' ? $selEserMese : null;
             $selIdProc = $selIdProc !== '' ? $selIdProc : null;
@@ -135,7 +134,7 @@ class processing_model
                 $upperBound = $searchLimit;
             }
 
-                        $sql = "SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
+            $sql = "SELECT ID_SH, ID_RUN_SH, ID_PROCESS, NAME, START_TIME, END_TIME,
                                                      ID_RUN_SH_FATHER, LOG, STATUS, USERNAME, MAIL, MESE_ESAME,
                                                      ESER_ESAME, ESER_MESE, DEBUG_DB, DEBUG_SH, PID, VARIABLES,
                                                      MESSAGE, RC, TAGS, ID_RUN_SH_ROOT, AMBITO
@@ -151,8 +150,7 @@ class processing_model
                                                                      FETCH FIRST 1 ROW ONLY
                                                              ) AS AMBITO,
                                                              ROW_NUMBER() OVER (ORDER BY s.START_TIME DESC) AS RN
-                                                " . $whereSql . "
-                                        ) BASE
+                                                " . $whereSql . ") BASE
                                         WHERE (? <= 0 OR RN <= ?)
                                             AND RN > ?
                                             AND RN <= ?
@@ -206,7 +204,7 @@ class processing_model
             }
 
             //stampa sql
-             $this->_db->printSql();
+            $this->_db->printSql();
 
             return [
                 'rows' => $rows,
@@ -331,7 +329,7 @@ class processing_model
     {
         try {
             $meseDiff = $_datiprocessing->getMeseDiff();
-            
+
             $sql = "SELECT MAX(ID_RUN_SH) ID_RUN_SH_OLD
                     FROM WORK_CORE.CORE_SH
                     WHERE 1=1
@@ -339,7 +337,7 @@ class processing_model
                     AND ID_SH = ?
                     AND TRIM(TAGS) = TRIM(?)
                     AND STATUS = 'F'";
-            
+
             $result = $this->_db->getArrayByQuery($sql, [$meseDiff, $idSh, $tag]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
@@ -360,7 +358,7 @@ class processing_model
                     FROM WORK_CORE.CORE_SH
                     WHERE 1=1
                     AND ID_RUN_SH = ?";
-            
+
             $result = $this->_db->getArrayByQuery($sql, [$idRunShOld]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
@@ -392,17 +390,13 @@ class processing_model
             //stanpa sql
             // $this->_db->printSql();
 
-            return $result;     
-
-            
-
-
+            return $result;
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function getArraySql($idRunSh,$pos = null)
+    public function getArraySql($idRunSh, $pos = null)
     {
         try {
             $sql = "SELECT ROWNUM POS,
@@ -502,7 +496,7 @@ class processing_model
                     AND ID_RUN_SH_FATHER = ?
                     AND ID_SH = ?
                     AND TRIM(TAGS) = TRIM(?)";
-            
+
             $result = $this->_db->getArrayByQuery($sql, [$idRunShOld, $idSh, $tag]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
@@ -524,7 +518,7 @@ class processing_model
                     WHERE 1=1
                     AND ID_RUN_SH = ?
                     AND STEP = ?";
-            
+
             $result = $this->_db->getArrayByQuery($sql, [$idRunShOld, $step]);
             return isset($result[0]) ? $result[0] : null;
         } catch (Exception $e) {
@@ -532,4 +526,3 @@ class processing_model
         }
     }
 }
-?>
