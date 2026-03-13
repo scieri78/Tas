@@ -82,7 +82,7 @@ class processing_model
                     AND (? IS NULL OR ID_PROCESS = ?)
                     AND (
                     ? = 'ALL_DAY'
-                    OR (? = 'LAST_DAYS' AND DATE(s.START_TIME) = CURRENT DATE)
+                    OR (? = '88' AND DATE(s.START_TIME) = CURRENT DATE) -- last day
                     OR (? = 'LAST_3_DAYS' AND DATE(s.START_TIME) >= (CURRENT DATE - 2 DAYS))
                     OR (? NOT IN ('ALL_DAY', 'LAST_DAYS', 'LAST_3_DAYS') AND TO_CHAR(s.START_TIME, 'DD') = LPAD(?, 2, '0'))
                     )" . $ambitoFilter;
