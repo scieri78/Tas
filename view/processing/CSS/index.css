@@ -264,16 +264,18 @@
 }
 
 .shell-select2-container .select2-selection--single {
-    min-height: 34px;
+    min-height: 30px;
     height: auto;
+    display: flex;
+    align-items: center;
 }
 
 .shell-select2-container .select2-selection__rendered {
     white-space: normal !important;
     word-break: break-word;
     line-height: 1.2;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     padding-right: 24px;
 }
 
