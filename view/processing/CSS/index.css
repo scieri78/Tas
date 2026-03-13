@@ -499,14 +499,14 @@
     gap: 6px;
     margin-bottom: 8px;
 }
-
+/*
 .divFilters {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     gap: 10px;
     margin-bottom: 8px;
-}
+}*/
 
 .divFilter {
     display: inline-flex;
@@ -517,8 +517,12 @@
 }
 
 .divFilter label {
+    /* text-align: center; */
     font-size: 12px;
     font-weight: 600;
+    /* vertical-align: middle; */
+    position: relative;
+    top: 5px;
 }
 
 .inputFilter,

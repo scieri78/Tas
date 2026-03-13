@@ -63,7 +63,7 @@
 
                     $iconAction = '';
                     if ($typeRun === 'PLSQL') {
-                        $iconAction .= '<img src="./images/LogDb.png" onclick="if (typeof openTabLog === \'function\') { openTabLog(' . (int) $idRunSql . '); }" class="IconSql" title="LogDb">';
+                      //  $iconAction .= '<img src="./images/LogDb.png" onclick="if (typeof openTabLog === \'function\') { openTabLog(' . (int) $idRunSql . '); }" class="IconSql" title="LogDb">';
                     }
                     if (!$isAnonymous) {
                         $iconAction .= '<img src="./images/File.png" onclick="openSqlFile(' . (int) $idRunSql . ', ' . $jsFileSql . ')" class="IconSql" title="File SQL">';
